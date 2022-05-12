@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PawnChessComponent extends ChessComponent {
 
@@ -50,8 +52,7 @@ public class PawnChessComponent extends ChessComponent {
             if (source.getX() == 1) {
                 if (destination.getX() == source.getX() + 1 && destination.getY() == source.getY() && chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
                     return true;
-
-                } else if (destination.getX() == source.getX() + 2 && destination.getY() == source.getY() && chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                } else if (destination.getX() == source.getX() + 2 && destination.getY() == source.getY() && chessComponents[destination.getX() - 1][destination.getY()] instanceof EmptySlotComponent && chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
                     return true;
                 }
             } else {
@@ -71,7 +72,7 @@ public class PawnChessComponent extends ChessComponent {
                 if (destination.getX() == source.getX() - 1 && destination.getY() == source.getY() && chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
                     return true;
 
-                } else if (destination.getX() == source.getX() - 2 && destination.getY() == source.getY() && chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                } else if (destination.getX() == source.getX() - 2 && destination.getY() == source.getY() && chessComponents[destination.getX() + 1][destination.getY()] instanceof EmptySlotComponent && chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
                     return true;
                 }
             } else {
@@ -100,5 +101,9 @@ public class PawnChessComponent extends ChessComponent {
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth(), getHeight());
         }
+    }
+
+    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
+        return new ArrayList<>();
     }
 }

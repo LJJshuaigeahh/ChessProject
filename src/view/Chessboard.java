@@ -6,6 +6,7 @@ import controller.ClickController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class Chessboard extends JComponent {
     private static final int CHESSBOARD_SIZE = 8;
 
     private final ChessComponent[][] chessComponents = new ChessComponent[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
-    private ChessColor currentColor = ChessColor.BLACK;
+    private ChessColor currentColor = ChessColor.WHITE;
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
     private final int CHESS_SIZE;
@@ -103,6 +104,10 @@ public class Chessboard extends JComponent {
         chess2.repaint();
 
         count += 0.5;
+
+//        if (tellDefeat(chessComponents[row1][col1],chessComponents[row2][col2])){
+//            JOptionPane.showMessageDialog(this, "Hello, world!");
+//        }
     }
 
     public void initiateEmptyChessboard() {
@@ -167,5 +172,229 @@ public class Chessboard extends JComponent {
 
     public void loadGame(List<String> chessData) {
         chessData.forEach(System.out::println);
+    }
+
+    public boolean tellDefeat(ChessComponent chess1, ChessComponent chess2) {
+        int kingI = 0;
+        int kingJ = 0;
+        int killerI = 0;
+        int killerJ = 0;
+        out:
+        for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+            for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                if (chessComponents[i][j] instanceof KingChessComponent && chessComponents[i][j].getChessColor() == chess2.getChessColor()) {
+                    kingI = i;
+                    kingJ = j;
+                    break out;
+                }
+            }
+        }
+        boolean test = false;
+        out:
+        for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+            for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                if (chessComponents[i][j].getChessColor() == chess1.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(kingI, kingJ))) {
+                    test = true;
+                    killerI = i;
+                    killerJ = j;
+                    break out;
+                }
+            }
+        }
+        if (test) {
+            if (chessComponents[killerI][killerJ] instanceof PawnChessComponent || chessComponents[killerI][killerJ] instanceof KnightChessComponent) {
+                if (chessComponents[kingI][kingJ].canMoveToList(chessComponents).isEmpty()) {
+                    boolean test1 = true;
+                    out:
+                    for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                        for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                            if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(killerI, killerJ))) {
+                                test1 = false;
+                                break out;
+                            }
+                        }
+                    }
+                    return test1;
+                } else {
+                    return false;
+                }
+            } else if (chessComponents[killerI][killerJ] instanceof RookChessComponent) {
+                if (chessComponents[kingI][kingJ].canMoveToList(chessComponents).isEmpty()) {
+                    boolean test1 = true;
+                    out:
+                    for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                        for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                            if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(killerI, killerJ))) {
+                                test1 = false;
+                                break out;
+                            }
+                        }
+                    }
+                    if (!test1) {
+                        return false;
+                    } else {
+                        boolean test2 = true;
+                        if (killerI == kingI && killerJ - kingJ != 0) {
+                            out:
+                            for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                                for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                                    for (int k = 1; k < Math.abs(killerJ - kingJ); k++) {
+                                        if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(killerI, Math.min(killerJ, kingJ) + i))) {
+                                            test2 = false;
+                                            break out;
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (killerJ == kingJ && killerI - kingI != 0) {
+                            out:
+                            for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                                for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                                    for (int k = 1; k < Math.abs(killerI - kingI); k++) {
+                                        if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(Math.min(killerI, kingI) + i, killerJ))) {
+                                            test2 = false;
+                                            break out;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (test) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                } else {
+                    return false;
+                }
+            } else if (chessComponents[killerI][killerJ] instanceof BishopChessComponent) {
+                if (chessComponents[kingI][kingJ].canMoveToList(chessComponents).isEmpty()) {
+                    boolean test1 = true;
+                    out:
+                    for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                        for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                            if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(killerI, killerJ))) {
+                                test1 = false;
+                                break out;
+                            }
+                        }
+                    }
+                    if (!test1) {
+                        return false;
+                    } else {
+                        boolean test2 = true;
+                        if (killerI - kingI == killerJ - kingJ) {
+                            out:
+                            for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                                for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                                    for (int k = 1; k < Math.abs(killerJ - kingJ); k++) {
+                                        if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(Math.min(killerI, kingI) + i, Math.min(killerJ, kingJ) + i))) {
+                                            test2 = false;
+                                            break out;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            out:
+                            for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                                for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                                    for (int k = 1; k < Math.abs(killerJ - kingJ); k++) {
+                                        if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(Math.max(killerI, kingI) - i, Math.min(killerJ, kingJ) + i))) {
+                                            test2 = false;
+                                            break out;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (test) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                if (chessComponents[kingI][kingJ].canMoveToList(chessComponents).isEmpty()) {
+                    boolean test1 = true;
+                    out:
+                    for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                        for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                            if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(killerI, killerJ))) {
+                                test1 = false;
+                                break out;
+                            }
+                        }
+                    }
+                    if (!test1) {
+                        return false;
+                    } else {
+                        boolean test2 = true;
+                        if (killerI == kingI && killerJ - kingJ != 0) {
+                            out:
+                            for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                                for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                                    for (int k = 1; k < Math.abs(killerJ - kingJ); k++) {
+                                        if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(killerI, Math.min(killerJ, kingJ) + i))) {
+                                            test2 = false;
+                                            break out;
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (killerJ == kingJ && killerI - kingI != 0) {
+                            out:
+                            for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                                for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                                    for (int k = 1; k < Math.abs(killerI - kingI); k++) {
+                                        if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(Math.min(killerI, kingI) + i, killerJ))) {
+                                            test2 = false;
+                                            break out;
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (killerI - kingI == killerJ - kingJ) {
+                            out:
+                            for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                                for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                                    for (int k = 1; k < Math.abs(killerJ - kingJ); k++) {
+                                        if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(Math.min(killerI, kingI) + i, Math.min(killerJ, kingJ) + i))) {
+                                            test2 = false;
+                                            break out;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            out:
+                            for (int i = 0; i < CHESSBOARD_SIZE; i++) {
+                                for (int j = 0; j < CHESSBOARD_SIZE; j++) {
+                                    for (int k = 1; k < Math.abs(killerJ - kingJ); k++) {
+                                        if (chessComponents[i][j].getChessColor() == chess2.getChessColor() && chessComponents[i][j].canMoveTo(chessComponents, new ChessboardPoint(Math.max(killerI, kingI) - i, Math.min(killerJ, kingJ) + i))) {
+                                            test2 = false;
+                                            break out;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (test) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
     }
 }

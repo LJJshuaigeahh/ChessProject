@@ -40,12 +40,13 @@ public class ChessGameFrame extends JFrame {
         getContentPane().add(panel0);
         setVisible(true);
 
-        getContentPane().add(panel2);
+        getContentPane().add(panel1);
         setVisible(true);
 
         addBeginGameButten(panel0);
         addChessboard(panel1);
         addLabel(panel1);
+        addReBeginGameButten(panel1);
     }
 
 
@@ -63,7 +64,7 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中添加回合状态标签
      */
     private void addLabel(JPanel panel) {
-        JLabel statusLabel = new JLabel("第1回合  It's Black's turn.");
+        JLabel statusLabel = new JLabel("第1回合  It's White's turn.");
         statusLabel.setLocation(200, 0);
         statusLabel.setSize(300, 60);
         statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
@@ -91,7 +92,25 @@ public class ChessGameFrame extends JFrame {
             validate();
             repaint();
         });
-        button.setLocation(HEIGTH, HEIGTH / 10 + 120);
+        button.setLocation(375, 500);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        panel.add(button);
+    }
+
+    private void addReBeginGameButten(JPanel panel) {
+        JButton button = new JButton("重新开始游戏");
+        button.addActionListener((e) -> {
+            remove(panel1);
+            panel1.removeAll();
+            addChessboard(panel1);
+            addLabel(panel1);
+            addReBeginGameButten(panel1);
+            setContentPane(panel1);
+            validate();
+            repaint();
+        });
+        button.setLocation(700, 600);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         panel.add(button);

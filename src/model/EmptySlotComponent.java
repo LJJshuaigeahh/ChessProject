@@ -5,6 +5,8 @@ import controller.ClickController;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 这个类表示棋盘上的空位置
@@ -25,4 +27,8 @@ public class EmptySlotComponent extends ChessComponent {
         //No resource!
     }
 
+
+    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
+        return new ArrayList<>();
+    }
 }

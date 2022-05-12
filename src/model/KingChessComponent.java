@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KingChessComponent extends ChessComponent {
 
@@ -82,6 +84,127 @@ public class KingChessComponent extends ChessComponent {
             }
         }
     }
+
+    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
+        ArrayList<ChessboardPoint> canMoveTo = new ArrayList<>();
+        if (getChessColor() == ChessColor.BLACK) {
+            if (getChessboardPoint().offset(1, 1) != null) {
+                if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY() + 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1));
+                } else if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY() + 1].getChessColor() == ChessColor.WHITE) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1));
+                }
+            }
+            if (getChessboardPoint().offset(1, -1) != null) {
+                if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY() - 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1));
+                } else if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY() - 1].getChessColor() == ChessColor.WHITE) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1));
+                }
+            }
+            if (getChessboardPoint().offset(-1, 1) != null) {
+                if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY() + 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1));
+                } else if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY() + 1].getChessColor() == ChessColor.WHITE) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1));
+                }
+            }
+            if (getChessboardPoint().offset(-1, -1) != null) {
+                if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY() - 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1));
+                } else if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY() - 1].getChessColor() == ChessColor.WHITE) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1));
+                }
+            }
+            if (getChessboardPoint().offset(1, 0) != null) {
+                if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY()] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()));
+                } else if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY()].getChessColor() == ChessColor.WHITE) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()));
+                }
+            }
+            if (getChessboardPoint().offset(-1, 0) != null) {
+                if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY()] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()));
+                } else if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY()].getChessColor() == ChessColor.WHITE) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()));
+                }
+            }
+            if (getChessboardPoint().offset(0, 1) != null) {
+                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY() + 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1));
+                } else if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY() + 1].getChessColor() == ChessColor.WHITE) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1));
+                }
+            }
+            if (getChessboardPoint().offset(0, -1) != null) {
+                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY() - 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1));
+                } else if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY() - 1].getChessColor() == ChessColor.WHITE) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1));
+                }
+            }
+        }else if (getChessColor() == ChessColor.WHITE) {
+            if (getChessboardPoint().offset(1, 1) != null) {
+                if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY() + 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1));
+                } else if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY() + 1].getChessColor() == ChessColor.BLACK) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1));
+                }
+            }
+            if (getChessboardPoint().offset(1, -1) != null) {
+                if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY() - 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1));
+                } else if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY() - 1].getChessColor() == ChessColor.BLACK) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1));
+                }
+            }
+            if (getChessboardPoint().offset(-1, 1) != null) {
+                if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY() + 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1));
+                } else if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY() + 1].getChessColor() == ChessColor.BLACK) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1));
+                }
+            }
+            if (getChessboardPoint().offset(-1, -1) != null) {
+                if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY() - 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1));
+                } else if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY() - 1].getChessColor() == ChessColor.BLACK) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1));
+                }
+            }
+            if (getChessboardPoint().offset(1, 0) != null) {
+                if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY()] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()));
+                } else if (chessComponents[getChessboardPoint().getX() + 1][getChessboardPoint().getY()].getChessColor() == ChessColor.BLACK) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()));
+                }
+            }
+            if (getChessboardPoint().offset(-1, 0) != null) {
+                if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY()] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()));
+                } else if (chessComponents[getChessboardPoint().getX() - 1][getChessboardPoint().getY()].getChessColor() == ChessColor.BLACK) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()));
+                }
+            }
+            if (getChessboardPoint().offset(0, 1) != null) {
+                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY() + 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1));
+                } else if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY() + 1].getChessColor() == ChessColor.BLACK) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1));
+                }
+            }
+            if (getChessboardPoint().offset(0, -1) != null) {
+                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY() - 1] instanceof EmptySlotComponent) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1));
+                } else if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY() - 1].getChessColor() == ChessColor.BLACK) {
+                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1));
+                }
+            }
+        }
+        return canMoveTo;
+    }
+
 
     @Override
     protected void paintComponent(Graphics g) {

@@ -7,7 +7,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.IllegalFormatCodePointException;
+import java.util.List;
 
 public class BishopChessComponent extends ChessComponent {
 
@@ -80,5 +82,9 @@ public class BishopChessComponent extends ChessComponent {
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth(), getHeight());
         }
+    }
+
+    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
+        return new ArrayList<>();
     }
 }
