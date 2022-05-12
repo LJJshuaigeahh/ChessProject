@@ -1,8 +1,11 @@
 package controller;
 
 
+import model.ChessColor;
 import model.ChessComponent;
 import view.Chessboard;
+
+import javax.swing.*;
 
 public class ClickController {
     private final Chessboard chessboard;
@@ -29,7 +32,8 @@ public class ClickController {
                 //repaint in swap chess method.
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
-
+                JLabel jLabel = (JLabel) chessboard.getParent().getComponent(1);
+                jLabel.setText("It's " + chessboard.getCurrentColor().getName() + "'s turn.");
                 first.setSelected(false);
                 first = null;
             }

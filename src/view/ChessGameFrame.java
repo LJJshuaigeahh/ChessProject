@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import model.ChessColor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,10 @@ public class ChessGameFrame extends JFrame {
     public final int CHESSBOARD_SIZE;
     private GameController gameController;
 
+    private JPanel panel0 = new JPanel();
+    private JPanel panel1 = new JPanel();
+    private JPanel panel2 = new JPanel();
+
     public ChessGameFrame(int width, int height) {
         setTitle("2022 CS102A Project Demo"); //设置标题
         this.WIDTH = width;
@@ -26,33 +31,43 @@ public class ChessGameFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(null);
 
+        panel0.setSize(WIDTH, HEIGTH);
+        panel0.setLayout(null);
 
-        addChessboard();
-        addLabel();
-        addHelloButton();
-        addLoadButton();
+        panel1.setSize(WIDTH, HEIGTH);
+        panel1.setLayout(null);
+
+        getContentPane().add(panel0);
+        setVisible(true);
+
+        getContentPane().add(panel2);
+        setVisible(true);
+
+        addBeginGameButten(panel0);
+        addChessboard(panel1);
+        addLabel(panel1);
     }
 
 
     /**
      * 在游戏面板中添加棋盘
      */
-    private void addChessboard() {
+    private void addChessboard(JPanel panel) {
         Chessboard chessboard = new Chessboard(CHESSBOARD_SIZE, CHESSBOARD_SIZE);
         gameController = new GameController(chessboard);
-        chessboard.setLocation(HEIGTH / 10, HEIGTH / 10);
-        add(chessboard);
+        chessboard.setLocation(0, 0);
+        panel.add(chessboard);
     }
 
     /**
      * 在游戏面板中添加标签
      */
-    private void addLabel() {
-        JLabel statusLabel = new JLabel("Sample label");
-        statusLabel.setLocation(HEIGTH, HEIGTH / 10);
+    private void addLabel(JPanel panel) {
+        JLabel statusLabel = new JLabel("It's Black's turn.");
+        statusLabel.setLocation(700, 0);
         statusLabel.setSize(200, 60);
         statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(statusLabel);
+        panel.add(statusLabel);
     }
 
     /**
@@ -60,12 +75,26 @@ public class ChessGameFrame extends JFrame {
      */
 
     private void addHelloButton() {
-        JButton button = new JButton("Show Hello Here");
+        JButton button = new JButton("Hi!!");
         button.addActionListener((e) -> JOptionPane.showMessageDialog(this, "Hello, world!"));
         button.setLocation(HEIGTH, HEIGTH / 10 + 120);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
+    }
+
+    private void addBeginGameButten(JPanel panel) {
+        JButton button = new JButton("开始游戏");
+        button.addActionListener((e) -> {
+            remove(panel0);
+            setContentPane(panel1);
+            validate();
+            repaint();
+        });
+        button.setLocation(HEIGTH, HEIGTH / 10 + 120);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        panel.add(button);
     }
 
     private void addLoadButton() {
@@ -77,7 +106,7 @@ public class ChessGameFrame extends JFrame {
 
         button.addActionListener(e -> {
             System.out.println("Click load");
-            String path = JOptionPane.showInputDialog(this,"Input Path here");
+            String path = JOptionPane.showInputDialog(this, "Input Path here");
             gameController.loadGameFromFile(path);
         });
     }
