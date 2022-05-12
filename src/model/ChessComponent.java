@@ -17,7 +17,8 @@ public abstract class ChessComponent extends JComponent {
      * CHESSGRID_SIZE: 主要用于确定每个棋子在页面中显示的大小。
      * <br>
      * 在这个设计中，每个棋子的图案是用图片画出来的（由于国际象棋那个棋子手动画太难了）
-     * <br>
+     * <br>\\\\
+     *
      * 因此每个棋子占用的形状是一个正方形，大小是50*50
      */
 
