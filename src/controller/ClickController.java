@@ -32,8 +32,9 @@ public class ClickController {
                 //repaint in swap chess method.
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
+
                 JLabel jLabel = (JLabel) chessboard.getParent().getComponent(1);
-                jLabel.setText("It's " + chessboard.getCurrentColor().getName() + "'s turn.");
+                jLabel.setText("第" + (int) chessboard.getCount() + "回合  " + "It's " + chessboard.getCurrentColor().getName() + "'s turn.");
                 first.setSelected(false);
                 first = null;
             }

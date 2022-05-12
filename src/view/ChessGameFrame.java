@@ -55,17 +55,17 @@ public class ChessGameFrame extends JFrame {
     private void addChessboard(JPanel panel) {
         Chessboard chessboard = new Chessboard(CHESSBOARD_SIZE, CHESSBOARD_SIZE);
         gameController = new GameController(chessboard);
-        chessboard.setLocation(0, 0);
+        chessboard.setLocation(20, 76);
         panel.add(chessboard);
     }
 
     /**
-     * 在游戏面板中添加标签
+     * 在游戏面板中添加回合状态标签
      */
     private void addLabel(JPanel panel) {
-        JLabel statusLabel = new JLabel("It's Black's turn.");
-        statusLabel.setLocation(700, 0);
-        statusLabel.setSize(200, 60);
+        JLabel statusLabel = new JLabel("第1回合  It's Black's turn.");
+        statusLabel.setLocation(200, 0);
+        statusLabel.setSize(300, 60);
         statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
         panel.add(statusLabel);
     }

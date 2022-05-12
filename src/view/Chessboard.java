@@ -30,33 +30,17 @@ public class Chessboard extends JComponent {
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
     private final int CHESS_SIZE;
-    private JLabel statusLabel;
+    private float count = 1;
 
+    public float getCount() {
+        return count;
+    }
 
     public Chessboard(int width, int height) {
         setLayout(null); // Use absolute layout.
         setSize(width, height);
         CHESS_SIZE = width / 8;
         System.out.printf("chessboard size = %d, chess size = %d\n", width, CHESS_SIZE);
-
-
-//        JLabel statusLabelBlack = new JLabel("It's Black's turn.");
-//        statusLabelBlack.setLocation(650, 0);
-//        statusLabelBlack.setSize(200, 60);
-//        statusLabelBlack.setFont(new Font("Rockwell", Font.BOLD, 20));
-//        JLabel statusLabelWhite = new JLabel("It's White's turn.");
-//        statusLabelWhite.setLocation(650, 0);
-//        statusLabelWhite.setSize(200, 60);
-//        statusLabelWhite.setFont(new Font("Rockwell", Font.BOLD, 20));
-//        statusLabel.setLocation(650, 0);
-//        statusLabel.setSize(200, 60);
-//        statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
-//        if (getCurrentColor()==ChessColor.BLACK){
-//            statusLabel = new JLabel("It's Black's turn.");
-//        }else {
-//            statusLabel = new JLabel("It's White's turn.");
-//        }
-//        add(statusLabel);
 
         initiateEmptyChessboard();
 
@@ -93,6 +77,7 @@ public class Chessboard extends JComponent {
         return currentColor;
     }
 
+
     public void putChessOnBoard(ChessComponent chessComponent) {
         int row = chessComponent.getChessboardPoint().getX(), col = chessComponent.getChessboardPoint().getY();
 
@@ -116,6 +101,8 @@ public class Chessboard extends JComponent {
 
         chess1.repaint();
         chess2.repaint();
+
+        count += 0.5;
     }
 
     public void initiateEmptyChessboard() {
