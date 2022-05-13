@@ -30,9 +30,6 @@ public abstract class ChessComponent extends JComponent {
      */
     private ClickController clickController;
 
-
-    public abstract List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents);
-
     /**
      * chessboardPoint: 表示8*8棋盘中，当前棋子在棋格对应的位置，如(0, 0), (1, 0), (0, 7),(7, 7)等等
      * <br>
@@ -115,6 +112,8 @@ public abstract class ChessComponent extends JComponent {
      * 这个方法主要是检查移动的合法性，如果合法就返回true，反之是false
      */
     public abstract boolean canMoveTo(ChessComponent[][] chessboard, ChessboardPoint destination);
+
+    public abstract List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents);
 
     /**
      * 这个方法主要用于加载一些特定资源，如棋子图片等等。

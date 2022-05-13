@@ -10,7 +10,7 @@ import java.awt.*;
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
  */
 public class ChessGameFrame extends JFrame {
-    //    public final Dimension FRAME_SIZE ;
+    //    public final Dimension FRAME_SIZE  窗体大小;
     private final int WIDTH;
     private final int HEIGTH;
     public final int CHESSBOARD_SIZE;
@@ -18,10 +18,9 @@ public class ChessGameFrame extends JFrame {
 
     private JPanel panel0 = new JPanel();
     private JPanel panel1 = new JPanel();
-    private JPanel panel2 = new JPanel();
 
     public ChessGameFrame(int width, int height) {
-        setTitle("2022 CS102A Project Demo"); //设置标题
+        setTitle("2022 CS102A Chess Project Demo"); //设置标题
         this.WIDTH = width;
         this.HEIGTH = height;
         this.CHESSBOARD_SIZE = HEIGTH * 4 / 5;
@@ -37,6 +36,7 @@ public class ChessGameFrame extends JFrame {
         panel1.setSize(WIDTH, HEIGTH);
         panel1.setLayout(null);
 
+//        把平面加到窗体上
         getContentPane().add(panel0);
         setVisible(true);
 
@@ -71,19 +71,6 @@ public class ChessGameFrame extends JFrame {
         panel.add(statusLabel);
     }
 
-    /**
-     * 在游戏面板中增加一个按钮，如果按下的话就会显示Hello, world!
-     */
-
-    private void addHelloButton() {
-        JButton button = new JButton("Hi!!");
-        button.addActionListener((e) -> JOptionPane.showMessageDialog(this, "Hello, world!"));
-        button.setLocation(HEIGTH, HEIGTH / 10 + 120);
-        button.setSize(200, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(button);
-    }
-
     private void addBeginGameButten(JPanel panel) {
         JButton button = new JButton("开始游戏");
         button.addActionListener((e) -> {
@@ -114,6 +101,19 @@ public class ChessGameFrame extends JFrame {
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         panel.add(button);
+    }
+
+    /**
+     * 在游戏面板中增加一个按钮，如果按下的话就会显示Hello, world!
+     */
+
+    private void addHelloButton() {
+        JButton button = new JButton("Hi!!");
+        button.addActionListener((e) -> JOptionPane.showMessageDialog(this, "Hello, world!"));
+        button.setLocation(HEIGTH, HEIGTH / 10 + 120);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
     }
 
     private void addLoadButton() {

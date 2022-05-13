@@ -48,28 +48,29 @@ public class KnightChessComponent extends ChessComponent {
     @Override
     public boolean canMoveTo(ChessComponent[][] chessComponents, ChessboardPoint destination) {
         ChessboardPoint source = getChessboardPoint();
-        if (destination.getX() - source.getX() == 2 && destination.getY() - source.getY() == 1) {
+        ChessColor color = getChessColor();
+        if (destination.getX() - source.getX() == 2 && destination.getY() - source.getY() == 1 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
             return true;
         }
-        if (destination.getX() - source.getX() == 1 && destination.getY() - source.getY() == 2) {
+        if (destination.getX() - source.getX() == 1 && destination.getY() - source.getY() == 2 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
             return true;
         }
-        if (destination.getX() - source.getX() == 2 && destination.getY() - source.getY() == -1) {
+        if (destination.getX() - source.getX() == 2 && destination.getY() - source.getY() == -1 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
             return true;
         }
-        if (destination.getX() - source.getX() == -2 && destination.getY() - source.getY() == 1) {
+        if (destination.getX() - source.getX() == -2 && destination.getY() - source.getY() == 1 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
             return true;
         }
-        if (destination.getX() - source.getX() == 1 && destination.getY() - source.getY() == -2) {
+        if (destination.getX() - source.getX() == 1 && destination.getY() - source.getY() == -2 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
             return true;
         }
-        if (destination.getX() - source.getX() == -1 && destination.getY() - source.getY() == 2) {
+        if (destination.getX() - source.getX() == -1 && destination.getY() - source.getY() == 2 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
             return true;
         }
-        if (destination.getX() - source.getX() == -2 && destination.getY() - source.getY() == -1) {
+        if (destination.getX() - source.getX() == -2 && destination.getY() - source.getY() == -1 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
             return true;
         }
-        if (destination.getX() - source.getX() == -1 && destination.getY() - source.getY() == -2) {
+        if (destination.getX() - source.getX() == -1 && destination.getY() - source.getY() == -2 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
             return true;
         }
         return false;

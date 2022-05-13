@@ -24,6 +24,7 @@ public class ChessboardPoint {
     public String toString() {
         return "("+x + ","+y+") " + "on the chessboard is clicked!";
     }
+
     public ChessboardPoint offset(int dx, int dy) {
         int x_ = x + dx;
         int y_ = y + dy;

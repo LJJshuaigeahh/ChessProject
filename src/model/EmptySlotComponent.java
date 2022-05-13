@@ -27,7 +27,6 @@ public class EmptySlotComponent extends ChessComponent {
         //No resource!
     }
 
-
     public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
         return new ArrayList<>();
     }

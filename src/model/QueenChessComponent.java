@@ -64,7 +64,7 @@ public class QueenChessComponent extends ChessComponent {
                     return false;
                 }
             }
-        } else if (Math.abs(destination.getX() - source.getX()) == Math.abs(destination.getY() - source.getY())) { // Not on the same row or the same column.
+        } else if (Math.abs(destination.getX() - source.getX()) == Math.abs(destination.getY() - source.getY())) {
             for (int i = 1; i < Math.abs(destination.getX() - source.getX()); i++) {
                 int row = source.getX();
                 int col = source.getY();
@@ -88,6 +88,10 @@ public class QueenChessComponent extends ChessComponent {
         return true;
     }
 
+    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
+        return new ArrayList<>();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -98,9 +102,5 @@ public class QueenChessComponent extends ChessComponent {
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth(), getHeight());
         }
-    }
-
-    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
-        return new ArrayList<>();
     }
 }

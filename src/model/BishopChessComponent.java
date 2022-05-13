@@ -66,7 +66,7 @@ public class BishopChessComponent extends ChessComponent {
                     return false;
                 }
             }
-        } else { // Not on the same row or the same column.
+        } else {
             return false;
         }
         return true;
