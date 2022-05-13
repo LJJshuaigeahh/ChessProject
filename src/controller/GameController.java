@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.jdi.connect.Connector;
 import model.*;
 import view.Chessboard;
 
@@ -10,7 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class GameController {
     private Chessboard chessboard;
@@ -21,7 +22,34 @@ public class GameController {
 
     public List<String> loadGameFromFile(String path) {
         try {
+            if (path.substring(path.length() -4, path.length()) != ".txt") {
+                JOptionPane.showMessageDialog(null, "File format error!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
             List<String> chessData = Files.readAllLines(Path.of(path));
+            if (!chessData.get(chessData.size() - 1).equals("w") && !chessData.get(chessData.size() - 1).equals("b")) {
+                JOptionPane.showMessageDialog(null, "Missing next player!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+            if (chessData.size() - 1 != 8) {
+                JOptionPane.showMessageDialog(null, "Wrong chessboard size!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+            for (int i = 0; i < 8; i++) {
+                if (chessData.get(i).length() != 8) {
+                    JOptionPane.showMessageDialog(null, "Wrong chessboard size!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                    return null;
+                }
+            }
+            List<Character> aList = Arrays.asList('R', 'N', 'B', 'Q', 'K', 'P', 'r', 'n', 'b', 'q', 'k', 'p', '_');
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (!aList.contains(chessData.get(i).charAt(j))) {
+                        JOptionPane.showMessageDialog(null, "Wrong piece type!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
+                }
+            }
             chessboard.loadGame(chessData);
             return chessData;
         } catch (IOException e) {
