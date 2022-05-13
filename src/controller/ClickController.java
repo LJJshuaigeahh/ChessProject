@@ -33,11 +33,13 @@ public class ClickController {
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
 
+                first.setSelected(false);
+                first = null;
+
+
 //                回合状态显示
                 JLabel jLabel = (JLabel) chessboard.getParent().getComponent(1);
                 jLabel.setText("第" + (int) chessboard.getCount() + "回合  " + "It's " + chessboard.getCurrentColor().getName() + "'s turn.");
-                first.setSelected(false);
-                first = null;
             }
         }
     }

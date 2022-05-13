@@ -105,24 +105,10 @@ public class Chessboard extends JComponent {
 
         count += 0.5;
 
-//        if (chess1.getChessColor() == ChessColor.BLACK) {
-//            if (tellDefeat(ChessColor.WHITE)) {
-//                JOptionPane.showMessageDialog(this, ChessColor.WHITE.getName() + "  wins!!");
-//            }
-//            if (tellDefeat(ChessColor.BLACK)) {
-//                JOptionPane.showMessageDialog(this, ChessColor.BLACK.getName() + "  wins!!");
-//            }
-//        } else {
-//            if (tellDefeat(ChessColor.BLACK)) {
-//                JOptionPane.showMessageDialog(this, ChessColor.BLACK.getName() + "  wins!!");
-//            }
-//            if (tellDefeat(ChessColor.WHITE)) {
-//                JOptionPane.showMessageDialog(this, ChessColor.WHITE.getName() + "  wins!!");
-//            }
+
+//        if (tellDefeat(chess1.getChessColor())) {
+//            JOptionPane.showMessageDialog(this, chess1.getChessColor().getName() + "  wins!!");
 //        }
-        if (tellDefeat(chess1.getChessColor())) {
-            JOptionPane.showMessageDialog(this, chess1.getChessColor().getName() + "  wins!!");
-        }
 
     }
 
@@ -187,7 +173,65 @@ public class Chessboard extends JComponent {
     }
 
     public void loadGame(List<String> chessData) {
-        chessData.forEach(System.out::println);
+
+        initiateEmptyChessboard();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if ((int) chessData.get(i).charAt(j) >= 65 && (int) chessData.get(i).charAt(j) <= 90) {
+                    switch (chessData.get(i).charAt(j)) {
+                        case 'R':
+                            initRookOnBoard(i, j, ChessColor.BLACK);
+                            break;
+                        case 'N':
+                            initKnightOnBoard(i, j, ChessColor.BLACK);
+                            break;
+                        case 'B':
+                            initBishopOnBoard(i, j, ChessColor.BLACK);
+                            break;
+                        case 'Q':
+                            initQueenOnBoard(i, j, ChessColor.BLACK);
+                            break;
+                        case 'K':
+                            initKingOnBoard(i, j, ChessColor.BLACK);
+                            break;
+                        case 'P':
+                            initPawnOnBoard(i, j, ChessColor.BLACK);
+                            break;
+                    }
+                } else if ((int) chessData.get(i).charAt(j) >= 97 && (int) chessData.get(i).charAt(j) <= 122) {
+                    switch (chessData.get(i).charAt(j)) {
+                        case 'r':
+                            initRookOnBoard(i, j, ChessColor.WHITE);
+                            break;
+                        case 'n':
+                            initKnightOnBoard(i, j, ChessColor.WHITE);
+                            break;
+                        case 'b':
+                            initBishopOnBoard(i, j, ChessColor.WHITE);
+                            break;
+                        case 'q':
+                            initQueenOnBoard(i, j, ChessColor.WHITE);
+                            break;
+                        case 'k':
+                            initKingOnBoard(i, j, ChessColor.WHITE);
+                            break;
+                        case 'p':
+                            initPawnOnBoard(i, j, ChessColor.WHITE);
+                            break;
+                    }
+                }
+                chessComponents[i][j].repaint();
+            }
+        }
+        if (chessData.get(8).equals("w")) {
+            currentColor = ChessColor.WHITE;
+        } else {
+            currentColor = ChessColor.BLACK;
+        }
+        count = 1;
+        JLabel jLabel = (JLabel) this.getParent().getComponent(1);
+        jLabel.setText("第1回合  " + "It's " + this.getCurrentColor().getName() + "'s turn.");
+//        chessData.forEach(System.out::println);
     }
 
     public boolean tellDefeat(ChessColor color) {

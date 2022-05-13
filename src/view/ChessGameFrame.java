@@ -45,8 +45,10 @@ public class ChessGameFrame extends JFrame {
 
         addBeginGameButten(panel0);
         addChessboard(panel1);
-        addLabel(panel1);
+        addRoundLabel(panel1);
+        addStoreButton(panel1);
         addReBeginGameButten(panel1);
+        addLoadButton(panel1);
     }
 
 
@@ -63,7 +65,7 @@ public class ChessGameFrame extends JFrame {
     /**
      * 在游戏面板中添加回合状态标签
      */
-    private void addLabel(JPanel panel) {
+    private void addRoundLabel(JPanel panel) {
         JLabel statusLabel = new JLabel("第1回合  It's White's turn.");
         statusLabel.setLocation(200, 0);
         statusLabel.setSize(300, 60);
@@ -91,7 +93,7 @@ public class ChessGameFrame extends JFrame {
             remove(panel1);
             panel1.removeAll();
             addChessboard(panel1);
-            addLabel(panel1);
+            addRoundLabel(panel1);
             addReBeginGameButten(panel1);
             setContentPane(panel1);
             validate();
@@ -116,18 +118,32 @@ public class ChessGameFrame extends JFrame {
         add(button);
     }
 
-    private void addLoadButton() {
-        JButton button = new JButton("Load");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 240);
+    private void addLoadButton(JPanel panel) {
+        JButton button = new JButton("Load a game");
+        button.setLocation(700, 400);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(button);
 
         button.addActionListener(e -> {
             System.out.println("Click load");
             String path = JOptionPane.showInputDialog(this, "Input Path here");
             gameController.loadGameFromFile(path);
         });
+        panel.add(button);
+    }
+
+    private void addStoreButton(JPanel panel) {
+        JButton button = new JButton("Store a game");
+        button.setLocation(700, 200);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+
+        button.addActionListener(e -> {
+            System.out.println("Click store");
+            String path = JOptionPane.showInputDialog(this, "Input Path here");
+            gameController.storeGameFromFile(path);
+        });
+        panel.add(button);
     }
 
 }
