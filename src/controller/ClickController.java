@@ -36,7 +36,7 @@ public class ClickController {
                 first.setSelected(false);
                 first = null;
 
-
+                chessboard.getRecordChessBoard().add(chessboard.getChessStringList2());
 //                回合状态显示
                 JLabel jLabel = (JLabel) chessboard.getParent().getComponent(1);
                 jLabel.setText("第" + (int) chessboard.getCount() + "回合  " + "It's " + chessboard.getCurrentColor().getName() + "'s turn.");

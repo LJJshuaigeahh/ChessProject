@@ -22,7 +22,7 @@ public class GameController {
 
     public List<String> loadGameFromFile(String path) {
         try {
-            if (path.substring(path.length() -4, path.length()) != ".txt") {
+            if (!path.substring(path.length() - 4).equals(".txt")) {
                 JOptionPane.showMessageDialog(null, "File format error!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
                 return null;
             }
@@ -62,7 +62,7 @@ public class GameController {
         try {
             FileWriter fileWriter = new FileWriter(path);
             BufferedWriter writer = new BufferedWriter(fileWriter);
-            for (String line : getChessString()
+            for (String line : getChessStringList()
             ) {
                 writer.write(line);
             }
@@ -72,9 +72,29 @@ public class GameController {
             e.printStackTrace();
         }
     }
+    public void storeGameFromFileIncludingStops(String path) {
+        try {
+            FileWriter fileWriter = new FileWriter(path);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+            for (int i = 0; i < chessboard.getRecordChessBoard().size(); i++) {
+                for (String line : chessboard.getRecordChessBoard().get(i)
+                ) {
+                    writer.write(line);
+                }
+            }
+            writer.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public List<String> getChessString() {
-        List<String> chessString = new ArrayList<>();
+    public void backChess1(){
+        chessboard.backChess2();
+    }
+
+    public List<String> getChessStringList() {
+        List<String> chessStringList = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < 8; j++) {
@@ -110,14 +130,13 @@ public class GameController {
                     sb.append('_');
                 }
             }
-            chessString.add(sb.toString());
-            chessString.add("\n");
+            chessStringList.add(sb.toString()+"\n");
         }
         if (chessboard.getCurrentColor() == ChessColor.BLACK) {
-            chessString.add("b");
+            chessStringList.add("b\n");
         } else {
-            chessString.add("w");
+            chessStringList.add("w\n");
         }
-        return chessString;
+        return chessStringList;
     }
 }
