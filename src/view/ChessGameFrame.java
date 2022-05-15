@@ -1,12 +1,17 @@
 package view;
 
 import controller.GameController;
-import model.ChessColor;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -21,6 +26,7 @@ public class ChessGameFrame extends JFrame {
     private JPanel panel0 = new JPanel();
     private JPanel panel1 = new JPanel();
     private JButton jButton1 = new JButton();
+
 
     public JPanel getPanel0() {
         return panel0;
@@ -41,6 +47,13 @@ public class ChessGameFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(null);
 
+//        背景音乐
+        File bgm = new File("./musics/obj_wo3DlMOGwrbDjj7DisKw_13256751280_b52f_bb8d_2f48_2f17e937ebba518cdd2f2edad1a3ce34.wav");
+        //播放背景音乐
+        playMusic(bgm);
+
+
+
         panel0.setSize(WIDTH, HEIGTH);
         panel0.setLayout(null);
 
@@ -52,6 +65,13 @@ public class ChessGameFrame extends JFrame {
         setVisible(true);
 
         addBeginGameButten(panel0);
+
+//        开始界面背景图片
+        ImageIcon image = new ImageIcon("./images/2962d5f01c94fefbda7d5e282bca0df9b2ada0e7(1).jpg");
+        JLabel jLabel = new JLabel(image);
+        jLabel.setSize(image.getIconWidth(), image.getIconHeight());
+        panel0.add(jLabel);
+
         addChessboard(panel1);
         addRoundLabel(panel1);
         addStoreButton(panel1);
@@ -59,6 +79,12 @@ public class ChessGameFrame extends JFrame {
         addLoadButton(panel1);
         addBackButton(panel1);
         addStoreIncludingStopsButton(panel1);
+
+//        游戏界面背景图片
+        ImageIcon image1 = new ImageIcon("./images/2962d5f01c94fefbda7d5e282bca0df9b2ada0e7(1).jpg");
+        JLabel jLabel1 = new JLabel(image1);
+        jLabel1.setSize(image1.getIconWidth(), image1.getIconHeight());
+        panel1.add(jLabel1);
     }
 
 
@@ -197,5 +223,26 @@ public class ChessGameFrame extends JFrame {
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
+    }
+
+    private void playMusic(File file) {
+        try {
+            //创建相当于音乐播放器的对象
+            Clip clip = AudioSystem.getClip();
+            //将传入的文件转成可播放的文件
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(file);
+            //播放器打开这个文件
+            clip.open(audioInput);
+            //clip.start();//只播放一次
+            //循环播放
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //死循环不让主程序结束（swing可不用）
+    /*
+      while(true){
+      }
+    */
     }
 }
