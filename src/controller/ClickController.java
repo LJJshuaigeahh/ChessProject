@@ -39,6 +39,7 @@ public class ClickController {
                 recordFirst.repaint();
             } else if (handleSecond(chessComponent)) {
 
+//                兵底线升变
                 if (first instanceof PawnChessComponent && (chessComponent.getChessboardPoint().getX() == 7 || chessComponent.getChessboardPoint().getX() == 0)) {
                     Object[] options = {"后", "车", "马", "象"};
                     int x = JOptionPane.showOptionDialog(null, "Please choose a kind of chessComponent",
@@ -64,6 +65,13 @@ public class ClickController {
                     }
                 }
 
+//                吃过路兵
+                if (first instanceof PawnChessComponent && first.getChessColor() == ChessColor.BLACK) {
+                    if (chessComponent.getChessboardPoint().getX() == first.getChessboardPoint().getX() + 1 && (chessComponent.getChessboardPoint().getY() == first.getChessboardPoint().getY() + 1||chessComponent.getChessboardPoint().getY() == first.getChessboardPoint().getY() - 1)){
+
+                    }
+                }
+
 
                 File move = new File("./musics/move.wav");
                 playMusic(move);
@@ -71,7 +79,6 @@ public class ClickController {
                 //repaint in swap chess method.
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
-
 
 
                 first.setSelected(false);

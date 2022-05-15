@@ -67,6 +67,17 @@ public class PawnChessComponent extends ChessComponent {
                     return true;
                 }
             }
+            if (source.getY() != 0 && source.getY() != 7) {
+                if (source.getX() == 4 && ((chessComponents[source.getX()][source.getY() + 1] instanceof PawnChessComponent && chessComponents[source.getX()][source.getY() + 1].getChessColor() == ChessColor.WHITE) || (chessComponents[source.getX()][source.getY() - 1] instanceof PawnChessComponent && chessComponents[source.getX()][source.getY() - 1].getChessColor() == ChessColor.WHITE))) {
+                    if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                        if (source.getX() + 1 == destination.getX() && source.getY() + 1 == destination.getY()) {
+                            return true;
+                        } else if (source.getX() + 1 == destination.getX() && source.getY() - 1 == destination.getY()) {
+                            return true;
+                        }
+                    }
+                }
+            }
         } else {
             if (source.getX() == 6) {
                 if (destination.getX() == source.getX() - 1 && destination.getY() == source.getY() && chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
