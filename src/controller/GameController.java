@@ -72,6 +72,7 @@ public class GameController {
             e.printStackTrace();
         }
     }
+
     public void storeGameFromFileIncludingStops(String path) {
         try {
             FileWriter fileWriter = new FileWriter(path);

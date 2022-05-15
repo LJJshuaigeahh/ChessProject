@@ -1,8 +1,7 @@
 package controller;
 
 
-import model.ChessColor;
-import model.ChessComponent;
+import model.*;
 import view.Chessboard;
 
 import javax.sound.sampled.AudioInputStream;
@@ -39,12 +38,41 @@ public class ClickController {
                 first = null;
                 recordFirst.repaint();
             } else if (handleSecond(chessComponent)) {
+
+                if (first instanceof PawnChessComponent && (chessComponent.getChessboardPoint().getX() == 7 || chessComponent.getChessboardPoint().getX() == 0)) {
+                    Object[] options = {"后", "车", "马", "象"};
+                    int x = JOptionPane.showOptionDialog(null, "Please choose a kind of chessComponent",
+                            "兵底线升变",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+                    switch (x) {
+                        case 0:
+                            chessboard.remove(first);
+                            chessboard.add(first = new QueenChessComponent(first.getChessboardPoint(), first.getLocation(), first.getChessColor(), first.getClickController(), chessboard.getCHESS_SIZE()));
+                            break;
+                        case 1:
+                            chessboard.remove(first);
+                            chessboard.add(first = new RookChessComponent(first.getChessboardPoint(), first.getLocation(), first.getChessColor(), first.getClickController(), chessboard.getCHESS_SIZE()));
+                            break;
+                        case 2:
+                            chessboard.remove(first);
+                            chessboard.add(first = new KnightChessComponent(first.getChessboardPoint(), first.getLocation(), first.getChessColor(), first.getClickController(), chessboard.getCHESS_SIZE()));
+                            break;
+                        case 3:
+                            chessboard.remove(first);
+                            chessboard.add(first = new BishopChessComponent(first.getChessboardPoint(), first.getLocation(), first.getChessColor(), first.getClickController(), chessboard.getCHESS_SIZE()));
+                            break;
+                    }
+                }
+
+
                 File move = new File("./musics/move.wav");
                 playMusic(move);
 
                 //repaint in swap chess method.
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
+
+
 
                 first.setSelected(false);
                 first = null;

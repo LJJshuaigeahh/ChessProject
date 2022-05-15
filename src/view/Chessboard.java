@@ -35,6 +35,11 @@ public class Chessboard extends JComponent {
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
     private final int CHESS_SIZE;
+
+    public int getCHESS_SIZE() {
+        return CHESS_SIZE;
+    }
+
     private float count = 1;
     private ArrayList<List<String>> recordChessBoard = new ArrayList<>();
 
@@ -773,7 +778,7 @@ public class Chessboard extends JComponent {
                 chessComponents[i][j].repaint();
             }
         }
-        if (chessData.get(8).equals("w")) {
+        if (chessData.get(8).equals("w\n")) {
             currentColor = ChessColor.WHITE;
         } else {
             currentColor = ChessColor.BLACK;

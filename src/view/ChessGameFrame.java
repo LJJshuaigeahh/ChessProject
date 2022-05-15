@@ -148,6 +148,10 @@ public class ChessGameFrame extends JFrame {
                 addLoadButton(panel1);
                 addBackButton(panel1);
                 setContentPane(panel1);
+                ImageIcon image1 = new ImageIcon("./images/2962d5f01c94fefbda7d5e282bca0df9b2ada0e7(1).jpg");
+                JLabel jLabel1 = new JLabel(image1);
+                jLabel1.setSize(image1.getIconWidth(), image1.getIconHeight());
+                panel1.add(jLabel1);
                 validate();
                 repaint();
             }
