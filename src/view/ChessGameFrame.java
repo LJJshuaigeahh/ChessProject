@@ -48,10 +48,9 @@ public class ChessGameFrame extends JFrame {
         setLayout(null);
 
 //        背景音乐
-        File bgm = new File("./musics/obj_wo3DlMOGwrbDjj7DisKw_13256751280_b52f_bb8d_2f48_2f17e937ebba518cdd2f2edad1a3ce34.wav");
-        //播放背景音乐
+        File bgm = new File("./musics/backgroundMusic.wav");
+//        播放背景音乐
         playMusic(bgm);
-
 
 
         panel0.setSize(WIDTH, HEIGTH);
@@ -121,6 +120,12 @@ public class ChessGameFrame extends JFrame {
 //        button.setLocation(1000, 300);
 //        button.setSize(WIDTH / 5, HEIGTH / 10);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
+//        设置背景颜色
+//        button.setBackground(Color.green);
+//        button.setBackground(Color.cyan);
+//        button.setBackground(new Color(200,255,255));
+//        按钮变透明
+//        button.setContentAreaFilled(false);
         jButton1 = button;
         panel.add(button);
     }
@@ -206,10 +211,32 @@ public class ChessGameFrame extends JFrame {
             int x = JOptionPane.showOptionDialog(null, "是否悔棋？", "判断",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             if (x == 0) {
+                File back = new File("./musics/back.wav");
+                playMusic2(back);
                 gameController.backChess1();
             }
         });
     }
+
+//    private void addMusicButton(JPanel panel) {
+////        背景音乐
+//        File bgm = new File("./musics/backgroundMusic.wav");
+////        //播放背景音乐
+//        playMusic(bgm);
+//        JButton button = new JButton();
+//        button.setLocation(700, 0);
+//        button.setBackground(new Color(200, 255, 255));
+//        ImageIcon image = new ImageIcon("./images/音乐开关-开.png");
+//        Image image1 = image.getImage();
+//        Image image2 = image1.getScaledInstance(30, 30, Image.SCALE_FAST);
+//        ImageIcon image3 = new ImageIcon(image2);
+//        button.setSize(image3.getIconWidth(), image3.getIconHeight());
+//        button.setIcon(image3);
+//        button.addActionListener((e) -> {
+//            stopMusic(bgm);
+//        });
+//        panel.add(button);
+//    }
 
 
     /**
@@ -236,6 +263,49 @@ public class ChessGameFrame extends JFrame {
             //clip.start();//只播放一次
             //循环播放
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //死循环不让主程序结束（swing可不用）
+    /*
+      while(true){
+      }
+    */
+    }
+
+//    private void stopMusic(File file) {
+//        try {
+//            //创建相当于音乐播放器的对象
+//            Clip clip = AudioSystem.getClip();
+//            //将传入的文件转成可播放的文件
+//            AudioInputStream audioInput = AudioSystem.getAudioInputStream(file);
+//            //播放器打开这个文件
+//            clip.open(audioInput);
+//            //clip.start();//只播放一次
+//            //循环播放
+////            clip.loop(Clip.LOOP_CONTINUOUSLY);
+//            clip.stop();
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        //死循环不让主程序结束（swing可不用）
+//    /*
+//      while(true){
+//      }
+//    */
+//    }
+
+    private void playMusic2(File file) {
+        try {
+            //创建相当于音乐播放器的对象
+            Clip clip = AudioSystem.getClip();
+            //将传入的文件转成可播放的文件
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(file);
+            //播放器打开这个文件
+            clip.open(audioInput);
+            clip.start();//只播放一次
+            //循环播放
+//            clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
