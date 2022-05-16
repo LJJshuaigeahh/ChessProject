@@ -17,6 +17,12 @@ public class PawnChessComponent extends ChessComponent {
 
     private Image pawnImage;
 
+    private ArrayList<List<String>> recordChessBoard = new ArrayList<>();
+
+    public void setRecordChessBoard(ArrayList<List<String>> recordChessBoard) {
+        this.recordChessBoard = recordChessBoard;
+    }
+
     public void loadResource() throws IOException {
         if (PAWN_WHITE == null) {
             PAWN_WHITE = ImageIO.read(new File("./images/棋子二/pawn-white.png"));
