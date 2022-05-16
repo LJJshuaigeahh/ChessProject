@@ -5,23 +5,21 @@ import controller.GameController;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
  */
 public class ChessGameFrame extends JFrame {
-    //    public final Dimension FRAME_SIZE;  //窗体大小
+
+    //    public final Dimension FRAME_SIZE;  //窗体大小  ？？
+
+
     private final int WIDTH;
     private final int HEIGTH;
     public final int CHESSBOARD_SIZE;
     private GameController gameController;
+
 
     private JPanel panel0 = new JPanel();
     private JPanel panel1 = new JPanel();
@@ -36,26 +34,28 @@ public class ChessGameFrame extends JFrame {
         return jButton1;
     }
 
+
     public ChessGameFrame(int width, int height) {
+
         setTitle("2022 CS102A Chess Project Demo"); //设置标题
         this.WIDTH = width;
         this.HEIGTH = height;
         this.CHESSBOARD_SIZE = HEIGTH * 4 / 5;
 
-        setSize(WIDTH, HEIGTH);
+        setSize(WIDTH, HEIGTH); //设置窗体大小
         setLocationRelativeTo(null); // Center the window.
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
-        setLayout(null);
+        setLayout(null);  //绝对布局
 
 //        背景音乐
         File bgm = new File("./musics/backgroundMusic.wav");
 //        播放背景音乐
         playMusic(bgm);
 
-
+//开始游戏界面
         panel0.setSize(WIDTH, HEIGTH);
         panel0.setLayout(null);
-
+//游戏界面
         panel1.setSize(WIDTH, HEIGTH);
         panel1.setLayout(null);
 
@@ -71,6 +71,7 @@ public class ChessGameFrame extends JFrame {
         jLabel.setSize(image.getIconWidth(), image.getIconHeight());
         panel0.add(jLabel);
 
+//        给平面加组件
         addChessboard(panel1);
         addRoundLabel(panel1);
         addStoreButton(panel1);
@@ -118,9 +119,10 @@ public class ChessGameFrame extends JFrame {
             validate();
             repaint();
         });
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+//        设置组件位置和大小
 //        button.setLocation(1000, 300);
 //        button.setSize(WIDTH / 5, HEIGTH / 10);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
 //        设置背景颜色
 //        button.setBackground(Color.green);
 //        button.setBackground(Color.cyan);
@@ -149,6 +151,7 @@ public class ChessGameFrame extends JFrame {
                 addLoadButton(panel1);
                 addBackButton(panel1);
                 setContentPane(panel1);
+
                 ImageIcon image1 = new ImageIcon("./images/背景/国际象棋8-1581498150.jpg");
                 JLabel jLabel1 = new JLabel(image1);
                 jLabel1.setSize(image1.getIconWidth(), image1.getIconHeight());
@@ -217,7 +220,7 @@ public class ChessGameFrame extends JFrame {
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             if (x == 0) {
                 File back = new File("./musics/back.wav");
-                playMusic2(back);
+                playBackChessMusic(back);
                 gameController.backChess1();
             }
         });
@@ -300,7 +303,7 @@ public class ChessGameFrame extends JFrame {
 //    */
 //    }
 
-    private void playMusic2(File file) {
+    private void playBackChessMusic(File file) {
         try {
             //创建相当于音乐播放器的对象
             Clip clip = AudioSystem.getClip();

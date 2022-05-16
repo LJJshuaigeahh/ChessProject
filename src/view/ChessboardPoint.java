@@ -25,6 +25,7 @@ public class ChessboardPoint {
         return "("+x + ","+y+") " + "on the chessboard is clicked!";
     }
 
+//    判断走棋越不越界
     public ChessboardPoint offset(int dx, int dy) {
         int x_ = x + dx;
         int y_ = y + dy;

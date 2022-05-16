@@ -79,7 +79,7 @@ public class Chessboard extends JComponent {
             initPawnOnBoard(CHESSBOARD_SIZE - 2, i, ChessColor.WHITE);
             initPawnOnBoard(CHESSBOARD_SIZE - 2, CHESSBOARD_SIZE - 1 - i, ChessColor.WHITE);
         }
-        recordChessBoard.add(getChessStringList2());
+        recordChessBoard.add(getChessStringList());
     }
 
     public ChessComponent[][] getChessComponents() {
@@ -161,7 +161,6 @@ public class Chessboard extends JComponent {
         ChessComponent chessComponent = new PawnChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
         putChessOnBoard(chessComponent);
-
     }
 
     private void initKnightOnBoard(int row, int col, ChessColor color) {
@@ -240,7 +239,7 @@ public class Chessboard extends JComponent {
                 chessComponents[i][j].repaint();
             }
         }
-        recordChessBoard.add(getChessStringList2());
+        recordChessBoard.add(getChessStringList());
         if (chessData.get(8).equals("w")) {
             currentColor = ChessColor.WHITE;
         } else {
@@ -686,7 +685,7 @@ public class Chessboard extends JComponent {
         }
     }
 
-    public List<String> getChessStringList2() {
+    public List<String> getChessStringList() {
         List<String> chessStringList = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             StringBuilder sb = new StringBuilder();

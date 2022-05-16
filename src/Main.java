@@ -8,7 +8,10 @@ import java.awt.event.ComponentListener;
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+//            建立一个新窗口
             ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
+
+//            适应窗口大小
             mainFrame.addComponentListener(new ComponentListener() {
                 //当窗口大小改变时
                 public void componentResized(ComponentEvent e) {
@@ -42,6 +45,8 @@ public class Main {
 
                 }
             });
+
+//            窗口可见
             mainFrame.setVisible(true);
         });
     }
