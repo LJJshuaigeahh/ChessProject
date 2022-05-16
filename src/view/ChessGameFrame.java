@@ -67,7 +67,7 @@ public class ChessGameFrame extends JFrame {
         addBeginGameButten(panel0);
 
 //        开始界面背景图片
-        ImageIcon image = new ImageIcon("./images/背景/2962d5f01c94fefbda7d5e282bca0df9b2ada0e7(1).jpg");
+        ImageIcon image = new ImageIcon("./images/背景/background2.jpg");
         JLabel jLabel = new JLabel(image);
         jLabel.setSize(image.getIconWidth(), image.getIconHeight());
         panel0.add(jLabel);
