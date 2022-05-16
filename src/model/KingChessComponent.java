@@ -44,6 +44,7 @@ public class KingChessComponent extends ChessComponent {
     public KingChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
         super(chessboardPoint, location, color, listener, size);
         initiateRookImage(color);
+        highLightChess(this);
     }
 
     @Override
@@ -86,94 +87,113 @@ public class KingChessComponent extends ChessComponent {
         }
     }
 
-    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
-        ArrayList<ChessboardPoint> canMoveTo = new ArrayList<>();
-        if (getChessColor() == ChessColor.BLACK) {
-            if (getChessboardPoint().offset(1, 1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1));
-                }
-            }
-            if (getChessboardPoint().offset(1, -1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1));
-                }
-            }
-            if (getChessboardPoint().offset(-1, 1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1));
-                }
-            }
-            if (getChessboardPoint().offset(-1, -1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1));
-                }
-            }
-            if (getChessboardPoint().offset(1, 0) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()));
-                }
-            }
-            if (getChessboardPoint().offset(-1, 0) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()));
-                }
-            }
-            if (getChessboardPoint().offset(0, 1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1));
-                }
-            }
-            if (getChessboardPoint().offset(0, -1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1));
-                }
-            }
-        } else if (getChessColor() == ChessColor.WHITE) {
-            if (getChessboardPoint().offset(1, 1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1));
-                }
-            }
-            if (getChessboardPoint().offset(1, -1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1));
-                }
-            }
-            if (getChessboardPoint().offset(-1, 1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1));
-                }
-            }
-            if (getChessboardPoint().offset(-1, -1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1));
-                }
-            }
-            if (getChessboardPoint().offset(1, 0) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()));
-                }
-            }
-            if (getChessboardPoint().offset(-1, 0) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()));
-                }
-            }
-            if (getChessboardPoint().offset(0, 1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1));
-                }
-            }
-            if (getChessboardPoint().offset(0, -1) != null) {
-                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1))) {
-                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1));
+    //    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
+//        ArrayList<ChessboardPoint> canMoveTo = new ArrayList<>();
+//        for (int i = 0; i < 8; i++) {
+//            for (int j = 0; j < 8; j++) {
+//                ChessboardPoint chessboardPoint = new ChessboardPoint(i, j);
+//                if (canMoveTo(chessComponents, chessboardPoint)) {
+//                    canMoveTo.add(chessboardPoint);
+//                }
+//            }
+//        }
+//        return canMoveTo;
+////        if (getChessColor() == ChessColor.BLACK) {
+////            if (getChessboardPoint().offset(1, 1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(1, -1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(-1, 1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(-1, -1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(1, 0) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()));
+////                }
+////            }
+////            if (getChessboardPoint().offset(-1, 0) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()));
+////                }
+////            }
+////            if (getChessboardPoint().offset(0, 1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(0, -1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1));
+////                }
+////            }
+////        } else if (getChessColor() == ChessColor.WHITE) {
+////            if (getChessboardPoint().offset(1, 1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() + 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(1, -1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY() - 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(-1, 1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() + 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(-1, -1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY() - 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(1, 0) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() + 1, getChessboardPoint().getY()));
+////                }
+////            }
+////            if (getChessboardPoint().offset(-1, 0) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX() - 1, getChessboardPoint().getY()));
+////                }
+////            }
+////            if (getChessboardPoint().offset(0, 1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() + 1));
+////                }
+////            }
+////            if (getChessboardPoint().offset(0, -1) != null) {
+////                if (chessComponents[getChessboardPoint().getX()][getChessboardPoint().getY()].canMoveTo(chessComponents, new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1))) {
+////                    canMoveTo.add(new ChessboardPoint(getChessboardPoint().getX(), getChessboardPoint().getY() - 1));
+////                }
+////            }
+////        }
+//    }
+    public List<ChessComponent> canMoveToList(ChessComponent[][] chessComponents) {
+        ArrayList<ChessComponent> canMoveTo = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                ChessboardPoint chessboardPoint = new ChessboardPoint(i, j);
+                if (canMoveTo(chessComponents, chessboardPoint)) {
+                    canMoveTo.add(chessComponents[i][j]);
                 }
             }
         }
         return canMoveTo;
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {

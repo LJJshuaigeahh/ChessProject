@@ -98,6 +98,8 @@ public class Chessboard extends JComponent {
             remove(chessComponents[row][col]);
         }
         add(chessComponents[row][col] = chessComponent);
+
+
         if (chessComponents[row][col] instanceof PawnChessComponent) {
             ((PawnChessComponent) chessComponents[row][col]).setRecordChessBoard(recordChessBoard);
         }

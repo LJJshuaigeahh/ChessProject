@@ -4,11 +4,14 @@ package controller;
 import model.*;
 import view.Chessboard;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 public class ClickController {
     private final Chessboard chessboard;
@@ -21,12 +24,15 @@ public class ClickController {
     public void onClick(ChessComponent chessComponent) {
         if (first == null) {
             if (handleFirst(chessComponent)) {
+
                 File click = new File("./musics/click.wav");
                 playMusic(click);
 
                 chessComponent.setSelected(true);
                 first = chessComponent;
                 first.repaint();
+
+                chessComponent.aiCanMoveTo(chessboard.getChessComponents());
             }
         } else {
             if (first == chessComponent) { // 再次点击取消选取
@@ -37,7 +43,11 @@ public class ClickController {
                 ChessComponent recordFirst = first;
                 first = null;
                 recordFirst.repaint();
+
+                chessComponent.removeAiCanMoveTo(chessboard.getChessComponents());
             } else if (handleSecond(chessComponent)) {
+
+                first.removeAiCanMoveTo(chessboard.getChessComponents());
 
 //                兵底线升变
                 if (first instanceof PawnChessComponent && (chessComponent.getChessboardPoint().getX() == 7 || chessComponent.getChessboardPoint().getX() == 0)) {

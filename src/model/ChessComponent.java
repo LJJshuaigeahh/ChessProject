@@ -1,11 +1,15 @@
 package model;
 
+import view.Chessboard;
 import view.ChessboardPoint;
 import controller.ClickController;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -113,7 +117,7 @@ public abstract class ChessComponent extends JComponent {
      */
     public abstract boolean canMoveTo(ChessComponent[][] chessboard, ChessboardPoint destination);
 
-    public abstract List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents);
+    public abstract List<ChessComponent> canMoveToList(ChessComponent[][] chessComponents);
 
     /**
      * 这个方法主要用于加载一些特定资源，如棋子图片等等。
@@ -129,5 +133,82 @@ public abstract class ChessComponent extends JComponent {
         Color squareColor = BACKGROUND_COLORS[(chessboardPoint.getX() + chessboardPoint.getY()) % 2];
         g.setColor(squareColor);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
+    }
+
+    //    高亮
+    public void highLightChess(ChessComponent chessComponent) {
+        chessComponent.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+//                Graphics g = chessComponent.getGraphics();
+//                paintComponent(g);
+//                g.setColor(new Color(191, 239, 255, 102));
+//                g.fillRect(0, 0, getWidth(), getHeight());
+                Chessboard chessboard = (Chessboard) chessComponent.getParent();
+                if (chessboard.getCurrentColor() == chessColor) {
+                    Graphics g = chessComponent.getGraphics();
+                    paintComponent(g);
+                    g.setColor(new Color(191, 239, 255, 102));
+                    g.fillRect(0, 0, getWidth(), getHeight());
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+//                Graphics g = chessComponent.getGraphics();
+//                paintComponent(g);
+                Chessboard chessboard = (Chessboard) chessComponent.getParent();
+                if (chessboard.getCurrentColor() == chessColor) {
+                    Graphics g = chessComponent.getGraphics();
+                    paintComponent(g);
+                }
+            }
+        });
+    }
+
+    public void aiCanMoveTo(ChessComponent[][] chessComponents) {
+        for (int i = 0; i < canMoveToList(chessComponents).size(); i++) {
+            Graphics g = canMoveToList(chessComponents).get(i).getGraphics();
+            canMoveToList(chessComponents).get(i).paintComponent(g);
+            Image image = null;
+            if (chessColor == ChessColor.BLACK) {
+                try {
+                    image = ImageIO.read(new File("./images/准星虫子.png"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (chessColor == ChessColor.WHITE) {
+                try {
+                    image = ImageIO.read(new File("./images/准星虫子 (1).png"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            g.drawImage(image, getWidth() / 10, getHeight() / 10, getWidth() * 4 / 5, getHeight() * 4 / 5, this);
+//            g.setColor(new Color(151, 255, 255, 102));
+//            g.fillRect(0, 0, getWidth(), getHeight());
+        }
+    }
+
+    public void removeAiCanMoveTo(ChessComponent[][] chessComponents) {
+        for (int i = 0; i < canMoveToList(chessComponents).size(); i++) {
+            Graphics g = canMoveToList(chessComponents).get(i).getGraphics();
+            canMoveToList(chessComponents).get(i).paintComponent(g);
+        }
     }
 }

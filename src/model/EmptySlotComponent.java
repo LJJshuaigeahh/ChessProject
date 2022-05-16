@@ -15,6 +15,7 @@ public class EmptySlotComponent extends ChessComponent {
 
     public EmptySlotComponent(ChessboardPoint chessboardPoint, Point location, ClickController listener, int size) {
         super(chessboardPoint, location, ChessColor.NONE, listener, size);
+        highLightChess(this);
     }
 
     @Override
@@ -27,7 +28,7 @@ public class EmptySlotComponent extends ChessComponent {
         //No resource!
     }
 
-    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
+    public List<ChessComponent> canMoveToList(ChessComponent[][] chessComponents) {
         return new ArrayList<>();
     }
 }

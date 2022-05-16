@@ -65,6 +65,7 @@ public class RookChessComponent extends ChessComponent {
     public RookChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
         super(chessboardPoint, location, color, listener, size);
         initiateRookImage(color);
+        highLightChess(this);
     }
 
     /**
@@ -124,7 +125,29 @@ public class RookChessComponent extends ChessComponent {
         }
     }
 
-    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
-        return new ArrayList<>();
+//    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
+//        ArrayList<ChessboardPoint> canMoveTo = new ArrayList<>();
+//        for (int i = 0; i < 8; i++) {
+//            for (int j = 0; j < 8; j++) {
+//                ChessboardPoint chessboardPoint = new ChessboardPoint(i, j);
+//                if (canMoveTo(chessComponents, chessboardPoint)) {
+//                    canMoveTo.add(chessboardPoint);
+//                }
+//            }
+//        }
+//        return canMoveTo;
+//    }
+
+    public List<ChessComponent> canMoveToList(ChessComponent[][] chessComponents) {
+        ArrayList<ChessComponent> canMoveTo = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                ChessboardPoint chessboardPoint = new ChessboardPoint(i, j);
+                if (canMoveTo(chessComponents, chessboardPoint)) {
+                    canMoveTo.add(chessComponents[i][j]);
+                }
+            }
+        }
+        return canMoveTo;
     }
 }

@@ -6,6 +6,9 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.io.File;
 
 /**
@@ -86,6 +89,32 @@ public class ChessGameFrame extends JFrame {
         JLabel jLabel1 = new JLabel(image1);
         jLabel1.setSize(image1.getIconWidth(), image1.getIconHeight());
         panel1.add(jLabel1);
+
+
+        this.addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                if (getContentPane().equals(panel1)) {
+//                    HEIGTH = getHeight();
+//                    WIDTH = getWidth();
+                }
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+
+            }
+        });
     }
 
 
