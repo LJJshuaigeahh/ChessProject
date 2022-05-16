@@ -66,7 +66,7 @@ public class ChessGameFrame extends JFrame {
         addBeginGameButten(panel0);
 
 //        开始界面背景图片
-        ImageIcon image = new ImageIcon("./images/2962d5f01c94fefbda7d5e282bca0df9b2ada0e7(1).jpg");
+        ImageIcon image = new ImageIcon("./images/背景/2962d5f01c94fefbda7d5e282bca0df9b2ada0e7(1).jpg");
         JLabel jLabel = new JLabel(image);
         jLabel.setSize(image.getIconWidth(), image.getIconHeight());
         panel0.add(jLabel);
@@ -80,7 +80,7 @@ public class ChessGameFrame extends JFrame {
         addStoreIncludingStopsButton(panel1);
 
 //        游戏界面背景图片
-        ImageIcon image1 = new ImageIcon("./images/2962d5f01c94fefbda7d5e282bca0df9b2ada0e7(1).jpg");
+        ImageIcon image1 = new ImageIcon("./images/背景/国际象棋8-1581498150.jpg");
         JLabel jLabel1 = new JLabel(image1);
         jLabel1.setSize(image1.getIconWidth(), image1.getIconHeight());
         panel1.add(jLabel1);

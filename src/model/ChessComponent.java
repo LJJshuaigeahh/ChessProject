@@ -19,12 +19,12 @@ public abstract class ChessComponent extends JComponent {
      * <br>
      * 在这个设计中，每个棋子的图案是用图片画出来的（由于国际象棋那个棋子手动画太难了）
      * <br>\\\\
-     *
+     * <p>
      * 因此每个棋子占用的形状是一个正方形，大小是50*50
      */
 
 //    private static final Dimension CHESSGRID_SIZE = new Dimension(1080 / 4 * 3 / 8, 1080 / 4 * 3 / 8);
-    private static final Color[] BACKGROUND_COLORS = {Color.WHITE, Color.BLACK};//棋盘背景颜色（黑/白）
+    private static final Color[] BACKGROUND_COLORS = {new Color(139, 115, 85), new Color(255, 231, 186)};//棋盘背景颜色（黑/白）
     /**
      * handle click event
      */

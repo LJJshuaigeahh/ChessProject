@@ -19,11 +19,11 @@ public class PawnChessComponent extends ChessComponent {
 
     public void loadResource() throws IOException {
         if (PAWN_WHITE == null) {
-            PAWN_WHITE = ImageIO.read(new File("./images/pawn-white.png"));
+            PAWN_WHITE = ImageIO.read(new File("./images/棋子二/pawn-white.png"));
         }
 
         if (PAWN_BLACK == null) {
-            PAWN_BLACK = ImageIO.read(new File("./images/pawn-black.png"));
+            PAWN_BLACK = ImageIO.read(new File("./images/棋子二/pawn-black.png"));
         }
     }
 
@@ -106,7 +106,7 @@ public class PawnChessComponent extends ChessComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 //        g.drawImage(rookImage, 0, 0, getWidth() - 13, getHeight() - 20, this);
-        g.drawImage(pawnImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(pawnImage, getWidth() / 10, getHeight() / 5, getWidth() * 4 / 5, getHeight() * 3 / 5, this);
         g.setColor(Color.BLACK);
         if (isSelected()) { // Highlights the model if selected.
             g.setColor(Color.RED);
