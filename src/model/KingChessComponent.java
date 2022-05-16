@@ -15,6 +15,7 @@ public class KingChessComponent extends ChessComponent {
     private static Image KING_WHITE;
     private static Image KING_BLACK;
 
+
     private Image kingImage;
 
     public void loadResource() throws IOException {
@@ -181,8 +182,15 @@ public class KingChessComponent extends ChessComponent {
         g.drawImage(kingImage, getWidth() / 10, getHeight() / 5, getWidth() * 4 / 5, getHeight() * 3 / 5, this);
         g.setColor(Color.BLACK);
         if (isSelected()) { // Highlights the model if selected.
-            g.setColor(Color.RED);
-            g.drawOval(0, 0, getWidth(), getHeight());
+            Image image = null;
+            try {
+                image = ImageIO.read(new File("./images/虚线框.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            g.drawImage(image, getWidth() / 10, getHeight() / 10, getWidth() * 4 / 5, getHeight() * 4 / 5, this);
+//            g.setColor(Color.RED);
+//            g.drawOval(0, 0, getWidth(), getHeight());
         }
     }
 }
