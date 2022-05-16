@@ -73,13 +73,36 @@ public class PawnChessComponent extends ChessComponent {
                     return true;
                 }
             }
-            if (source.getY() != 0 && source.getY() != 7) {
-                if (source.getX() == 4 && ((chessComponents[source.getX()][source.getY() + 1] instanceof PawnChessComponent && chessComponents[source.getX()][source.getY() + 1].getChessColor() == ChessColor.WHITE) || (chessComponents[source.getX()][source.getY() - 1] instanceof PawnChessComponent && chessComponents[source.getX()][source.getY() - 1].getChessColor() == ChessColor.WHITE))) {
-                    if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
-                        if (source.getX() + 1 == destination.getX() && source.getY() + 1 == destination.getY()) {
-                            return true;
-                        } else if (source.getX() + 1 == destination.getX() && source.getY() - 1 == destination.getY()) {
-                            return true;
+            if (source.getX() == 4) {
+                if (source.getY() != 0 && source.getY() != 7) {
+                    if (recordChessBoard.get(recordChessBoard.size() - 1).get(source.getX()).charAt(source.getY() + 1) == 'p' && recordChessBoard.get(recordChessBoard.size() - 2).get(source.getX() + 2).charAt(source.getY() + 1) == 'p') {
+                        if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                            if (source.getX() + 1 == destination.getX() && source.getY() + 1 == destination.getY()) {
+                                return true;
+                            }
+                        }
+                    }
+                    if (recordChessBoard.get(recordChessBoard.size() - 1).get(source.getX()).charAt(source.getY() - 1) == 'p' && recordChessBoard.get(recordChessBoard.size() - 2).get(source.getX() + 2).charAt(source.getY() - 1) == 'p') {
+                        if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                            if (source.getX() + 1 == destination.getX() && source.getY() - 1 == destination.getY()) {
+                                return true;
+                            }
+                        }
+                    }
+                } else if (source.getY() == 0) {
+                    if (recordChessBoard.get(recordChessBoard.size() - 1).get(source.getX()).charAt(source.getY() + 1) == 'p' && recordChessBoard.get(recordChessBoard.size() - 2).get(source.getX() + 2).charAt(source.getY() + 1) == 'p') {
+                        if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                            if (source.getX() + 1 == destination.getX() && source.getY() + 1 == destination.getY()) {
+                                return true;
+                            }
+                        }
+                    }
+                } else if (source.getY() == 7) {
+                    if (recordChessBoard.get(recordChessBoard.size() - 1).get(source.getX()).charAt(source.getY() - 1) == 'p' && recordChessBoard.get(recordChessBoard.size() - 2).get(source.getX() + 2).charAt(source.getY() - 1) == 'p') {
+                        if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                            if (source.getX() + 1 == destination.getX() && source.getY() - 1 == destination.getY()) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -102,6 +125,40 @@ public class PawnChessComponent extends ChessComponent {
                     return true;
                 } else if (source.getX() - 1 == destination.getX() && source.getY() + 1 == destination.getY()) {
                     return true;
+                }
+            }
+            if (source.getX() == 3) {
+                if (source.getY() != 0 && source.getY() != 7) {
+                    if (recordChessBoard.get(recordChessBoard.size() - 1).get(source.getX()).charAt(source.getY() + 1) == 'P' && recordChessBoard.get(recordChessBoard.size() - 2).get(source.getX() - 2).charAt(source.getY() + 1) == 'P') {
+                        if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                            if (source.getX() - 1 == destination.getX() && source.getY() + 1 == destination.getY()) {
+                                return true;
+                            }
+                        }
+                    }
+                    if (recordChessBoard.get(recordChessBoard.size() - 1).get(source.getX()).charAt(source.getY() - 1) == 'P' && recordChessBoard.get(recordChessBoard.size() - 2).get(source.getX() - 2).charAt(source.getY() - 1) == 'P') {
+                        if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                            if (source.getX() - 1 == destination.getX() && source.getY() - 1 == destination.getY()) {
+                                return true;
+                            }
+                        }
+                    }
+                } else if (source.getY() == 0) {
+                    if (recordChessBoard.get(recordChessBoard.size() - 1).get(source.getX()).charAt(source.getY() + 1) == 'P' && recordChessBoard.get(recordChessBoard.size() - 2).get(source.getX() - 2).charAt(source.getY() + 1) == 'P') {
+                        if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                            if (source.getX() - 1 == destination.getX() && source.getY() + 1 == destination.getY()) {
+                                return true;
+                            }
+                        }
+                    }
+                } else if (source.getY() == 7) {
+                    if (recordChessBoard.get(recordChessBoard.size() - 1).get(source.getX()).charAt(source.getY() - 1) == 'P' && recordChessBoard.get(recordChessBoard.size() - 2).get(source.getX() - 2).charAt(source.getY() - 1) == 'P') {
+                        if (chessComponents[destination.getX()][destination.getY()] instanceof EmptySlotComponent) {
+                            if (source.getX() - 1 == destination.getX() && source.getY() - 1 == destination.getY()) {
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
         }

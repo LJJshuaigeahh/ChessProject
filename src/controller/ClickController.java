@@ -66,72 +66,75 @@ public class ClickController {
                 }
 
 //                吃过路兵
-                if (first instanceof PawnChessComponent && first.getChessColor() == ChessColor.BLACK && first.getChessboardPoint().getX() == 4) {
-                    if (first.getChessboardPoint().getY() != 0 && first.getChessboardPoint().getY() != 7) {
-                        if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() + 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() + 1) == 'p'
-                        ) {
-                            ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() + 1];
-                            ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                            chessboard.putChessOnBoard(emptySlot);
-                            emptySlot.repaint();
+                if (chessComponent instanceof EmptySlotComponent) {
+                    if (first instanceof PawnChessComponent && first.getChessColor() == ChessColor.BLACK && first.getChessboardPoint().getX() == 4) {
+                        if (first.getChessboardPoint().getY() != 0 && first.getChessboardPoint().getY() != 7) {
+                            if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() + 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() + 1) == 'p'
+                            ) {
+                                ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() + 1];
+                                ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(emptySlot);
+                                emptySlot.repaint();
+                            }
+                            if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() - 1) == 'p'
+                            ) {
+                                ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
+                                ChessComponent empytSlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(empytSlot);
+                                empytSlot.repaint();
+                            }
+                        } else if (first.getChessboardPoint().getY() == 0) {
+                            if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() + 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() + 1) == 'p'
+                            ) {
+                                ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() + 1];
+                                ChessComponent empytSlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(empytSlot);
+                                empytSlot.repaint();
+                            }
+                        } else if (first.getChessboardPoint().getY() == 7) {
+                            if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() - 1) == 'p'
+                            ) {
+                                ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
+                                ChessComponent empytSlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(empytSlot);
+                                empytSlot.repaint();
+                            }
                         }
-                        if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() - 1) == 'p'
-                        ) {
-                            ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
-                            ChessComponent empytSlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                            chessboard.putChessOnBoard(empytSlot);
-                            empytSlot.repaint();
+                    } else if (first instanceof PawnChessComponent && first.getChessColor() == ChessColor.WHITE && first.getChessboardPoint().getX() == 3) {
+                        if (first.getChessboardPoint().getY() != 0 && first.getChessboardPoint().getY() != 7) {
+                            if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() + 1) == 'P' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() - 2).charAt(first.getChessboardPoint().getY() + 1) == 'P'
+                            ) {
+                                ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() + 1];
+                                ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(emptySlot);
+                                emptySlot.repaint();
+                            }
+                            if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'P' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() - 2).charAt(first.getChessboardPoint().getY() - 1) == 'P'
+                            ) {
+                                ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
+                                ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(emptySlot);
+                                emptySlot.repaint();
+                            }
+                        } else if (first.getChessboardPoint().getY() == 0) {
+                            if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() + 1) == 'P' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() - 2).charAt(first.getChessboardPoint().getY() + 1) == 'P'
+                            ) {
+                                ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() + 1];
+                                ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(emptySlot);
+                                emptySlot.repaint();
+                            }
+                        } else if (first.getChessboardPoint().getY() == 7) {
+                            if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'P' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() - 2).charAt(first.getChessboardPoint().getY() - 1) == 'P'
+                            ) {
+                                ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
+                                ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(emptySlot);
+                                emptySlot.repaint();
+                            }
                         }
-                    } else if (first.getChessboardPoint().getY() == 0) {
-                        if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() + 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() + 1) == 'p'
-                        ) {
-                            ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() + 1];
-                            ChessComponent empytSlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                            chessboard.putChessOnBoard(empytSlot);
-                            empytSlot.repaint();
-                        }
-                    } else if (first.getChessboardPoint().getY() == 7) {
-                        if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() - 1) == 'p'
-                        ) {
-                            ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
-                            ChessComponent empytSlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                            chessboard.putChessOnBoard(empytSlot);
-                            empytSlot.repaint();
-                        }
-                    }
-                } else if (first instanceof PawnChessComponent && first.getChessColor() == ChessColor.WHITE && first.getChessboardPoint().getX() == 3) {
-                    if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() + 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() - 2).charAt(first.getChessboardPoint().getY() + 1) == 'p'
-                    ) {
-                        ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() + 1];
-                        ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                        chessboard.putChessOnBoard(emptySlot);
-                        emptySlot.repaint();
-                    }
-                    if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() - 2).charAt(first.getChessboardPoint().getY() - 1) == 'p'
-                    ) {
-                        ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
-                        ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                        chessboard.putChessOnBoard(emptySlot);
-                        emptySlot.repaint();
-                    }
-                } else if (first.getChessboardPoint().getY() == 0) {
-                    if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() + 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() - 2).charAt(first.getChessboardPoint().getY() + 1) == 'p'
-                    ) {
-                        ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() + 1];
-                        ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                        chessboard.putChessOnBoard(emptySlot);
-                        emptySlot.repaint();
-                    }
-                } else if (first.getChessboardPoint().getY() == 7) {
-                    if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() - 2).charAt(first.getChessboardPoint().getY() - 1) == 'p'
-                    ) {
-                        ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
-                        ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                        chessboard.putChessOnBoard(emptySlot);
-                        emptySlot.repaint();
                     }
                 }
-
 
                 File move = new File("./musics/move.wav");
                 playMusic(move);

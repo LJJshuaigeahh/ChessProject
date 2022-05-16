@@ -98,6 +98,9 @@ public class Chessboard extends JComponent {
             remove(chessComponents[row][col]);
         }
         add(chessComponents[row][col] = chessComponent);
+        if (chessComponents[row][col] instanceof PawnChessComponent) {
+            ((PawnChessComponent) chessComponents[row][col]).setRecordChessBoard(recordChessBoard);
+        }
     }
 
     public void swapChessComponents(ChessComponent chess1, ChessComponent chess2) {
@@ -158,6 +161,7 @@ public class Chessboard extends JComponent {
         ChessComponent chessComponent = new PawnChessComponent(new ChessboardPoint(row, col), calculatePoint(row, col), color, clickController, CHESS_SIZE);
         chessComponent.setVisible(true);
         putChessOnBoard(chessComponent);
+
     }
 
     private void initKnightOnBoard(int row, int col, ChessColor color) {
@@ -677,7 +681,7 @@ public class Chessboard extends JComponent {
         if (recordChessBoard.size() != 1) {
             loadGame2(recordChessBoard.get(recordChessBoard.size() - 2));
             recordChessBoard.remove(recordChessBoard.size() - 1);
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "It's the first step of the chess now!!", "悔棋失败", JOptionPane.ERROR_MESSAGE);
         }
     }
