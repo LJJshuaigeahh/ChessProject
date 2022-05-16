@@ -105,6 +105,7 @@ public class ChessGameFrame extends JFrame {
         statusLabel.setLocation(200, 0);
         statusLabel.setSize(300, 60);
         statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
+        statusLabel.setForeground(Color.black);
         panel.add(statusLabel);
     }
 
@@ -148,7 +149,7 @@ public class ChessGameFrame extends JFrame {
                 addLoadButton(panel1);
                 addBackButton(panel1);
                 setContentPane(panel1);
-                ImageIcon image1 = new ImageIcon("./images/2962d5f01c94fefbda7d5e282bca0df9b2ada0e7(1).jpg");
+                ImageIcon image1 = new ImageIcon("./images/背景/国际象棋8-1581498150.jpg");
                 JLabel jLabel1 = new JLabel(image1);
                 jLabel1.setSize(image1.getIconWidth(), image1.getIconHeight());
                 panel1.add(jLabel1);

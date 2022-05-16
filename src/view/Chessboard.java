@@ -41,6 +41,7 @@ public class Chessboard extends JComponent {
     }
 
     private float count = 1;
+
     private ArrayList<List<String>> recordChessBoard = new ArrayList<>();
 
     public float getCount() {

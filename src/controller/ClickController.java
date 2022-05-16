@@ -67,9 +67,16 @@ public class ClickController {
 
 //                吃过路兵
                 if (first instanceof PawnChessComponent && first.getChessColor() == ChessColor.BLACK) {
-                    if (chessComponent.getChessboardPoint().getX() == first.getChessboardPoint().getX() + 1 && (chessComponent.getChessboardPoint().getY() == first.getChessboardPoint().getY() + 1||chessComponent.getChessboardPoint().getY() == first.getChessboardPoint().getY() - 1)){
-
+                    if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getX()).charAt(first.getY() + 1) == 'p' && chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2).get(first.getX() + 2).charAt(first.getY() + 1) == 'p'
+                    ) {
+                        ChessComponent second = chessboard.getChessComponents()[first.getX()][first.getY() + 1];
+                        chessboard.putChessOnBoard(second);
+//                        chessboard.remove(second);
+//                        chessboard.add(second = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE()));
                     }
+//                    if (chessComponent.getChessboardPoint().getX() == first.getChessboardPoint().getX() + 1 && (chessComponent.getChessboardPoint().getY() == first.getChessboardPoint().getY() + 1 || chessComponent.getChessboardPoint().getY() == first.getChessboardPoint().getY() - 1)) {
+//
+//                    }
                 }
 
 
