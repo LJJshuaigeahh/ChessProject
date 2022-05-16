@@ -4,6 +4,7 @@ import model.*;
 import view.Chessboard;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,13 +21,15 @@ public class GameController {
         this.chessboard = chessboard;
     }
 
-    public List<String> loadGameFromFile(String path) {
+    public List<String> loadGameFromFile(File file) {
+        String path = file.getPath();
         try {
             if (!path.substring(path.length() - 4).equals(".txt")) {
                 JOptionPane.showMessageDialog(null, "File format error!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
                 return null;
             }
-            List<String> chessData = Files.readAllLines(Path.of(path));
+//            List<String> chessData = Files.readAllLines(Path.of(path));
+            List<String> chessData = Files.readAllLines(Path.of(file.getPath()));
             if (!chessData.get(chessData.size() - 1).equals("w") && !chessData.get(chessData.size() - 1).equals("b")) {
                 JOptionPane.showMessageDialog(null, "Missing next player!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
                 return null;
@@ -90,7 +93,7 @@ public class GameController {
         }
     }
 
-    public void backChess1(){
+    public void backChess1() {
         chessboard.backChess2();
     }
 
@@ -131,7 +134,7 @@ public class GameController {
                     sb.append('_');
                 }
             }
-            chessStringList.add(sb.toString()+"\n");
+            chessStringList.add(sb.toString() + "\n");
         }
         if (chessboard.getCurrentColor() == ChessColor.BLACK) {
             chessStringList.add("b\n");
