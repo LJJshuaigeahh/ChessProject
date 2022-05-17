@@ -80,6 +80,7 @@ public class ChessGameFrame extends JFrame {
         jLabel1.setSize(WIDTH, HEIGTH);
         panel1.add(jLabel1);
 
+
 //        适应窗口大小变化
         this.addComponentListener(new ComponentListener() {
             @Override
