@@ -26,16 +26,6 @@ public class ChessGameFrame extends JFrame {
 
     private JPanel panel0 = new JPanel();
     private JPanel panel1 = new JPanel();
-//    private JButton jButton1 = new JButton();
-//
-//
-//    public JPanel getPanel0() {
-//        return panel0;
-//    }
-//
-//    public JButton getJButton1() {
-//        return jButton1;
-//    }
 
 
     public ChessGameFrame(int width, int height) {
@@ -69,8 +59,8 @@ public class ChessGameFrame extends JFrame {
         addBeginGameButten(panel0);
 
 //        开始界面背景图片
-        ImageIcon image = new ImageIcon("./images/背景/background2.jpg");
-        JLabel jLabel = new JLabel(image);
+        Image image = new ImageIcon("./images/背景/background2.jpg").getImage();
+        JLabel jLabel = new aLabel(image);
         jLabel.setSize(WIDTH, HEIGTH);
         jLabel.setLocation(0, 0);
         panel0.add(jLabel);
@@ -85,9 +75,9 @@ public class ChessGameFrame extends JFrame {
         addStoreIncludingStopsButton(panel1);
 
 //        游戏界面背景图片
-        ImageIcon image1 = new ImageIcon("./images/背景/国际象棋8-1581498150.jpg");
-        JLabel jLabel1 = new JLabel(image1);
-        jLabel1.setSize(image1.getIconWidth(), image1.getIconHeight());
+        Image image1 = new ImageIcon("./images/背景/国际象棋8-1581498150.jpg").getImage();
+        JLabel jLabel1 = new aLabel(image1);
+        jLabel1.setSize(WIDTH, HEIGTH);
         panel1.add(jLabel1);
 
 //        适应窗口大小变化
@@ -123,15 +113,11 @@ public class ChessGameFrame extends JFrame {
 
     public void updateLayOutJPanel0(JPanel jPanel, int width, int height) {
         JButton jButton = (JButton) jPanel.getComponent(0);
-        JLabel jLabel = (JLabel) jPanel.getComponent(1);
+        JLabel jLabel = (aLabel) jPanel.getComponent(1);
 
-        jButton.setSize(width / 5, height / 10);
-        jButton.setLocation(width * 2 / 5, height * 2 / 3);
+        jButton.setBounds(width * 2 / 5, height * 2 / 3, width / 5, height / 10);
 
-        ImageIcon image = new ImageIcon("./images/背景/background2.jpg");
-        jLabel = new JLabel(image);
-        jLabel.setSize(width, height);
-        jLabel.setLocation(0, 0);
+        jLabel.setBounds(0, 0, width, height);
     }
 
     public void updateLayOutJPanel1(JPanel jPanel, int width, int height) {
@@ -149,11 +135,13 @@ public class ChessGameFrame extends JFrame {
         JButton loadButton = (JButton) jPanel.getComponent(4);
         JButton backButton = (JButton) jPanel.getComponent(5);
         JButton storeIncludingStopsButton = (JButton) jPanel.getComponent(6);
+        JLabel jLabel = (aLabel) jPanel.getComponent(7);
 
         chessboard.setSize(height * 4 / 5, height * 4 / 5);
+        chessboard.resetChessboardSize(height / 10);
         chessboard.setLocation(height / 10, height / 10);
 
-        roundLabel.setSize(width * 3 / 10, height * 3 / 38);
+        roundLabel.setSize(width * 3 / 10, height * 3 / 19);
         roundLabel.setLocation(0, width / 20);
 
         storeButton.setSize(width * 1 / 5, height * 3 / 38);
@@ -170,6 +158,8 @@ public class ChessGameFrame extends JFrame {
 
         storeIncludingStopsButton.setSize(width * 1 / 5, height * 3 / 38);
         storeIncludingStopsButton.setLocation(width * 7 / 10, height * 5 / 19);
+
+        jLabel.setBounds(0, 0, width, height);
     }
 
     /**

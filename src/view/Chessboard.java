@@ -34,7 +34,7 @@ public class Chessboard extends JComponent {
     private ChessColor currentColor = ChessColor.WHITE;
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
-    private final int CHESS_SIZE;
+    private int CHESS_SIZE;
 
     public int getCHESS_SIZE() {
         return CHESS_SIZE;
@@ -796,4 +796,12 @@ public class Chessboard extends JComponent {
     }
 
 
+    public void resetChessboardSize(int CHESS_SIZE) {
+        this.CHESS_SIZE = CHESS_SIZE;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                chessComponents[i][j].setBounds(j * CHESS_SIZE, i * CHESS_SIZE, CHESS_SIZE, CHESS_SIZE);
+            }
+        }
+    }
 }
