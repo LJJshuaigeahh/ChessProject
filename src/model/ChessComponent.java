@@ -188,20 +188,18 @@ public abstract class ChessComponent extends JComponent {
             Image image = null;
             if (chessColor == ChessColor.BLACK) {
                 try {
-                    image = ImageIO.read(new File("./images/准星虫子.png"));
+                    image = ImageIO.read(new File("./images/虚线框 (3).png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else if (chessColor == ChessColor.WHITE) {
                 try {
-                    image = ImageIO.read(new File("./images/准星虫子 (1).png"));
+                    image = ImageIO.read(new File("./images/虚线框 (4).png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             g.drawImage(image, getWidth() / 10, getHeight() / 10, getWidth() * 4 / 5, getHeight() * 4 / 5, this);
-//            g.setColor(new Color(151, 255, 255, 102));
-//            g.fillRect(0, 0, getWidth(), getHeight());
         }
     }
 

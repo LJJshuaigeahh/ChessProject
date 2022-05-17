@@ -4,14 +4,11 @@ package controller;
 import model.*;
 import view.Chessboard;
 
-import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 
 public class ClickController {
     private final Chessboard chessboard;
@@ -47,6 +44,16 @@ public class ClickController {
                 chessComponent.removeAiCanMoveTo(chessboard.getChessComponents());
             } else if (handleSecond(chessComponent)) {
 
+                ChessComponent first_ = first;
+                ChessComponent chessComponent_ = chessComponent;
+                ChessColor color1 = first.getChessColor();
+                ChessColor color2;
+                if (color1 == ChessColor.BLACK) {
+                    color2 = ChessColor.WHITE;
+                } else {
+                    color2 = ChessColor.BLACK;
+                }
+
                 first.removeAiCanMoveTo(chessboard.getChessComponents());
 
 //                兵底线升变
@@ -56,6 +63,8 @@ public class ClickController {
                             "兵底线升变",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
                     switch (x) {
+                        case -1:
+                            return;
                         case 0:
                             chessboard.remove(first);
                             chessboard.add(first = new QueenChessComponent(first.getChessboardPoint(), first.getLocation(), first.getChessColor(), first.getClickController(), chessboard.getCHESS_SIZE()));
@@ -153,6 +162,22 @@ public class ClickController {
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
 
+                if (chessboard.tellIfKingIsAttacked2(color2)) {
+                    JOptionPane.showMessageDialog(null, "行棋后己方被将军", "无效行棋提示", 0);
+                    chessboard.swapChessComponents(first_, chessComponent_);
+                    if (chessboard.getCurrentColor() == ChessColor.BLACK) {
+                        chessboard.setCurrentColor(ChessColor.WHITE);
+                    } else {
+                        chessboard.setCurrentColor(ChessColor.BLACK);
+                    }
+                    chessboard.setCount((float) (chessboard.getCount() - 1.0));
+                }
+
+                if (chessboard.tellIfKingIsAttacked(color1)) {
+                    if (chessboard.tellWinOrDefeat(color1)) {
+                        JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", -1);
+                    }
+                }
 
                 first.setSelected(false);
                 first = null;

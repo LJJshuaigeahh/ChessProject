@@ -79,26 +79,30 @@ public class RookChessComponent extends ChessComponent {
     @Override
     public boolean canMoveTo(ChessComponent[][] chessComponents, ChessboardPoint destination) {
         ChessboardPoint source = getChessboardPoint();
-        if (source.getX() == destination.getX()) {
-            int row = source.getX();
-            for (int col = Math.min(source.getY(), destination.getY()) + 1;
-                 col < Math.max(source.getY(), destination.getY()); col++) {
-                if (!(chessComponents[row][col] instanceof EmptySlotComponent)) {
-                    return false;
+        if (chessComponents[destination.getX()][destination.getY()].getChessColor() != chessColor) {
+            if (source.getX() == destination.getX()) {
+                int row = source.getX();
+                for (int col = Math.min(source.getY(), destination.getY()) + 1;
+                     col < Math.max(source.getY(), destination.getY()); col++) {
+                    if (!(chessComponents[row][col] instanceof EmptySlotComponent)) {
+                        return false;
+                    }
                 }
-            }
-        } else if (source.getY() == destination.getY()) {
-            int col = source.getY();
-            for (int row = Math.min(source.getX(), destination.getX()) + 1;
-                 row < Math.max(source.getX(), destination.getX()); row++) {
-                if (!(chessComponents[row][col] instanceof EmptySlotComponent)) {
-                    return false;
+            } else if (source.getY() == destination.getY()) {
+                int col = source.getY();
+                for (int row = Math.min(source.getX(), destination.getX()) + 1;
+                     row < Math.max(source.getX(), destination.getX()); row++) {
+                    if (!(chessComponents[row][col] instanceof EmptySlotComponent)) {
+                        return false;
+                    }
                 }
+            } else { // Not on the same row or the same column.
+                return false;
             }
-        } else { // Not on the same row or the same column.
+            return true;
+        } else {
             return false;
         }
-        return true;
     }
 
     /**
@@ -110,17 +114,17 @@ public class RookChessComponent extends ChessComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 //        g.drawImage(rookImage, 0, 0, getWidth() - 13, getHeight() - 20, this);
-        g.drawImage(rookImage, getWidth() / 10, getHeight() / 5, getWidth() * 4 / 5, getHeight() * 3 / 5,  this);
+        g.drawImage(rookImage, getWidth() / 10, getHeight() / 5, getWidth() * 4 / 5, getHeight() * 3 / 5, this);
         g.setColor(Color.BLACK);
         if (isSelected()) { // Highlights the model if selected.
             Image image = null;
-            if (chessColor==ChessColor.BLACK){
+            if (chessColor == ChessColor.BLACK) {
                 try {
                     image = ImageIO.read(new File("./images/虚线框2.png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else if (chessColor==ChessColor.WHITE){
+            } else if (chessColor == ChessColor.WHITE) {
                 try {
                     image = ImageIO.read(new File("./images/虚线框.png"));
                 } catch (IOException e) {
@@ -132,19 +136,6 @@ public class RookChessComponent extends ChessComponent {
 //            g.drawOval(0, 0, getWidth(), getHeight());
         }
     }
-
-//    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
-//        ArrayList<ChessboardPoint> canMoveTo = new ArrayList<>();
-//        for (int i = 0; i < 8; i++) {
-//            for (int j = 0; j < 8; j++) {
-//                ChessboardPoint chessboardPoint = new ChessboardPoint(i, j);
-//                if (canMoveTo(chessComponents, chessboardPoint)) {
-//                    canMoveTo.add(chessboardPoint);
-//                }
-//            }
-//        }
-//        return canMoveTo;
-//    }
 
     public List<ChessComponent> canMoveToList(ChessComponent[][] chessComponents) {
         ArrayList<ChessComponent> canMoveTo = new ArrayList<>();

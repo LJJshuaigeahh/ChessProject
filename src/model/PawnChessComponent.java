@@ -193,18 +193,6 @@ public class PawnChessComponent extends ChessComponent {
         }
     }
 
-    //    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
-//        ArrayList<ChessboardPoint> canMoveTo = new ArrayList<>();
-//        for (int i = 0; i < 8; i++) {
-//            for (int j = 0; j < 8; j++) {
-//                ChessboardPoint chessboardPoint = new ChessboardPoint(i, j);
-//                if (canMoveTo(chessComponents, chessboardPoint)) {
-//                    canMoveTo.add(chessboardPoint);
-//                }
-//            }
-//        }
-//        return canMoveTo;
-//    }
     public List<ChessComponent> canMoveToList(ChessComponent[][] chessComponents) {
         ArrayList<ChessComponent> canMoveTo = new ArrayList<>();
         for (int i = 0; i < 8; i++) {

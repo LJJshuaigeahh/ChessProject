@@ -49,58 +49,49 @@ public class QueenChessComponent extends ChessComponent {
     @Override
     public boolean canMoveTo(ChessComponent[][] chessComponents, ChessboardPoint destination) {
         ChessboardPoint source = getChessboardPoint();
-        if (source.getX() == destination.getX()) {
-            int row = source.getX();
-            for (int col = Math.min(source.getY(), destination.getY()) + 1;
-                 col < Math.max(source.getY(), destination.getY()); col++) {
-                if (!(chessComponents[row][col] instanceof EmptySlotComponent)) {
-                    return false;
-                }
-            }
-        } else if (source.getY() == destination.getY()) {
-            int col = source.getY();
-            for (int row = Math.min(source.getX(), destination.getX()) + 1;
-                 row < Math.max(source.getX(), destination.getX()); row++) {
-                if (!(chessComponents[row][col] instanceof EmptySlotComponent)) {
-                    return false;
-                }
-            }
-        } else if (Math.abs(destination.getX() - source.getX()) == Math.abs(destination.getY() - source.getY())) {
-            for (int i = 1; i < Math.abs(destination.getX() - source.getX()); i++) {
+        if (chessComponents[destination.getX()][destination.getY()].getChessColor() != chessColor) {
+            if (source.getX() == destination.getX()) {
                 int row = source.getX();
+                for (int col = Math.min(source.getY(), destination.getY()) + 1;
+                     col < Math.max(source.getY(), destination.getY()); col++) {
+                    if (!(chessComponents[row][col] instanceof EmptySlotComponent)) {
+                        return false;
+                    }
+                }
+            } else if (source.getY() == destination.getY()) {
                 int col = source.getY();
-                if (destination.getX() - source.getX() > 0 && destination.getY() - source.getY() > 0 && !(chessComponents[row + i][col + i] instanceof EmptySlotComponent)) {
-                    return false;
+                for (int row = Math.min(source.getX(), destination.getX()) + 1;
+                     row < Math.max(source.getX(), destination.getX()); row++) {
+                    if (!(chessComponents[row][col] instanceof EmptySlotComponent)) {
+                        return false;
+                    }
                 }
-                if (destination.getX() - source.getX() > 0 && destination.getY() - source.getY() < 0 && !(chessComponents[row + i][col - i] instanceof EmptySlotComponent)) {
-                    return false;
+            } else if (Math.abs(destination.getX() - source.getX()) == Math.abs(destination.getY() - source.getY())) {
+                for (int i = 1; i < Math.abs(destination.getX() - source.getX()); i++) {
+                    int row = source.getX();
+                    int col = source.getY();
+                    if (destination.getX() - source.getX() > 0 && destination.getY() - source.getY() > 0 && !(chessComponents[row + i][col + i] instanceof EmptySlotComponent)) {
+                        return false;
+                    }
+                    if (destination.getX() - source.getX() > 0 && destination.getY() - source.getY() < 0 && !(chessComponents[row + i][col - i] instanceof EmptySlotComponent)) {
+                        return false;
+                    }
+                    if (destination.getX() - source.getX() < 0 && destination.getY() - source.getY() > 0 && !(chessComponents[row - i][col + i] instanceof EmptySlotComponent)) {
+                        return false;
+                    }
+                    if (destination.getX() - source.getX() < 0 && destination.getY() - source.getY() < 0 && !(chessComponents[row - i][col - i] instanceof EmptySlotComponent)) {
+                        return false;
+                    }
                 }
-                if (destination.getX() - source.getX() < 0 && destination.getY() - source.getY() > 0 && !(chessComponents[row - i][col + i] instanceof EmptySlotComponent)) {
-                    return false;
-                }
-                if (destination.getX() - source.getX() < 0 && destination.getY() - source.getY() < 0 && !(chessComponents[row - i][col - i] instanceof EmptySlotComponent)) {
-                    return false;
-                }
+            } else {
+                return false;
             }
-        } else {
+
+            return true;
+        }else {
             return false;
         }
-
-        return true;
     }
-
-//    public List<ChessboardPoint> canMoveToList(ChessComponent[][] chessComponents) {
-//        ArrayList<ChessboardPoint> canMoveTo = new ArrayList<>();
-//        for (int i = 0; i < 8; i++) {
-//            for (int j = 0; j < 8; j++) {
-//                ChessboardPoint chessboardPoint = new ChessboardPoint(i, j);
-//                if (canMoveTo(chessComponents, chessboardPoint)) {
-//                    canMoveTo.add(chessboardPoint);
-//                }
-//            }
-//        }
-//        return canMoveTo;
-//    }
 
     @Override
     protected void paintComponent(Graphics g) {
