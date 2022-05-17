@@ -6,7 +6,6 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
@@ -19,24 +18,24 @@ public class ChessGameFrame extends JFrame {
     //    public final Dimension FRAME_SIZE;  //窗体大小  ？？
 
 
-    private final int WIDTH;
-    private final int HEIGTH;
+    private int WIDTH;
+    private int HEIGTH;
     public final int CHESSBOARD_SIZE;
     private GameController gameController;
 
 
     private JPanel panel0 = new JPanel();
     private JPanel panel1 = new JPanel();
-    private JButton jButton1 = new JButton();
-
-
-    public JPanel getPanel0() {
-        return panel0;
-    }
-
-    public JButton getJButton1() {
-        return jButton1;
-    }
+//    private JButton jButton1 = new JButton();
+//
+//
+//    public JPanel getPanel0() {
+//        return panel0;
+//    }
+//
+//    public JButton getJButton1() {
+//        return jButton1;
+//    }
 
 
     public ChessGameFrame(int width, int height) {
@@ -72,7 +71,8 @@ public class ChessGameFrame extends JFrame {
 //        开始界面背景图片
         ImageIcon image = new ImageIcon("./images/背景/background2.jpg");
         JLabel jLabel = new JLabel(image);
-        jLabel.setSize(image.getIconWidth(), image.getIconHeight());
+        jLabel.setSize(WIDTH, HEIGTH);
+        jLabel.setLocation(0, 0);
         panel0.add(jLabel);
 
 //        给平面加组件
@@ -90,14 +90,18 @@ public class ChessGameFrame extends JFrame {
         jLabel1.setSize(image1.getIconWidth(), image1.getIconHeight());
         panel1.add(jLabel1);
 
-
+//        适应窗口大小变化
         this.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
-                if (getContentPane().equals(panel1)) {
-//                    HEIGTH = getHeight();
-//                    WIDTH = getWidth();
-                }
+//                if (getContentPane().equals(panel0)) {
+//                }
+                WIDTH = getWidth();
+                HEIGTH = getHeight();
+                panel0.setSize(WIDTH, HEIGTH);
+                panel1.setSize(WIDTH, HEIGTH);
+                updateLayOutJPanel0(panel0, WIDTH, HEIGTH);
+                updateLayOutJPanel1(panel1, WIDTH, HEIGTH);
             }
 
             @Override
@@ -117,6 +121,56 @@ public class ChessGameFrame extends JFrame {
         });
     }
 
+    public void updateLayOutJPanel0(JPanel jPanel, int width, int height) {
+        JButton jButton = (JButton) jPanel.getComponent(0);
+        JLabel jLabel = (JLabel) jPanel.getComponent(1);
+
+        jButton.setSize(width / 5, height / 10);
+        jButton.setLocation(width * 2 / 5, height * 2 / 3);
+
+        ImageIcon image = new ImageIcon("./images/背景/background2.jpg");
+        jLabel = new JLabel(image);
+        jLabel.setSize(width, height);
+        jLabel.setLocation(0, 0);
+    }
+
+    public void updateLayOutJPanel1(JPanel jPanel, int width, int height) {
+//        addChessboard(panel1);
+//        addRoundLabel(panel1);
+//        addStoreButton(panel1);
+//        addReBeginGameButten(panel1);
+//        addLoadButton(panel1);
+//        addBackButton(panel1);
+//        addStoreIncludingStopsButton(panel1);
+        Chessboard chessboard = (Chessboard) jPanel.getComponent(0);
+        JLabel roundLabel = (JLabel) jPanel.getComponent(1);
+        JButton storeButton = (JButton) jPanel.getComponent(2);
+        JButton reBeginGameButton = (JButton) jPanel.getComponent(3);
+        JButton loadButton = (JButton) jPanel.getComponent(4);
+        JButton backButton = (JButton) jPanel.getComponent(5);
+        JButton storeIncludingStopsButton = (JButton) jPanel.getComponent(6);
+
+        chessboard.setSize(height * 4 / 5, height * 4 / 5);
+        chessboard.setLocation(height / 10, height / 10);
+
+        roundLabel.setSize(width * 3 / 10, height * 3 / 38);
+        roundLabel.setLocation(0, width / 20);
+
+        storeButton.setSize(width * 1 / 5, height * 3 / 38);
+        storeButton.setLocation(width * 7 / 10, height * 10 / 19);
+
+        reBeginGameButton.setSize(width * 1 / 5, height * 3 / 38);
+        reBeginGameButton.setLocation(width * 7 / 10, height * 15 / 19);
+
+        loadButton.setSize(width * 1 / 5, height * 3 / 38);
+        loadButton.setLocation(width * 7 / 10, height * 25 / 38);
+
+        backButton.setSize(width * 1 / 5, height * 3 / 38);
+        backButton.setLocation(width * 7 / 10, height * 15 / 38);
+
+        storeIncludingStopsButton.setSize(width * 1 / 5, height * 3 / 38);
+        storeIncludingStopsButton.setLocation(width * 7 / 10, height * 5 / 19);
+    }
 
     /**
      * 在游戏面板中添加棋盘
@@ -142,6 +196,10 @@ public class ChessGameFrame extends JFrame {
 
     private void addBeginGameButten(JPanel panel) {
         JButton button = new JButton("开始游戏");
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+//        设置组件位置和大小
+        button.setLocation(WIDTH * 2 / 5, HEIGTH * 2 / 3);
+        button.setSize(WIDTH / 5, HEIGTH / 10);
         button.addActionListener((e) -> {
             remove(panel0);
             getContentPane().add(panel1);
@@ -149,17 +207,13 @@ public class ChessGameFrame extends JFrame {
             validate();
             repaint();
         });
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
-//        设置组件位置和大小
-//        button.setLocation(1000, 300);
-//        button.setSize(WIDTH / 5, HEIGTH / 10);
 //        设置背景颜色
 //        button.setBackground(Color.green);
 //        button.setBackground(Color.cyan);
 //        button.setBackground(new Color(200,255,255));
 //        按钮变透明
 //        button.setContentAreaFilled(false);
-        jButton1 = button;
+//        jButton1 = button;
         panel.add(button);
     }
 

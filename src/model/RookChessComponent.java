@@ -114,10 +114,18 @@ public class RookChessComponent extends ChessComponent {
         g.setColor(Color.BLACK);
         if (isSelected()) { // Highlights the model if selected.
             Image image = null;
-            try {
-                image = ImageIO.read(new File("./images/虚线框.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (chessColor==ChessColor.BLACK){
+                try {
+                    image = ImageIO.read(new File("./images/虚线框2.png"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if (chessColor==ChessColor.WHITE){
+                try {
+                    image = ImageIO.read(new File("./images/虚线框.png"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             g.drawImage(image, getWidth() / 10, getHeight() / 10, getWidth() * 4 / 5, getHeight() * 4 / 5, this);
 //            g.setColor(Color.RED);
