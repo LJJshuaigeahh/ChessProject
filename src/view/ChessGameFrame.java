@@ -72,6 +72,8 @@ public class ChessGameFrame extends JFrame {
         addStoreIncludingStopsButton(panel1);
         addReBeginGameButten(panel1);
         addstopMusicButton(panel1);
+        addBlackCapturedChessLabel(panel1);
+        addWhiteCapturedChessLabel(panel1);
 
 
 //        游戏界面背景图片
@@ -131,7 +133,9 @@ public class ChessGameFrame extends JFrame {
         JButton storeIncludingStopsButton = (JButton) jPanel.getComponent(4);
         JButton reBeginGameButton = (JButton) jPanel.getComponent(5);
         JButton stopMusicButton = (JButton) jPanel.getComponent(6);
-        JLabel backgroundImage = (aLabel) jPanel.getComponent(7);
+        JLabel blackCapturedChessLabel = (JLabel) jPanel.getComponent(7);
+        JLabel whiteCapturedChessLabel = (JLabel) jPanel.getComponent(8);
+        JLabel backgroundImage = (aLabel) jPanel.getComponent(9);
 
         chessboard.setSize(height * 4 / 5, height * 4 / 5);
         chessboard.setLocation(width / 30, height / 8);
@@ -140,20 +144,24 @@ public class ChessGameFrame extends JFrame {
         roundLabel.setSize(width * 3 / 10, height * 2 / 19);
         roundLabel.setLocation(width / 10, 0);
 
-        backButton.setSize(width * 1 / 5, height * 3 / 38);
+        backButton.setSize(width / 5, height * 3 / 38);
         backButton.setLocation(width * 7 / 10, height * 15 / 38);
 
-        storeButton.setSize(width * 1 / 5, height * 3 / 38);
+        storeButton.setSize(width / 5, height * 3 / 38);
         storeButton.setLocation(width * 7 / 10, height * 10 / 19);
 
-        storeIncludingStopsButton.setSize(width * 1 / 5, height * 3 / 38);
+        storeIncludingStopsButton.setSize(width / 5, height * 3 / 38);
         storeIncludingStopsButton.setLocation(width * 7 / 10, height * 25 / 38);
 
-        reBeginGameButton.setSize(width * 1 / 5, height * 3 / 38);
+        reBeginGameButton.setSize(width / 5, height * 3 / 38);
         reBeginGameButton.setLocation(width * 7 / 10, height * 15 / 19);
 
         stopMusicButton.setSize(width / 18, height / 15);
         stopMusicButton.setLocation(width * 17 / 18, 0);
+
+        blackCapturedChessLabel.setBounds(width * 7 / 10, height * 2 / 38, width / 5, height * 2 / 19);
+
+        whiteCapturedChessLabel.setBounds(width * 7 / 10, height * 7 / 38, width / 5, height * 2 / 19);
 
         backgroundImage.setBounds(0, 0, width, height);
     }
@@ -339,6 +347,8 @@ public class ChessGameFrame extends JFrame {
                 addStoreIncludingStopsButton(panel1);
                 addReBeginGameButten(panel1);
                 addstopMusicButton(panel1);
+                addBlackCapturedChessLabel(panel1);
+                addWhiteCapturedChessLabel(panel1);
 
                 Image image1 = new ImageIcon("./images/背景/国际象棋8-1581498150.jpg").getImage();
                 JLabel jLabel1 = new aLabel(image1);
@@ -366,6 +376,28 @@ public class ChessGameFrame extends JFrame {
             }
         });
         panel.add(stopMusicButton);
+    }
+
+    private void addBlackCapturedChessLabel(JPanel panel) {
+        JLabel blackCapturedChessLabel = new JLabel();
+        blackCapturedChessLabel.setBackground(new Color(211, 211, 211));
+        blackCapturedChessLabel.setForeground(Color.black);
+        blackCapturedChessLabel.setOpaque(true);
+        blackCapturedChessLabel.setBounds(WIDTH * 7 / 10, HEIGTH * 2 / 38, WIDTH / 5, HEIGTH * 2 / 19);
+        blackCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 15));
+        blackCapturedChessLabel.setText("Player Black's captured chess:");
+        panel.add(blackCapturedChessLabel);
+    }
+
+    private void addWhiteCapturedChessLabel(JPanel panel) {
+        JLabel whiteCapturedChessLabel = new JLabel();
+        whiteCapturedChessLabel.setBackground(new Color(105, 105, 105));
+        whiteCapturedChessLabel.setForeground(Color.white);
+        whiteCapturedChessLabel.setOpaque(true);
+        whiteCapturedChessLabel.setBounds(WIDTH * 7 / 10, HEIGTH * 7 / 38, WIDTH / 5, HEIGTH * 2 / 19);
+        whiteCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 15));
+        whiteCapturedChessLabel.setText("Player White's captured chess:");
+        panel.add(whiteCapturedChessLabel);
     }
 
     private void playMusic(File file) {

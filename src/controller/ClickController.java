@@ -186,6 +186,16 @@ public class ClickController {
 //                回合状态显示
                 JLabel jLabel = (JLabel) chessboard.getParent().getComponent(1);
                 jLabel.setText("第" + (int) chessboard.getCount() + "回合  " + "It's " + chessboard.getCurrentColor().getName() + "'s turn.");
+
+                JLabel blackCapturedChessLabel = (JLabel) chessboard.getParent().getComponent(7);
+                JLabel whiteCapturedChessLabel = (JLabel) chessboard.getParent().getComponent(8);
+                if (color1 == ChessColor.BLACK) {
+                    blackCapturedChessLabel.setText("Player Black's captured chess:\n" + chessboard.getCapturedChess(color1));
+                    whiteCapturedChessLabel.setText("Player white's captured chess:\n" + chessboard.getCapturedChess(color2));
+                } else {
+                    blackCapturedChessLabel.setText("Player Black's captured chess:\n" + chessboard.getCapturedChess(color2));
+                    whiteCapturedChessLabel.setText("Player white's captured chess:\n" + chessboard.getCapturedChess(color1));
+                }
             }
         }
     }

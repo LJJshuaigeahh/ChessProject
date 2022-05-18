@@ -478,6 +478,146 @@ public class Chessboard extends JComponent {
         return test;
     }
 
+    public String getCapturedChess(ChessColor player) {
+        if (player == ChessColor.BLACK) {
+            int num1 = 0;
+            int num2 = 0;
+            int num3 = 0;
+            int num4 = 0;
+            int num5 = 0;
+            int num6 = 0;
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (chessComponents[i][j] instanceof KingChessComponent && chessComponents[i][j].getChessColor() == ChessColor.BLACK) {
+                        num1++;
+                    } else if (chessComponents[i][j] instanceof QueenChessComponent && chessComponents[i][j].getChessColor() == ChessColor.BLACK) {
+                        num2++;
+                    } else if (chessComponents[i][j] instanceof RookChessComponent && chessComponents[i][j].getChessColor() == ChessColor.BLACK) {
+                        num3++;
+                    } else if (chessComponents[i][j] instanceof BishopChessComponent && chessComponents[i][j].getChessColor() == ChessColor.BLACK) {
+                        num4++;
+                    } else if (chessComponents[i][j] instanceof KnightChessComponent && chessComponents[i][j].getChessColor() == ChessColor.BLACK) {
+                        num5++;
+                    } else if (chessComponents[i][j] instanceof PawnChessComponent && chessComponents[i][j].getChessColor() == ChessColor.BLACK) {
+                        num6++;
+                    }
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            int capturedNum1 = 1 - num1;
+            if (capturedNum1 != 0) {
+                sb.append("K");
+                sb.append(" ");
+                sb.append(capturedNum1);
+                sb.append("  ");
+            }
+            int capturedNum2 = 1 - num2;
+            if (capturedNum2 != 0) {
+                sb.append("Q");
+                sb.append(" ");
+                sb.append(capturedNum2);
+                sb.append("  ");
+            }
+            int capturedNum3 = 2 - num3;
+            if (capturedNum3 != 0) {
+                sb.append("R");
+                sb.append(" ");
+                sb.append(capturedNum3);
+                sb.append("  ");
+            }
+            int capturedNum4 = 2 - num4;
+            if (capturedNum4 != 0) {
+                sb.append("B");
+                sb.append(" ");
+                sb.append(capturedNum4);
+                sb.append("  ");
+            }
+            int capturedNum5 = 2 - num5;
+            if (capturedNum5 != 0) {
+                sb.append("N");
+                sb.append(" ");
+                sb.append(capturedNum5);
+                sb.append("  ");
+            }
+            int capturedNum6 = 8 - num6;
+            if (capturedNum6 != 0) {
+                sb.append("P");
+                sb.append(" ");
+                sb.append(capturedNum6);
+                sb.append("  ");
+            }
+            return sb.toString();
+        } else {
+            int num1 = 0;
+            int num2 = 0;
+            int num3 = 0;
+            int num4 = 0;
+            int num5 = 0;
+            int num6 = 0;
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (chessComponents[i][j] instanceof KingChessComponent && chessComponents[i][j].getChessColor() == ChessColor.WHITE) {
+                        num1++;
+                    } else if (chessComponents[i][j] instanceof QueenChessComponent && chessComponents[i][j].getChessColor() == ChessColor.WHITE) {
+                        num2++;
+                    } else if (chessComponents[i][j] instanceof RookChessComponent && chessComponents[i][j].getChessColor() == ChessColor.WHITE) {
+                        num3++;
+                    } else if (chessComponents[i][j] instanceof BishopChessComponent && chessComponents[i][j].getChessColor() == ChessColor.WHITE) {
+                        num4++;
+                    } else if (chessComponents[i][j] instanceof KnightChessComponent && chessComponents[i][j].getChessColor() == ChessColor.WHITE) {
+                        num5++;
+                    } else if (chessComponents[i][j] instanceof PawnChessComponent && chessComponents[i][j].getChessColor() == ChessColor.WHITE) {
+                        num6++;
+                    }
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            int capturedNum1 = 1 - num1;
+            if (capturedNum1 != 0) {
+                sb.append("k");
+                sb.append(" ");
+                sb.append(capturedNum1);
+                sb.append("  ");
+            }
+            int capturedNum2 = 1 - num2;
+            if (capturedNum2 != 0) {
+                sb.append("q");
+                sb.append(" ");
+                sb.append(capturedNum2);
+                sb.append("  ");
+            }
+            int capturedNum3 = 2 - num3;
+            if (capturedNum3 != 0) {
+                sb.append("r");
+                sb.append(" ");
+                sb.append(capturedNum3);
+                sb.append("  ");
+            }
+            int capturedNum4 = 2 - num4;
+            if (capturedNum4 != 0) {
+                sb.append("b");
+                sb.append(" ");
+                sb.append(capturedNum4);
+                sb.append("  ");
+            }
+            int capturedNum5 = 2 - num5;
+            if (capturedNum5 != 0) {
+                sb.append("n");
+                sb.append(" ");
+                sb.append(capturedNum5);
+                sb.append("  ");
+            }
+            int capturedNum6 = 8 - num6;
+            if (capturedNum6 != 0) {
+                sb.append("p");
+                sb.append(" ");
+                sb.append(capturedNum6);
+                sb.append("  ");
+            }
+            return sb.toString();
+        }
+    }
+
 //    public boolean tellWinOrDefeat(ChessColor color) {
 //        if (color == ChessColor.BLACK) {
 //            int kingI = 0;
