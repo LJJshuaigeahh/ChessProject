@@ -259,7 +259,7 @@ public class Chessboard extends JComponent {
         JLabel whiteCapturedChessLabel = (JLabel) this.getParent().getComponent(8);
         blackCapturedChessLabel.setText(this.getCapturedChess(ChessColor.BLACK));
         whiteCapturedChessLabel.setText(this.getCapturedChess(ChessColor.WHITE));
-}
+    }
 
     public void backChess2() {
         if (recordChessBoard.size() != 1) {
@@ -620,6 +620,59 @@ public class Chessboard extends JComponent {
         }
     }
 
+    public boolean tellIfHasNotChessToMove(ChessColor color) {
+        boolean test = true;
+        out:
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (chessComponents[i][j].getChessColor() == color && chessComponents[i][j].canMoveToList(chessComponents).size() != 0) {
+                    test = false;
+                    break out;
+                }
+            }
+        }
+        return test;
+    }
+
+    public boolean tellIfMoreThanThreeTimes() {
+        if (recordChessBoard.size() >= 13) {
+            boolean test = true;
+            for (int i = 0; i < 8; i++) {
+                String str13 = recordChessBoard.get(recordChessBoard.size() - 1).get(i);
+                String str9 = recordChessBoard.get(recordChessBoard.size() - 5).get(i);
+                String str5 = recordChessBoard.get(recordChessBoard.size() - 9).get(i);
+                String str1 = recordChessBoard.get(recordChessBoard.size() - 13).get(i);
+                String str12 = recordChessBoard.get(recordChessBoard.size() - 2).get(i);
+                String str8 = recordChessBoard.get(recordChessBoard.size() - 6).get(i);
+                String str4 = recordChessBoard.get(recordChessBoard.size() - 10).get(i);
+                String str11 = recordChessBoard.get(recordChessBoard.size() - 3).get(i);
+                String str7 = recordChessBoard.get(recordChessBoard.size() - 7).get(i);
+                String str3 = recordChessBoard.get(recordChessBoard.size() - 11).get(i);
+                String str10 = recordChessBoard.get(recordChessBoard.size() - 4).get(i);
+                String str6 = recordChessBoard.get(recordChessBoard.size() - 8).get(i);
+                String str2 = recordChessBoard.get(recordChessBoard.size() - 12).get(i);
+                if (!(str1.equals(str5) && str5.equals(str9) && str9.equals(str13))) {
+                    test = false;
+                    break;
+                }
+                if (!(str2.equals(str6) && str6.equals(str10))) {
+                    test = false;
+                    break;
+                }
+                if (!(str3.equals(str7) && str7.equals(str11))) {
+                    test = false;
+                    break;
+                }
+                if (!(str4.equals(str8) && str8.equals(str12))) {
+                    test = false;
+                    break;
+                }
+            }
+            return test;
+        } else {
+            return false;
+        }
+    }
 //    public boolean tellWinOrDefeat(ChessColor color) {
 //        if (color == ChessColor.BLACK) {
 //            int kingI = 0;

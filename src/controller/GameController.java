@@ -21,27 +21,32 @@ public class GameController {
         this.chessboard = chessboard;
     }
 
-    public List<String> loadGameFromFile(File file) {
+    public boolean loadGameFromFile(File file) {
         String path = file.getPath();
+        boolean test = true;
         try {
             if (!path.substring(path.length() - 4).equals(".txt")) {
                 JOptionPane.showMessageDialog(null, "File format error!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
-                return null;
+                test = false;
+                return false;
             }
 //            List<String> chessData = Files.readAllLines(Path.of(path));
             List<String> chessData = Files.readAllLines(Path.of(file.getPath()));
             if (!chessData.get(chessData.size() - 1).equals("w") && !chessData.get(chessData.size() - 1).equals("b")) {
                 JOptionPane.showMessageDialog(null, "Missing next player!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
-                return null;
+                test = false;
+                return false;
             }
             if (chessData.size() - 1 != 8) {
                 JOptionPane.showMessageDialog(null, "Wrong chessboard size!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
-                return null;
+                test = false;
+                return false;
             }
             for (int i = 0; i < 8; i++) {
                 if (chessData.get(i).length() != 8) {
                     JOptionPane.showMessageDialog(null, "Wrong chessboard size!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
-                    return null;
+                    test = false;
+                    return false;
                 }
             }
             List<Character> aList = Arrays.asList('R', 'N', 'B', 'Q', 'K', 'P', 'r', 'n', 'b', 'q', 'k', 'p', '_');
@@ -49,16 +54,21 @@ public class GameController {
                 for (int j = 0; j < 8; j++) {
                     if (!aList.contains(chessData.get(i).charAt(j))) {
                         JOptionPane.showMessageDialog(null, "Wrong piece type!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
-                        return null;
+                        test = false;
+                        return false;
                     }
                 }
             }
-            chessboard.loadGame(chessData);
-            return chessData;
+            if (test){
+                chessboard.loadGame(chessData);
+                return true;
+            }else {
+                return false;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return true;
     }
 
     public void storeGameFromFile(String path) {

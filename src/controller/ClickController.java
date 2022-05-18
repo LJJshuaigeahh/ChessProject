@@ -162,6 +162,7 @@ public class ClickController {
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
 
+//                无效行棋提醒
                 if (chessboard.tellIfKingIsAttacked2(chessboard.getChessComponents(), color2)) {
                     JOptionPane.showMessageDialog(null, "行棋后己方被将军", "无效行棋提示", 0);
                     chessboard.swapChessComponents(first_, chessComponent_);
@@ -173,10 +174,12 @@ public class ClickController {
                     chessboard.setCount((float) (chessboard.getCount() - 1.0));
                 }
 
+//                提醒被将军
                 if (chessboard.tellIfKingIsAttacked(color1)){
 
                 }
 
+//                王被将死
                 if (chessboard.tellIfKingIsAttacked2(chessboard.getChessComponents(), color1)) {
                     if (chessboard.tellWinOrDefeat(color1)) {
                         JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", -1);
@@ -199,6 +202,16 @@ public class ClickController {
                 } else {
                     blackCapturedChessLabel.setText(chessboard.getCapturedChess(color2));
                     whiteCapturedChessLabel.setText(chessboard.getCapturedChess(color1));
+                }
+
+//                无子可动
+                if (chessboard.tellIfHasNotChessToMove(color2)){
+                    JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", -1);
+                }
+
+//                三次重复
+                if (chessboard.tellIfMoreThanThreeTimes()){
+                    JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", -1);
                 }
             }
         }

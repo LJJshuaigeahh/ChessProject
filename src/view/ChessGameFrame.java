@@ -71,11 +71,12 @@ public class ChessGameFrame extends JFrame {
         addStoreButton(panel1);
         addStoreIncludingStopsButton(panel1);
         addReBeginGameButten(panel1);
-        addstopMusicButton(panel1);
+        addStopMusicButton(panel1);
         addBlackCapturedChessLabel(panel1);
         addWhiteCapturedChessLabel(panel1);
         addBlackCapturedChessLabel2(panel1);
         addWhiteCapturedChessLabel2(panel1);
+        addBackPanel0Button(panel1);
 
 
 //        游戏界面背景图片
@@ -121,8 +122,8 @@ public class ChessGameFrame extends JFrame {
         JButton loadGameButton = (JButton) jPanel.getComponent(1);
         JLabel backgroundImage = (aLabel) jPanel.getComponent(2);
 
-        beginGameButten.setBounds(width / 4, height * 2 / 3, width / 6, height / 12);
-        loadGameButton.setBounds(width * 7 / 12, height * 2 / 3, width / 6, height / 12);
+        beginGameButten.setBounds(width / 4, height * 2 / 3, width / 5, height / 10);
+        loadGameButton.setBounds(width * 11 / 20, height * 2 / 3, width / 5, height / 10);
         backgroundImage.setBounds(0, 0, width, height);
     }
 
@@ -139,7 +140,8 @@ public class ChessGameFrame extends JFrame {
         JLabel whiteCapturedChessLabel = (JLabel) jPanel.getComponent(8);
         JLabel blackCapturedChessLabel2 = (JLabel) jPanel.getComponent(9);
         JLabel whiteCapturedChessLabel2 = (JLabel) jPanel.getComponent(10);
-        JLabel backgroundImage = (aLabel) jPanel.getComponent(11);
+        JButton backPanel0Button = (JButton) jPanel.getComponent(11);
+        JLabel backgroundImage = (aLabel) jPanel.getComponent(12);
 
         chessboard.setSize(height * 4 / 5, height * 4 / 5);
         chessboard.setLocation(width / 30, height / 8);
@@ -171,13 +173,15 @@ public class ChessGameFrame extends JFrame {
 
         whiteCapturedChessLabel2.setBounds(WIDTH * 55 / 80, HEIGTH * 7 / 38, WIDTH / 4, HEIGTH * 1 / 19);
 
+        backPanel0Button.setBounds(width * 17 / 18, height / 15, width / 18, height / 15);
+
         backgroundImage.setBounds(0, 0, width, height);
     }
 
     private void addBeginGameButten(JPanel panel) {
         JButton button = new JButton("Start a game");
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        button.setBounds(WIDTH / 4, HEIGTH * 2 / 3, WIDTH / 6, HEIGTH / 12);
+        button.setFont(new Font("Rockwell", Font.BOLD, 27));
+        button.setBounds(WIDTH / 4, HEIGTH * 2 / 3, WIDTH / 5, HEIGTH / 10);
         button.addActionListener((e) -> {
             remove(panel0);
             getContentPane().add(panel1);
@@ -200,8 +204,8 @@ public class ChessGameFrame extends JFrame {
 
     private void addLoadButton(JPanel panel) {
         JButton button = new JButton("Load a game");
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        button.setBounds(WIDTH * 7 / 12, HEIGTH * 2 / 3, WIDTH / 6, HEIGTH / 12);
+        button.setFont(new Font("Rockwell", Font.BOLD, 27));
+        button.setBounds(WIDTH * 11 / 20, HEIGTH * 2 / 3, WIDTH / 5, HEIGTH / 10);
 
         button.addActionListener(e -> {
             System.out.println("Click load");
@@ -219,7 +223,7 @@ public class ChessGameFrame extends JFrame {
             fileChooser.setMultiSelectionEnabled(false);
 
             // 添加可用的文件过滤器（FileNameExtensionFilter 的第一个参数是描述, 后面是需要过滤的文件扩展名 可变参数）
-            fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("txt", "txt"));
+            fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("json", "json"));
             // 设置默认使用的文件过滤器
             fileChooser.setFileFilter(new FileNameExtensionFilter("txt", "txt"));
 
@@ -236,12 +240,13 @@ public class ChessGameFrame extends JFrame {
                 msgTextArea.setLineWrap(true);
                 panel.add(msgTextArea);
                 msgTextArea.append("打开文件: " + file.getAbsolutePath() + "\n\n");
-                remove(panel0);
-                getContentPane().add(panel1);
-                gameController.loadGameFromFile(file);
-                setVisible(true);
-                validate();
-                repaint();
+                if (gameController.loadGameFromFile(file)) {
+                    remove(panel0);
+                    getContentPane().add(panel1);
+                    setVisible(true);
+                    validate();
+                    repaint();
+                }
             }
         });
         panel.add(button);
@@ -270,7 +275,7 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addBackButton(JPanel panel) {
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton("Regret");
         backButton.setFont(new Font("Rockwell", Font.BOLD, 20));
         backButton.setSize(WIDTH * 1 / 5, HEIGTH * 3 / 38);
         backButton.setLocation(WIDTH * 7 / 10, HEIGTH * 15 / 38);
@@ -354,18 +359,20 @@ public class ChessGameFrame extends JFrame {
                 addStoreButton(panel1);
                 addStoreIncludingStopsButton(panel1);
                 addReBeginGameButten(panel1);
-                addstopMusicButton(panel1);
+                addStopMusicButton(panel1);
                 addBlackCapturedChessLabel(panel1);
                 addWhiteCapturedChessLabel(panel1);
                 addBlackCapturedChessLabel2(panel1);
                 addWhiteCapturedChessLabel2(panel1);
+                addBackPanel0Button(panel1);
 
                 Image image1 = new ImageIcon("./images/背景/国际象棋8-1581498150.jpg").getImage();
                 JLabel jLabel1 = new aLabel(image1);
                 jLabel1.setSize(WIDTH, HEIGTH);
                 panel1.add(jLabel1);
 
-                setContentPane(panel1);
+//                setContentPane(panel1);
+                getContentPane().add(panel1);
                 validate();
                 repaint();
             }
@@ -373,7 +380,7 @@ public class ChessGameFrame extends JFrame {
         panel.add(reBeginGameButton);
     }
 
-    private void addstopMusicButton(JPanel panel) {
+    private void addStopMusicButton(JPanel panel) {
         JButton stopMusicButton = new JButton("♬");
         stopMusicButton.setFont(new Font("Rockwell", Font.BOLD, 20));
         stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
@@ -413,7 +420,7 @@ public class ChessGameFrame extends JFrame {
         whiteCapturedChessLabel.setBackground(new Color(105, 105, 105));
         whiteCapturedChessLabel.setForeground(Color.white);
         whiteCapturedChessLabel.setOpaque(true);
-        whiteCapturedChessLabel.setBounds(WIDTH * 7 / 10, HEIGTH * 9 / 38, WIDTH / 5, HEIGTH * 1/ 19);
+        whiteCapturedChessLabel.setBounds(WIDTH * 7 / 10, HEIGTH * 9 / 38, WIDTH / 5, HEIGTH * 1 / 19);
         whiteCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 15));
         whiteCapturedChessLabel.setText("");
         panel.add(whiteCapturedChessLabel);
@@ -426,6 +433,21 @@ public class ChessGameFrame extends JFrame {
         whiteCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 15));
         whiteCapturedChessLabel.setText("Player White's captured chess:");
         panel.add(whiteCapturedChessLabel);
+    }
+
+    private void addBackPanel0Button(JPanel panel) {
+        JButton stopMusicButton = new JButton("↩");
+        stopMusicButton.setFont(new Font("Rockwell", Font.BOLD, 20));
+        stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
+        stopMusicButton.setLocation(WIDTH * 17 / 18, HEIGTH / 15);
+        stopMusicButton.addActionListener((e) -> {
+            remove(panel1);
+            getContentPane().add(panel0);
+            setVisible(true);
+            validate();
+            repaint();
+        });
+        panel.add(stopMusicButton);
     }
 
     private void playMusic(File file) {
