@@ -254,8 +254,12 @@ public class Chessboard extends JComponent {
         count = 1;
         JLabel jLabel = (JLabel) this.getParent().getComponent(1);
         jLabel.setText("第1回合  " + "It's " + this.getCurrentColor().getName() + "'s turn.");
-//        chessData.forEach(System.out::println);
-    }
+
+        JLabel blackCapturedChessLabel = (JLabel) this.getParent().getComponent(7);
+        JLabel whiteCapturedChessLabel = (JLabel) this.getParent().getComponent(8);
+        blackCapturedChessLabel.setText(this.getCapturedChess(ChessColor.BLACK));
+        whiteCapturedChessLabel.setText(this.getCapturedChess(ChessColor.WHITE));
+}
 
     public void backChess2() {
         if (recordChessBoard.size() != 1) {
