@@ -415,7 +415,7 @@ public class Chessboard extends JComponent {
         return test;
     }
 
-    public boolean tellIfKingIsAttacked2(ChessColor color) {
+    public boolean tellIfKingIsAttacked2(ChessComponent[][] chessComponents, ChessColor color) {
         boolean test = false;
         int kingX = 0;
         int kingY = 0;
@@ -462,14 +462,12 @@ public class Chessboard extends JComponent {
         out:
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (chessComponentsTest[i][j].canMoveToList(chessComponentsTest).size() != 0) {
+                if (!(chessComponentsTest[i][j] instanceof EmptySlotComponent) && chessComponentsTest[i][j].canMoveToList(chessComponentsTest).size() != 0) {
                     for (int k = 0; k < chessComponentsTest[i][j].canMoveToList(chessComponentsTest).size(); k++) {
-                        if (!(chessComponentsTest[i][j] instanceof EmptySlotComponent)) {
-                            moveTo(chessComponentsTest, chessComponentsTest[i][j], chessComponentsTest[i][j].canMoveToList(chessComponentsTest).get(k));
-                            if (!tellIfKingIsAttacked2(color)) {
-                                test = false;
-                                break out;
-                            }
+                        moveTo(chessComponentsTest, chessComponentsTest[i][j], chessComponentsTest[i][j].canMoveToList(chessComponentsTest).get(k));
+                        if (!tellIfKingIsAttacked2(chessComponentsTest, color)) {
+                            test = false;
+                            break out;
                         }
                     }
                 }

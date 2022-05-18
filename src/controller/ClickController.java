@@ -162,7 +162,7 @@ public class ClickController {
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
 
-                if (chessboard.tellIfKingIsAttacked2(color2)) {
+                if (chessboard.tellIfKingIsAttacked2(chessboard.getChessComponents(), color2)) {
                     JOptionPane.showMessageDialog(null, "行棋后己方被将军", "无效行棋提示", 0);
                     chessboard.swapChessComponents(first_, chessComponent_);
                     if (chessboard.getCurrentColor() == ChessColor.BLACK) {
@@ -173,7 +173,11 @@ public class ClickController {
                     chessboard.setCount((float) (chessboard.getCount() - 1.0));
                 }
 
-                if (chessboard.tellIfKingIsAttacked(color1)) {
+                if (chessboard.tellIfKingIsAttacked(color1)){
+
+                }
+
+                if (chessboard.tellIfKingIsAttacked2(chessboard.getChessComponents(), color1)) {
                     if (chessboard.tellWinOrDefeat(color1)) {
                         JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", -1);
                     }
@@ -190,11 +194,11 @@ public class ClickController {
                 JLabel blackCapturedChessLabel = (JLabel) chessboard.getParent().getComponent(7);
                 JLabel whiteCapturedChessLabel = (JLabel) chessboard.getParent().getComponent(8);
                 if (color1 == ChessColor.BLACK) {
-                    blackCapturedChessLabel.setText("Player Black's captured chess:\n" + chessboard.getCapturedChess(color1));
-                    whiteCapturedChessLabel.setText("Player white's captured chess:\n" + chessboard.getCapturedChess(color2));
+                    blackCapturedChessLabel.setText(chessboard.getCapturedChess(color1));
+                    whiteCapturedChessLabel.setText(chessboard.getCapturedChess(color2));
                 } else {
-                    blackCapturedChessLabel.setText("Player Black's captured chess:\n" + chessboard.getCapturedChess(color2));
-                    whiteCapturedChessLabel.setText("Player white's captured chess:\n" + chessboard.getCapturedChess(color1));
+                    blackCapturedChessLabel.setText(chessboard.getCapturedChess(color2));
+                    whiteCapturedChessLabel.setText(chessboard.getCapturedChess(color1));
                 }
             }
         }

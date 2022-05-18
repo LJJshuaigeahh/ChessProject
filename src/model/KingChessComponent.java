@@ -50,15 +50,20 @@ public class KingChessComponent extends ChessComponent {
     @Override
     public boolean canMoveTo(ChessComponent[][] chessComponents, ChessboardPoint destination) {
         ChessboardPoint source = getChessboardPoint();
+        ChessComponent[][] chessComponentsTest = new ChessComponent[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                chessComponentsTest[i][j] = chessComponents[i][j];
+            }
+        }
         if (getChessColor() == ChessColor.BLACK) {
             if (((Math.abs(destination.getX() - source.getX()) == 1 && Math.abs(destination.getY() - source.getY()) == 1) || (Math.abs(destination.getX() - source.getX()) == 1 && Math.abs(destination.getY() - source.getY()) == 0) || (Math.abs(destination.getX() - source.getX()) == 0 && Math.abs(destination.getY() - source.getY()) == 1)) && chessComponents[destination.getX()][destination.getY()].getChessColor() != ChessColor.BLACK) {
                 boolean test = true;
                 out:
                 for (int i = 0; i < 8; i++) {
                     for (int j = 0; j < 8; j++) {
-                        ChessComponent[][] chessComponents1 = chessComponents;
-                        chessComponents1[destination.getX()][destination.getY()] = new KingChessComponent(getChessboardPoint(), getLocation(), getChessColor(), getClickController(), 0);
-                        if (chessComponents1[i][j].getChessColor() == ChessColor.WHITE && chessComponents1[i][j].canMoveTo(chessComponents, destination)) {
+                        chessComponentsTest[destination.getX()][destination.getY()] = new KingChessComponent(getChessboardPoint(), getLocation(), getChessColor(), getClickController(), 0);
+                        if (chessComponentsTest[i][j].getChessColor() == ChessColor.WHITE && chessComponentsTest[i][j].canMoveTo(chessComponentsTest, destination)) {
                             test = false;
                             break out;
                         }
@@ -74,7 +79,8 @@ public class KingChessComponent extends ChessComponent {
                 out:
                 for (int i = 0; i < 8; i++) {
                     for (int j = 0; j < 8; j++) {
-                        if (chessComponents[i][j].getChessColor() == ChessColor.BLACK && chessComponents[i][j].canMoveTo(chessComponents, destination)) {
+                        chessComponentsTest[destination.getX()][destination.getY()] = new KingChessComponent(getChessboardPoint(), getLocation(), getChessColor(), getClickController(), 0);
+                        if (chessComponentsTest[i][j].getChessColor() == ChessColor.BLACK && chessComponentsTest[i][j].canMoveTo(chessComponentsTest, destination)) {
                             test = false;
                             break out;
                         }
@@ -108,13 +114,13 @@ public class KingChessComponent extends ChessComponent {
         g.setColor(Color.BLACK);
         if (isSelected()) { // Highlights the model if selected.
             Image image = null;
-            if (chessColor==ChessColor.BLACK){
+            if (chessColor == ChessColor.BLACK) {
                 try {
                     image = ImageIO.read(new File("./images/虚线框2.png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else if (chessColor==ChessColor.WHITE){
+            } else if (chessColor == ChessColor.WHITE) {
                 try {
                     image = ImageIO.read(new File("./images/虚线框.png"));
                 } catch (IOException e) {

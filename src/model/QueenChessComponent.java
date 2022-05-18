@@ -60,6 +60,7 @@ public class QueenChessComponent extends ChessComponent {
                 }
             } else if (source.getY() == destination.getY()) {
                 int col = source.getY();
+
                 for (int row = Math.min(source.getX(), destination.getX()) + 1;
                      row < Math.max(source.getX(), destination.getX()); row++) {
                     if (!(chessComponents[row][col] instanceof EmptySlotComponent)) {
@@ -86,7 +87,6 @@ public class QueenChessComponent extends ChessComponent {
             } else {
                 return false;
             }
-
             return true;
         }else {
             return false;

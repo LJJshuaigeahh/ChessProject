@@ -74,6 +74,8 @@ public class ChessGameFrame extends JFrame {
         addstopMusicButton(panel1);
         addBlackCapturedChessLabel(panel1);
         addWhiteCapturedChessLabel(panel1);
+        addBlackCapturedChessLabel2(panel1);
+        addWhiteCapturedChessLabel2(panel1);
 
 
 //        游戏界面背景图片
@@ -135,7 +137,9 @@ public class ChessGameFrame extends JFrame {
         JButton stopMusicButton = (JButton) jPanel.getComponent(6);
         JLabel blackCapturedChessLabel = (JLabel) jPanel.getComponent(7);
         JLabel whiteCapturedChessLabel = (JLabel) jPanel.getComponent(8);
-        JLabel backgroundImage = (aLabel) jPanel.getComponent(9);
+        JLabel blackCapturedChessLabel2 = (JLabel) jPanel.getComponent(9);
+        JLabel whiteCapturedChessLabel2 = (JLabel) jPanel.getComponent(10);
+        JLabel backgroundImage = (aLabel) jPanel.getComponent(11);
 
         chessboard.setSize(height * 4 / 5, height * 4 / 5);
         chessboard.setLocation(width / 30, height / 8);
@@ -159,9 +163,13 @@ public class ChessGameFrame extends JFrame {
         stopMusicButton.setSize(width / 18, height / 15);
         stopMusicButton.setLocation(width * 17 / 18, 0);
 
-        blackCapturedChessLabel.setBounds(width * 7 / 10, height * 2 / 38, width / 5, height * 2 / 19);
+        blackCapturedChessLabel.setBounds(width * 7 / 10, height * 2 / 19, width / 5, height * 1 / 19);
 
-        whiteCapturedChessLabel.setBounds(width * 7 / 10, height * 7 / 38, width / 5, height * 2 / 19);
+        whiteCapturedChessLabel.setBounds(width * 7 / 10, height * 9 / 38, width / 5, height * 1 / 19);
+
+        blackCapturedChessLabel2.setBounds(WIDTH * 55 / 80, HEIGTH * 2 / 38, WIDTH / 4, HEIGTH * 1 / 19);
+
+        whiteCapturedChessLabel2.setBounds(WIDTH * 55 / 80, HEIGTH * 7 / 38, WIDTH / 4, HEIGTH * 1 / 19);
 
         backgroundImage.setBounds(0, 0, width, height);
     }
@@ -349,6 +357,8 @@ public class ChessGameFrame extends JFrame {
                 addstopMusicButton(panel1);
                 addBlackCapturedChessLabel(panel1);
                 addWhiteCapturedChessLabel(panel1);
+                addBlackCapturedChessLabel2(panel1);
+                addWhiteCapturedChessLabel2(panel1);
 
                 Image image1 = new ImageIcon("./images/背景/国际象棋8-1581498150.jpg").getImage();
                 JLabel jLabel1 = new aLabel(image1);
@@ -383,7 +393,16 @@ public class ChessGameFrame extends JFrame {
         blackCapturedChessLabel.setBackground(new Color(211, 211, 211));
         blackCapturedChessLabel.setForeground(Color.black);
         blackCapturedChessLabel.setOpaque(true);
-        blackCapturedChessLabel.setBounds(WIDTH * 7 / 10, HEIGTH * 2 / 38, WIDTH / 5, HEIGTH * 2 / 19);
+        blackCapturedChessLabel.setBounds(WIDTH * 7 / 10, HEIGTH * 2 / 19, WIDTH / 5, HEIGTH * 1 / 19);
+        blackCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 15));
+        blackCapturedChessLabel.setText("");
+        panel.add(blackCapturedChessLabel);
+    }
+
+    private void addBlackCapturedChessLabel2(JPanel panel) {
+        JLabel blackCapturedChessLabel = new JLabel();
+        blackCapturedChessLabel.setForeground(Color.black);
+        blackCapturedChessLabel.setBounds(WIDTH * 55 / 80, HEIGTH * 2 / 38, WIDTH / 4, HEIGTH * 1 / 19);
         blackCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 15));
         blackCapturedChessLabel.setText("Player Black's captured chess:");
         panel.add(blackCapturedChessLabel);
@@ -394,7 +413,16 @@ public class ChessGameFrame extends JFrame {
         whiteCapturedChessLabel.setBackground(new Color(105, 105, 105));
         whiteCapturedChessLabel.setForeground(Color.white);
         whiteCapturedChessLabel.setOpaque(true);
-        whiteCapturedChessLabel.setBounds(WIDTH * 7 / 10, HEIGTH * 7 / 38, WIDTH / 5, HEIGTH * 2 / 19);
+        whiteCapturedChessLabel.setBounds(WIDTH * 7 / 10, HEIGTH * 9 / 38, WIDTH / 5, HEIGTH * 1/ 19);
+        whiteCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 15));
+        whiteCapturedChessLabel.setText("");
+        panel.add(whiteCapturedChessLabel);
+    }
+
+    private void addWhiteCapturedChessLabel2(JPanel panel) {
+        JLabel whiteCapturedChessLabel = new JLabel();
+        whiteCapturedChessLabel.setForeground(Color.white);
+        whiteCapturedChessLabel.setBounds(WIDTH * 55 / 80, HEIGTH * 7 / 38, WIDTH / 4, HEIGTH * 1 / 19);
         whiteCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 15));
         whiteCapturedChessLabel.setText("Player White's captured chess:");
         panel.add(whiteCapturedChessLabel);
