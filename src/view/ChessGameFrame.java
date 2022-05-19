@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
+import java.net.URL;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -58,6 +59,9 @@ public class ChessGameFrame extends JFrame {
         addLoadButton(panel0);
 
 //        开始游戏界面背景图片
+//        URL url = this.getClass().getResource("./images/背景/background2.jpg");
+//        ImageIcon imageIcon = new ImageIcon(url);
+//        Image image = imageIcon.getImage();
         Image image = new ImageIcon("./images/背景/background2.jpg").getImage();
         JLabel jLabel = new aLabel(image);
         jLabel.setSize(WIDTH, HEIGTH);
