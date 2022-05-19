@@ -1,6 +1,7 @@
 package view;
 
 
+import jdk.swing.interop.SwingInterOpUtils;
 import model.*;
 import controller.ClickController;
 
@@ -455,6 +456,11 @@ public class Chessboard extends JComponent {
         }
     }
 
+    public void moveBack(ChessComponent[][] chessComponents, ChessComponent chessComponent1, ChessComponent chessComponent2) {
+        chessComponents[chessComponent1.getChessboardPoint().getX()][chessComponent1.getChessboardPoint().getY()] = chessComponent1;
+        chessComponents[chessComponent2.getChessboardPoint().getX()][chessComponent2.getChessboardPoint().getY()] = chessComponent2;
+    }
+
     public boolean tellWinOrDefeat(ChessColor color) {
         ChessComponent[][] chessComponentsTest = new ChessComponent[8][8];
         boolean test = true;
@@ -468,17 +474,23 @@ public class Chessboard extends JComponent {
             for (int j = 0; j < 8; j++) {
                 if (!(chessComponentsTest[i][j] instanceof EmptySlotComponent) && chessComponentsTest[i][j].getChessColor() != color && chessComponentsTest[i][j].canMoveToList(chessComponentsTest).size() != 0) {
                     for (int k = 0; k < chessComponentsTest[i][j].canMoveToList(chessComponentsTest).size(); k++) {
-                        moveTo(chessComponentsTest, chessComponentsTest[i][j], chessComponentsTest[i][j].canMoveToList(chessComponentsTest).get(k));
+
+                        ChessComponent chessComponent1 = chessComponentsTest[i][j];
+                        ChessComponent chessComponent2 = chessComponentsTest[i][j].canMoveToList(chessComponentsTest).get(k);
+                        moveTo(chessComponentsTest, chessComponent1, chessComponent2);
                         if (!tellIfKingIsAttacked2(chessComponentsTest, color)) {
                             test = false;
                             break out;
                         }
+                        moveBack(chessComponentsTest, chessComponent1, chessComponent2);
                     }
+
                 }
             }
         }
         return test;
     }
+
 
     public String getCapturedChess(ChessColor player) {
         if (player == ChessColor.BLACK) {

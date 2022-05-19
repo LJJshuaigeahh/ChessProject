@@ -157,7 +157,7 @@ public class ChessGameFrame extends JFrame {
         chessboard.setLocation(width / 30, height / 8);
         chessboard.resetChessboardSize(height / 10);
 
-        roundLabel.setSize(width * 3 / 10, height * 2 / 19);
+        roundLabel.setSize(width * 2 / 5, height * 2 / 19);
         roundLabel.setLocation(width / 10, 0);
 
         backButton.setSize(width / 5, height * 3 / 38);
@@ -287,7 +287,7 @@ public class ChessGameFrame extends JFrame {
     private void addRoundLabel(JPanel panel) {
         JLabel roundLabel = new JLabel("第1回合  It's White's turn.");
         roundLabel.setFont(new Font("Rockwell", Font.BOLD, 25));
-        roundLabel.setSize(WIDTH * 3 / 10, HEIGTH * 2 / 19);
+        roundLabel.setSize(WIDTH * 2 / 5, HEIGTH * 2 / 19);
         roundLabel.setLocation(WIDTH / 10, 0);
         roundLabel.setForeground(Color.black);
         panel.add(roundLabel);
