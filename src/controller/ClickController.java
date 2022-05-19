@@ -162,6 +162,9 @@ public class ClickController {
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
 
+                first.setSelected(false);
+                first = null;
+
 //                无效行棋提醒
                 if (chessboard.tellIfKingIsAttacked2(chessboard.getChessComponents(), color2)) {
                     JOptionPane.showMessageDialog(null, "行棋后己方被将军", "无效行棋提示", 0);
@@ -185,9 +188,6 @@ public class ClickController {
                         JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", -1);
                     }
                 }
-
-                first.setSelected(false);
-                first = null;
 
                 chessboard.getRecordChessBoard().add(chessboard.getChessStringList());
 //                回合状态显示

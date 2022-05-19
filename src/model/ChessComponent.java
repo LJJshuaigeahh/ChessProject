@@ -155,10 +155,6 @@ public abstract class ChessComponent extends JComponent {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-//                Graphics g = chessComponent.getGraphics();
-//                paintComponent(g);
-//                g.setColor(new Color(191, 239, 255, 102));
-//                g.fillRect(0, 0, getWidth(), getHeight());
                 Chessboard chessboard = (Chessboard) chessComponent.getParent();
                 if (chessboard.getCurrentColor() == chessColor) {
                     Graphics g = chessComponent.getGraphics();
@@ -170,8 +166,6 @@ public abstract class ChessComponent extends JComponent {
 
             @Override
             public void mouseExited(MouseEvent e) {
-//                Graphics g = chessComponent.getGraphics();
-//                paintComponent(g);
                 Chessboard chessboard = (Chessboard) chessComponent.getParent();
                 if (chessboard.getCurrentColor() == chessColor) {
                     Graphics g = chessComponent.getGraphics();

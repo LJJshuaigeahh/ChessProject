@@ -466,7 +466,7 @@ public class Chessboard extends JComponent {
         out:
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (!(chessComponentsTest[i][j] instanceof EmptySlotComponent) && chessComponentsTest[i][j].canMoveToList(chessComponentsTest).size() != 0) {
+                if (!(chessComponentsTest[i][j] instanceof EmptySlotComponent) && chessComponentsTest[i][j].getChessColor() != color && chessComponentsTest[i][j].canMoveToList(chessComponentsTest).size() != 0) {
                     for (int k = 0; k < chessComponentsTest[i][j].canMoveToList(chessComponentsTest).size(); k++) {
                         moveTo(chessComponentsTest, chessComponentsTest[i][j], chessComponentsTest[i][j].canMoveToList(chessComponentsTest).get(k));
                         if (!tellIfKingIsAttacked2(chessComponentsTest, color)) {
