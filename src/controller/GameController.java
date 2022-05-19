@@ -26,25 +26,25 @@ public class GameController {
         boolean test = true;
         try {
             if (!path.substring(path.length() - 4).equals(".txt")) {
-                JOptionPane.showMessageDialog(null, "File format error!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "File format error!!", "错误编码： 104", JOptionPane.ERROR_MESSAGE);
                 test = false;
                 return false;
             }
 //            List<String> chessData = Files.readAllLines(Path.of(path));
             List<String> chessData = Files.readAllLines(Path.of(file.getPath()));
             if (!chessData.get(chessData.size() - 1).equals("w") && !chessData.get(chessData.size() - 1).equals("b")) {
-                JOptionPane.showMessageDialog(null, "Missing next player!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Missing next player!!", "错误编码： 103", JOptionPane.ERROR_MESSAGE);
                 test = false;
                 return false;
             }
             if (chessData.size() - 1 != 8) {
-                JOptionPane.showMessageDialog(null, "Wrong chessboard size!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Wrong chessboard size!!", "错误编码： 101", JOptionPane.ERROR_MESSAGE);
                 test = false;
                 return false;
             }
             for (int i = 0; i < 8; i++) {
                 if (chessData.get(i).length() != 8) {
-                    JOptionPane.showMessageDialog(null, "Wrong chessboard size!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Wrong chessboard size!!", "错误编码： 101", JOptionPane.ERROR_MESSAGE);
                     test = false;
                     return false;
                 }
@@ -53,7 +53,7 @@ public class GameController {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (!aList.contains(chessData.get(i).charAt(j))) {
-                        JOptionPane.showMessageDialog(null, "Wrong piece type!!", "读取存档棋盘失败", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Wrong piece type!!", "错误编码： 102", JOptionPane.ERROR_MESSAGE);
                         test = false;
                         return false;
                     }
