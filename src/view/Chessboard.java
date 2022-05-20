@@ -76,8 +76,8 @@ public class Chessboard extends JComponent {
         initKnightOnBoard(CHESSBOARD_SIZE - 1, CHESSBOARD_SIZE - 2, ChessColor.WHITE);
         initBishopOnBoard(CHESSBOARD_SIZE - 1, 2, ChessColor.WHITE);
         initBishopOnBoard(CHESSBOARD_SIZE - 1, CHESSBOARD_SIZE - 3, ChessColor.WHITE);
-        initQueenOnBoard(CHESSBOARD_SIZE - 1, CHESSBOARD_SIZE - 4, ChessColor.WHITE);
-        initKingOnBoard(CHESSBOARD_SIZE - 1, 3, ChessColor.WHITE);
+        initKingOnBoard(CHESSBOARD_SIZE - 1, CHESSBOARD_SIZE - 4, ChessColor.WHITE);
+        initQueenOnBoard(CHESSBOARD_SIZE - 1, 3, ChessColor.WHITE);
         initRookOnBoard(CHESSBOARD_SIZE - 1, CHESSBOARD_SIZE - 1, ChessColor.WHITE);
         for (int i = 0; i < 4; i++) {
             initPawnOnBoard(1, i, ChessColor.BLACK);
@@ -108,6 +108,9 @@ public class Chessboard extends JComponent {
 
         if (chessComponents[row][col] instanceof PawnChessComponent) {
             ((PawnChessComponent) chessComponents[row][col]).setRecordChessBoard(recordChessBoard);
+        }
+        if (chessComponents[row][col] instanceof KingChessComponent) {
+            ((KingChessComponent) chessComponents[row][col]).setRecordChessBoard(recordChessBoard);
         }
     }
 

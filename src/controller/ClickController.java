@@ -155,6 +155,24 @@ public class ClickController {
                     }
                 }
 
+//                王车易位
+                if (first instanceof KingChessComponent && chessComponent instanceof EmptySlotComponent) {
+                    if (first.getChessboardPoint().getX() == 0 && first.getChessboardPoint().getY() == 4 && chessComponent.getChessboardPoint().getX() == 0 && chessComponent.getChessboardPoint().getY() == 2) {
+                        chessboard.swapChessComponents(chessboard.getChessComponents()[0][0], chessboard.getChessComponents()[0][3]);
+                        chessboard.setCount((float) (chessboard.getCount() - 0.5));
+                    } else if (first.getChessboardPoint().getX() == 0 && first.getChessboardPoint().getY() == 4 && chessComponent.getChessboardPoint().getX() == 0 && chessComponent.getChessboardPoint().getY() == 6) {
+                        chessboard.swapChessComponents(chessboard.getChessComponents()[0][7], chessboard.getChessComponents()[0][5]);
+                        chessboard.setCount((float) (chessboard.getCount() - 0.5));
+                    } else if (first.getChessboardPoint().getX() == 7 && first.getChessboardPoint().getY() == 4 && chessComponent.getChessboardPoint().getX() == 7 && chessComponent.getChessboardPoint().getY() == 2) {
+                        chessboard.swapChessComponents(chessboard.getChessComponents()[7][0], chessboard.getChessComponents()[7][3]);
+                        chessboard.setCount((float) (chessboard.getCount() - 0.5));
+                    } else if (first.getChessboardPoint().getX() == 7 && first.getChessboardPoint().getY() == 4 && chessComponent.getChessboardPoint().getX() == 7 && chessComponent.getChessboardPoint().getY() == 6) {
+                        chessboard.swapChessComponents(chessboard.getChessComponents()[7][7], chessboard.getChessComponents()[7][5]);
+                        chessboard.setCount((float) (chessboard.getCount() - 0.5));
+                    }
+                }
+
+
                 File move = new File("./musics/move.wav");
                 playMusic(move);
 
@@ -178,7 +196,7 @@ public class ClickController {
                 }
 
 //                提醒被将军
-                if (chessboard.tellIfKingIsAttacked(color1)){
+                if (chessboard.tellIfKingIsAttacked(color1)) {
 
                 }
 
@@ -205,12 +223,12 @@ public class ClickController {
                 }
 
 //                无子可动
-                if (chessboard.tellIfHasNotChessToMove(color2)){
+                if (chessboard.tellIfHasNotChessToMove(color2)) {
                     JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", -1);
                 }
 
 //                三次重复
-                if (chessboard.tellIfMoreThanThreeTimes()){
+                if (chessboard.tellIfMoreThanThreeTimes()) {
                     JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", -1);
                 }
             }

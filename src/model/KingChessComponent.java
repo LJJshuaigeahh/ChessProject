@@ -18,6 +18,12 @@ public class KingChessComponent extends ChessComponent {
 
     private Image kingImage;
 
+    private ArrayList<List<String>> recordChessBoard = new ArrayList<>();
+
+    public void setRecordChessBoard(ArrayList<List<String>> recordChessBoard) {
+        this.recordChessBoard = recordChessBoard;
+    }
+
     public void loadResource() throws IOException {
         if (KING_WHITE == null) {
             KING_WHITE = ImageIO.read(new File("./images/棋子二/king-white.png"));
@@ -62,7 +68,10 @@ public class KingChessComponent extends ChessComponent {
                 out:
                 for (int i = 0; i < 8; i++) {
                     for (int j = 0; j < 8; j++) {
-                        chessComponentsTest[destination.getX()][destination.getY()] = new KingChessComponent(getChessboardPoint(), getLocation(), getChessColor(), getClickController(), 0);
+                        ChessboardPoint chessboardPoint = chessComponentsTest[destination.getX()][destination.getY()].getChessboardPoint();
+                        Point point = chessComponentsTest[destination.getX()][destination.getY()].getLocation();
+                        chessComponentsTest[destination.getX()][destination.getY()] = new KingChessComponent(chessboardPoint, point, getChessColor(), getClickController(), 0);
+                        chessComponentsTest[source.getX()][source.getY()] = new EmptySlotComponent(getChessboardPoint(), getLocation(), getClickController(), 0);
                         if (chessComponentsTest[i][j].getChessColor() == ChessColor.WHITE && chessComponentsTest[i][j].canMoveTo(chessComponentsTest, destination)) {
                             test = false;
                             break out;
@@ -70,6 +79,96 @@ public class KingChessComponent extends ChessComponent {
                     }
                 }
                 return test;
+            } else if (destination.getX() == 0 && destination.getY() == 2) {
+                boolean test = true;
+                out:
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 8; j++) {
+                        if (chessComponents[i][j].getChessColor() == ChessColor.WHITE && chessComponents[i][j].canMoveTo(chessComponents, destination)) {
+                            test = false;
+                            break out;
+                        }
+                    }
+                }
+                if (test) {
+                    boolean test1 = true;
+                    out:
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                            ChessboardPoint chessboardPoint = chessComponentsTest[0][2].getChessboardPoint();
+                            Point point = chessComponentsTest[0][2].getLocation();
+                            chessComponentsTest[0][2] = new KingChessComponent(chessboardPoint, point, getChessColor(), getClickController(), 0);
+                            chessComponentsTest[source.getX()][source.getY()] = new EmptySlotComponent(getChessboardPoint(), getLocation(), getClickController(), 0);
+                            if (chessComponentsTest[i][j].getChessColor() == ChessColor.WHITE && chessComponentsTest[i][j].canMoveTo(chessComponentsTest, destination)) {
+                                test1 = false;
+                                break out;
+                            }
+                        }
+                    }
+                    if (test1) {
+                        if (recordChessBoard.get(recordChessBoard.size() - 1).get(0).charAt(1) == '_' && recordChessBoard.get(recordChessBoard.size() - 1).get(0).charAt(2) == '_' && recordChessBoard.get(recordChessBoard.size() - 1).get(0).charAt(3) == '_') {
+                            boolean test2 = true;
+                            for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
+                                if (recordChessBoard.get(i).get(0).charAt(4) == 'K' || recordChessBoard.get(i).get(0).charAt(0) == 'R') {
+                                    test = false;
+                                    break;
+                                }
+                            }
+                            return test2;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else if (destination.getX() == 0 && destination.getY() == 6) {
+                boolean test = true;
+                out:
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 8; j++) {
+                        if (chessComponents[i][j].getChessColor() == ChessColor.WHITE && chessComponents[i][j].canMoveTo(chessComponents, destination)) {
+                            test = false;
+                            break out;
+                        }
+                    }
+                }
+                if (test) {
+                    boolean test1 = true;
+                    out:
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                            ChessboardPoint chessboardPoint = chessComponentsTest[0][6].getChessboardPoint();
+                            Point point = chessComponentsTest[0][6].getLocation();
+                            chessComponentsTest[0][6] = new KingChessComponent(chessboardPoint, point, getChessColor(), getClickController(), 0);
+                            chessComponentsTest[source.getX()][source.getY()] = new EmptySlotComponent(getChessboardPoint(), getLocation(), getClickController(), 0);
+                            if (chessComponentsTest[i][j].getChessColor() == ChessColor.WHITE && chessComponentsTest[i][j].canMoveTo(chessComponentsTest, destination)) {
+                                test1 = false;
+                                break out;
+                            }
+                        }
+                    }
+                    if (test1) {
+                        if (recordChessBoard.get(recordChessBoard.size() - 1).get(0).charAt(5) == '_' && recordChessBoard.get(recordChessBoard.size() - 1).get(0).charAt(6) == '_') {
+                            boolean test2 = true;
+                            for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
+                                if (recordChessBoard.get(i).get(0).charAt(4) == 'K' || recordChessBoard.get(i).get(0).charAt(7) == 'R') {
+                                    test = false;
+                                    break;
+                                }
+                            }
+                            return test2;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
@@ -79,7 +178,10 @@ public class KingChessComponent extends ChessComponent {
                 out:
                 for (int i = 0; i < 8; i++) {
                     for (int j = 0; j < 8; j++) {
-                        chessComponentsTest[destination.getX()][destination.getY()] = new KingChessComponent(getChessboardPoint(), getLocation(), getChessColor(), getClickController(), 0);
+                        ChessboardPoint chessboardPoint = chessComponentsTest[destination.getX()][destination.getY()].getChessboardPoint();
+                        Point point = chessComponentsTest[destination.getX()][destination.getY()].getLocation();
+                        chessComponentsTest[destination.getX()][destination.getY()] = new KingChessComponent(chessboardPoint, point, getChessColor(), getClickController(), 0);
+                        chessComponentsTest[source.getX()][source.getY()] = new EmptySlotComponent(getChessboardPoint(), getLocation(), getClickController(), 0);
                         if (chessComponentsTest[i][j].getChessColor() == ChessColor.BLACK && chessComponentsTest[i][j].canMoveTo(chessComponentsTest, destination)) {
                             test = false;
                             break out;
@@ -87,6 +189,96 @@ public class KingChessComponent extends ChessComponent {
                     }
                 }
                 return test;
+            } else if (destination.getX() == 7 && destination.getY() == 2) {
+                boolean test = true;
+                out:
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 8; j++) {
+                        if (chessComponents[i][j].getChessColor() == ChessColor.BLACK && chessComponents[i][j].canMoveTo(chessComponents, destination)) {
+                            test = false;
+                            break out;
+                        }
+                    }
+                }
+                if (test) {
+                    boolean test1 = true;
+                    out:
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                            ChessboardPoint chessboardPoint = chessComponentsTest[7][2].getChessboardPoint();
+                            Point point = chessComponentsTest[7][2].getLocation();
+                            chessComponentsTest[7][2] = new KingChessComponent(chessboardPoint, point, getChessColor(), getClickController(), 0);
+                            chessComponentsTest[source.getX()][source.getY()] = new EmptySlotComponent(getChessboardPoint(), getLocation(), getClickController(), 0);
+                            if (chessComponentsTest[i][j].getChessColor() == ChessColor.BLACK && chessComponentsTest[i][j].canMoveTo(chessComponentsTest, destination)) {
+                                test1 = false;
+                                break out;
+                            }
+                        }
+                    }
+                    if (test1) {
+                        if (recordChessBoard.get(recordChessBoard.size() - 1).get(7).charAt(1) == '_' && recordChessBoard.get(recordChessBoard.size() - 1).get(7).charAt(2) == '_' && recordChessBoard.get(recordChessBoard.size() - 1).get(7).charAt(3) == '_') {
+                            boolean test2 = true;
+                            for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
+                                if (recordChessBoard.get(i).get(7).charAt(4) == 'k' || recordChessBoard.get(i).get(7).charAt(0) == 'r') {
+                                    test = false;
+                                    break;
+                                }
+                            }
+                            return test2;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else if (destination.getX() == 7 && destination.getY() == 6) {
+                boolean test = true;
+                out:
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 8; j++) {
+                        if (chessComponents[i][j].getChessColor() == ChessColor.BLACK && chessComponents[i][j].canMoveTo(chessComponents, destination)) {
+                            test = false;
+                            break out;
+                        }
+                    }
+                }
+                if (test) {
+                    boolean test1 = true;
+                    out:
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                            ChessboardPoint chessboardPoint = chessComponentsTest[7][6].getChessboardPoint();
+                            Point point = chessComponentsTest[7][6].getLocation();
+                            chessComponentsTest[7][6] = new KingChessComponent(chessboardPoint, point, getChessColor(), getClickController(), 0);
+                            chessComponentsTest[source.getX()][source.getY()] = new EmptySlotComponent(getChessboardPoint(), getLocation(), getClickController(), 0);
+                            if (chessComponentsTest[i][j].getChessColor() == ChessColor.BLACK && chessComponentsTest[i][j].canMoveTo(chessComponentsTest, destination)) {
+                                test1 = false;
+                                break out;
+                            }
+                        }
+                    }
+                    if (test1) {
+                        if (recordChessBoard.get(recordChessBoard.size() - 1).get(7).charAt(5) == '_' && recordChessBoard.get(recordChessBoard.size() - 1).get(7).charAt(6) == '_') {
+                            boolean test2 = true;
+                            for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
+                                if (recordChessBoard.get(i).get(7).charAt(4) == 'k' || recordChessBoard.get(i).get(7).charAt(7) == 'r') {
+                                    test = false;
+                                    break;
+                                }
+                            }
+                            return test2;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
