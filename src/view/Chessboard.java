@@ -230,7 +230,7 @@ public class Chessboard extends JComponent {
         }
         count = 1;
         JLabel jLabel = (JLabel) this.getParent().getComponent(1);
-        jLabel.setText("第1回合  " + "It's " + this.getCurrentColor().getName() + "'s turn.");
+        jLabel.setText("Round  1————" + "It's " + this.getCurrentColor().getName() + "'s turn.");
 
         JLabel blackCapturedChessLabel = (JLabel) this.getParent().getComponent(7);
         JLabel whiteCapturedChessLabel = (JLabel) this.getParent().getComponent(8);
@@ -327,7 +327,7 @@ public class Chessboard extends JComponent {
         }
         count -= 0.5;
         JLabel jLabel = (JLabel) this.getParent().getComponent(1);
-        jLabel.setText("第" + (int) count + "回合  " + "It's " + currentColor.getName() + "'s turn.");
+        jLabel.setText("Round  " + (int) count + "————" + "It's " + currentColor.getName() + "'s turn.");
     }
 
     public void resetChessboardSize(int CHESS_SIZE) {
