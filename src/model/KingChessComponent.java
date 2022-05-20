@@ -58,9 +58,7 @@ public class KingChessComponent extends ChessComponent {
         ChessboardPoint source = getChessboardPoint();
         ChessComponent[][] chessComponentsTest = new ChessComponent[8][8];
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                chessComponentsTest[i][j] = chessComponents[i][j];
-            }
+            System.arraycopy(chessComponents[i], 0, chessComponentsTest[i], 0, 8);
         }
         if (getChessColor() == ChessColor.BLACK) {
             if (((Math.abs(destination.getX() - source.getX()) == 1 && Math.abs(destination.getY() - source.getY()) == 1) || (Math.abs(destination.getX() - source.getX()) == 1 && Math.abs(destination.getY() - source.getY()) == 0) || (Math.abs(destination.getX() - source.getX()) == 0 && Math.abs(destination.getY() - source.getY()) == 1)) && chessComponents[destination.getX()][destination.getY()].getChessColor() != ChessColor.BLACK) {
@@ -110,7 +108,7 @@ public class KingChessComponent extends ChessComponent {
                             boolean test2 = true;
                             for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
                                 if (recordChessBoard.get(i).get(0).charAt(4) == 'K' || recordChessBoard.get(i).get(0).charAt(0) == 'R') {
-                                    test = false;
+                                    test2 = false;
                                     break;
                                 }
                             }
@@ -155,7 +153,7 @@ public class KingChessComponent extends ChessComponent {
                             boolean test2 = true;
                             for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
                                 if (recordChessBoard.get(i).get(0).charAt(4) == 'K' || recordChessBoard.get(i).get(0).charAt(7) == 'R') {
-                                    test = false;
+                                    test2 = false;
                                     break;
                                 }
                             }
@@ -220,7 +218,7 @@ public class KingChessComponent extends ChessComponent {
                             boolean test2 = true;
                             for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
                                 if (recordChessBoard.get(i).get(7).charAt(4) == 'k' || recordChessBoard.get(i).get(7).charAt(0) == 'r') {
-                                    test = false;
+                                    test2 = false;
                                     break;
                                 }
                             }
@@ -265,7 +263,7 @@ public class KingChessComponent extends ChessComponent {
                             boolean test2 = true;
                             for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
                                 if (recordChessBoard.get(i).get(7).charAt(4) == 'k' || recordChessBoard.get(i).get(7).charAt(7) == 'r') {
-                                    test = false;
+                                    test2 = false;
                                     break;
                                 }
                             }

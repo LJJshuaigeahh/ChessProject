@@ -98,25 +98,25 @@ public class ClickController {
                             if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() - 1) == 'p'
                             ) {
                                 ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
-                                ChessComponent empytSlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                                chessboard.putChessOnBoard(empytSlot);
-                                empytSlot.repaint();
+                                ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(emptySlot);
+                                emptySlot.repaint();
                             }
                         } else if (first.getChessboardPoint().getY() == 0) {
                             if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() + 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() + 1) == 'p'
                             ) {
                                 ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() + 1];
-                                ChessComponent empytSlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                                chessboard.putChessOnBoard(empytSlot);
-                                empytSlot.repaint();
+                                ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(emptySlot);
+                                emptySlot.repaint();
                             }
                         } else if (first.getChessboardPoint().getY() == 7) {
                             if (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 1).get(first.getChessboardPoint().getX()).charAt(first.getChessboardPoint().getY() - 1) == 'p' && (chessboard.getRecordChessBoard().get(chessboard.getRecordChessBoard().size() - 2)).get(first.getChessboardPoint().getX() + 2).charAt(first.getChessboardPoint().getY() - 1) == 'p'
                             ) {
                                 ChessComponent second = chessboard.getChessComponents()[first.getChessboardPoint().getX()][first.getChessboardPoint().getY() - 1];
-                                ChessComponent empytSlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
-                                chessboard.putChessOnBoard(empytSlot);
-                                empytSlot.repaint();
+                                ChessComponent emptySlot = new EmptySlotComponent(second.getChessboardPoint(), second.getLocation(), second.getClickController(), chessboard.getCHESS_SIZE());
+                                chessboard.putChessOnBoard(emptySlot);
+                                emptySlot.repaint();
                             }
                         }
                     } else if (first instanceof PawnChessComponent && first.getChessColor() == ChessColor.WHITE && first.getChessboardPoint().getX() == 3) {
@@ -185,7 +185,7 @@ public class ClickController {
 
 //                无效行棋提醒
                 if (chessboard.tellIfKingIsAttacked2(chessboard.getChessComponents(), color2)) {
-                    JOptionPane.showMessageDialog(null, "行棋后己方被将军", "无效行棋提示", 0);
+                    JOptionPane.showMessageDialog(null, "行棋后己方被将军", "无效行棋提示", JOptionPane.ERROR_MESSAGE);
                     chessboard.swapChessComponents(first_, chessComponent_);
                     if (chessboard.getCurrentColor() == ChessColor.BLACK) {
                         chessboard.setCurrentColor(ChessColor.WHITE);
@@ -196,14 +196,12 @@ public class ClickController {
                 }
 
 //                提醒被将军
-                if (chessboard.tellIfKingIsAttacked(color1)) {
-
-                }
+                chessboard.tellIfKingIsAttacked(color1);
 
 //                王被将死
                 if (chessboard.tellIfKingIsAttacked2(chessboard.getChessComponents(), color1)) {
                     if (chessboard.tellWinOrDefeat(color1)) {
-                        JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", -1);
+                        JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
                     }
                 }
 
@@ -224,12 +222,12 @@ public class ClickController {
 
 //                无子可动
                 if (chessboard.tellIfHasNotChessToMove(color2)) {
-                    JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", -1);
+                    JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
                 }
 
 //                三次重复
                 if (chessboard.tellIfMoreThanThreeTimes()) {
-                    JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", -1);
+                    JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
                 }
             }
         }

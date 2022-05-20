@@ -25,7 +25,7 @@ public class GameController {
         String path = file.getPath();
         boolean test = true;
         try {
-            if (!path.substring(path.length() - 4).equals(".txt")) {
+            if (!path.endsWith(".txt")) {
                 JOptionPane.showMessageDialog(null, "File format error!!", "错误编码： 104", JOptionPane.ERROR_MESSAGE);
                 test = false;
                 return false;
@@ -144,7 +144,7 @@ public class GameController {
                     sb.append('_');
                 }
             }
-            chessStringList.add(sb.toString() + "\n");
+            chessStringList.add(sb + "\n");
         }
         if (chessboard.getCurrentColor() == ChessColor.BLACK) {
             chessStringList.add("b\n");

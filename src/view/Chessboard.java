@@ -1,14 +1,11 @@
 package view;
 
 
-import jdk.swing.interop.SwingInterOpUtils;
 import model.*;
 import controller.ClickController;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 /**
@@ -205,45 +202,21 @@ public class Chessboard extends JComponent {
             for (int j = 0; j < 8; j++) {
                 if ((int) chessData.get(i).charAt(j) >= 65 && (int) chessData.get(i).charAt(j) <= 90) {
                     switch (chessData.get(i).charAt(j)) {
-                        case 'R':
-                            initRookOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'N':
-                            initKnightOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'B':
-                            initBishopOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'Q':
-                            initQueenOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'K':
-                            initKingOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'P':
-                            initPawnOnBoard(i, j, ChessColor.BLACK);
-                            break;
+                        case 'R' -> initRookOnBoard(i, j, ChessColor.BLACK);
+                        case 'N' -> initKnightOnBoard(i, j, ChessColor.BLACK);
+                        case 'B' -> initBishopOnBoard(i, j, ChessColor.BLACK);
+                        case 'Q' -> initQueenOnBoard(i, j, ChessColor.BLACK);
+                        case 'K' -> initKingOnBoard(i, j, ChessColor.BLACK);
+                        case 'P' -> initPawnOnBoard(i, j, ChessColor.BLACK);
                     }
                 } else if ((int) chessData.get(i).charAt(j) >= 97 && (int) chessData.get(i).charAt(j) <= 122) {
                     switch (chessData.get(i).charAt(j)) {
-                        case 'r':
-                            initRookOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'n':
-                            initKnightOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'b':
-                            initBishopOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'q':
-                            initQueenOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'k':
-                            initKingOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'p':
-                            initPawnOnBoard(i, j, ChessColor.WHITE);
-                            break;
+                        case 'r' -> initRookOnBoard(i, j, ChessColor.WHITE);
+                        case 'n' -> initKnightOnBoard(i, j, ChessColor.WHITE);
+                        case 'b' -> initBishopOnBoard(i, j, ChessColor.WHITE);
+                        case 'q' -> initQueenOnBoard(i, j, ChessColor.WHITE);
+                        case 'k' -> initKingOnBoard(i, j, ChessColor.WHITE);
+                        case 'p' -> initPawnOnBoard(i, j, ChessColor.WHITE);
                     }
                 }
                 chessComponents[i][j].repaint();
@@ -311,7 +284,7 @@ public class Chessboard extends JComponent {
                     sb.append('_');
                 }
             }
-            chessStringList.add(sb.toString() + "\n");
+            chessStringList.add(sb + "\n");
         }
         if (currentColor == ChessColor.BLACK) {
             chessStringList.add("b\n");
@@ -327,45 +300,21 @@ public class Chessboard extends JComponent {
             for (int j = 0; j < 8; j++) {
                 if ((int) chessData.get(i).charAt(j) >= 65 && (int) chessData.get(i).charAt(j) <= 90) {
                     switch (chessData.get(i).charAt(j)) {
-                        case 'R':
-                            initRookOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'N':
-                            initKnightOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'B':
-                            initBishopOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'Q':
-                            initQueenOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'K':
-                            initKingOnBoard(i, j, ChessColor.BLACK);
-                            break;
-                        case 'P':
-                            initPawnOnBoard(i, j, ChessColor.BLACK);
-                            break;
+                        case 'R' -> initRookOnBoard(i, j, ChessColor.BLACK);
+                        case 'N' -> initKnightOnBoard(i, j, ChessColor.BLACK);
+                        case 'B' -> initBishopOnBoard(i, j, ChessColor.BLACK);
+                        case 'Q' -> initQueenOnBoard(i, j, ChessColor.BLACK);
+                        case 'K' -> initKingOnBoard(i, j, ChessColor.BLACK);
+                        case 'P' -> initPawnOnBoard(i, j, ChessColor.BLACK);
                     }
                 } else if ((int) chessData.get(i).charAt(j) >= 97 && (int) chessData.get(i).charAt(j) <= 122) {
                     switch (chessData.get(i).charAt(j)) {
-                        case 'r':
-                            initRookOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'n':
-                            initKnightOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'b':
-                            initBishopOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'q':
-                            initQueenOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'k':
-                            initKingOnBoard(i, j, ChessColor.WHITE);
-                            break;
-                        case 'p':
-                            initPawnOnBoard(i, j, ChessColor.WHITE);
-                            break;
+                        case 'r' -> initRookOnBoard(i, j, ChessColor.WHITE);
+                        case 'n' -> initKnightOnBoard(i, j, ChessColor.WHITE);
+                        case 'b' -> initBishopOnBoard(i, j, ChessColor.WHITE);
+                        case 'q' -> initQueenOnBoard(i, j, ChessColor.WHITE);
+                        case 'k' -> initKingOnBoard(i, j, ChessColor.WHITE);
+                        case 'p' -> initPawnOnBoard(i, j, ChessColor.WHITE);
                     }
                 }
                 chessComponents[i][j].repaint();
@@ -468,9 +417,7 @@ public class Chessboard extends JComponent {
         ChessComponent[][] chessComponentsTest = new ChessComponent[8][8];
         boolean test = true;
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                chessComponentsTest[i][j] = chessComponents[i][j];
-            }
+            System.arraycopy(chessComponents[i], 0, chessComponentsTest[i], 0, 8);
         }
         out:
         for (int i = 0; i < 8; i++) {

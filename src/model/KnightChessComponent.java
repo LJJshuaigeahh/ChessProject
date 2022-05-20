@@ -71,10 +71,7 @@ public class KnightChessComponent extends ChessComponent {
         if (destination.getX() - source.getX() == -2 && destination.getY() - source.getY() == -1 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
             return true;
         }
-        if (destination.getX() - source.getX() == -1 && destination.getY() - source.getY() == -2 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color) {
-            return true;
-        }
-        return false;
+        return destination.getX() - source.getX() == -1 && destination.getY() - source.getY() == -2 && chessComponents[destination.getX()][destination.getY()].getChessColor() != color;
     }
 
     @Override
