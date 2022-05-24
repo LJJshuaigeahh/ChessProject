@@ -205,8 +205,23 @@ public class ClickController {
                         JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
                     }
                 }
+//                无子可动
+                if (chessboard.tellIfHasNotChessToMove(color2)) {
+                    JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
+                }
 
+//                三次重复
+                if (chessboard.tellIfMoreThanThreeTimes()) {
+                    JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
+                }
+
+                if (chessboard.getGameMode() == 2 && color1 == ChessColor.WHITE){
+//                    AI随机行棋
+                    chessboard.AIRandomChess();
+                }
                 chessboard.getRecordChessBoard().add(chessboard.getChessStringList());
+
+
 //                回合状态显示
                 JLabel jLabel = (JLabel) chessboard.getParent().getComponent(1);
                 jLabel.setText("Round  " + (int) chessboard.getCount() + "————" + "It's " + chessboard.getCurrentColor().getName() + "'s turn.");
@@ -219,20 +234,6 @@ public class ClickController {
                 } else {
                     blackCapturedChessLabel.setText(chessboard.getCapturedChess(color2));
                     whiteCapturedChessLabel.setText(chessboard.getCapturedChess(color1));
-                }
-
-//                无子可动
-                if (chessboard.tellIfHasNotChessToMove(color2)) {
-                    JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
-                }
-
-//                三次重复
-                if (chessboard.tellIfMoreThanThreeTimes()) {
-                    JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
-                }
-
-                if (chessboard.getGameMode() == 2 && color2 == ChessColor.BLACK){
-
                 }
             }
         }

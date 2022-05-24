@@ -3,16 +3,18 @@ package view;
 
 import model.*;
 import controller.ClickController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 这个类表示面板上的棋盘组件对象
  */
 public class Chessboard extends JComponent {
-//    游戏模式（2时代表人机对战）
+    //    游戏模式（2时代表人机对战）
     private int gameMode;
 
     public void setGameMode(int gameMode) {
@@ -336,9 +338,19 @@ public class Chessboard extends JComponent {
         } else {
             currentColor = ChessColor.BLACK;
         }
-        count -= 0.5;
+        if (gameMode == 2) {
+            count -= 1.0;
+        } else {
+            count -= 0.5;
+        }
         JLabel jLabel = (JLabel) this.getParent().getComponent(1);
         jLabel.setText("Round  " + (int) count + "————" + "It's " + currentColor.getName() + "'s turn.");
+
+        JLabel blackCapturedChessLabel = (JLabel) this.getParent().getComponent(7);
+        JLabel whiteCapturedChessLabel = (JLabel) this.getParent().getComponent(8);
+        blackCapturedChessLabel.setText(this.getCapturedChess(ChessColor.BLACK));
+        whiteCapturedChessLabel.setText(this.getCapturedChess(ChessColor.WHITE));
+
     }
 
     public void resetChessboardSize(int CHESS_SIZE) {
@@ -645,6 +657,39 @@ public class Chessboard extends JComponent {
         } else {
             return false;
         }
+    }
+
+    public boolean AIRandomChess() {
+        boolean test = false;
+        out:
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (chessComponents[i][j].getChessColor() == ChessColor.BLACK && chessComponents[i][j].canMoveToList(chessComponents).size() != 0) {
+                    test = true;
+                    break out;
+                }
+            }
+        }
+
+        ChessComponent chessComponent1 = new EmptySlotComponent(new ChessboardPoint(0, 0), calculatePoint(0, 0), clickController, CHESS_SIZE);
+        ChessComponent chessComponent2 = new EmptySlotComponent(new ChessboardPoint(0, 0), calculatePoint(0, 0), clickController, CHESS_SIZE);
+        Random random = new Random();
+        boolean test2 = true;
+        if (test) {
+            while (test2) {
+                int number1 = random.nextInt(8);
+                int number2 = random.nextInt(8);
+                if (chessComponents[number1][number2].getChessColor() == ChessColor.BLACK && chessComponents[number1][number2].canMoveToList(chessComponents).size() != 0) {
+                    chessComponent1 = chessComponents[number1][number2];
+                    chessComponent2 = chessComponents[number1][number2].canMoveToList(chessComponents).get(0);
+                    test2 = false;
+                }
+            }
+            System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+            this.swapChessComponents(chessComponent1, chessComponent2);
+            this.swapColor();
+        }
+        return test;
     }
 //    public boolean tellWinOrDefeat(ChessColor color) {
 //        if (color == ChessColor.BLACK) {
