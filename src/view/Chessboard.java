@@ -12,6 +12,17 @@ import java.util.List;
  * 这个类表示面板上的棋盘组件对象
  */
 public class Chessboard extends JComponent {
+//    游戏模式（2时代表人机对战）
+    private int gameMode;
+
+    public void setGameMode(int gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    public int getGameMode() {
+        return gameMode;
+    }
+
     /**
      * CHESSBOARD_SIZE： 棋盘是8 * 8的
      * <br>

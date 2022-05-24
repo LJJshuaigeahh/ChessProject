@@ -21,29 +21,30 @@ public class ClickController {
     public void onClick(ChessComponent chessComponent) {
         if (first == null) {
             if (handleFirst(chessComponent)) {
-
+//                点击棋子的音效
                 File click = new File("./musics/click.wav");
                 playMusic(click);
-
+//                棋子选中
                 chessComponent.setSelected(true);
                 first = chessComponent;
                 first.repaint();
-
+//                AI落子点
                 chessComponent.aiCanMoveTo(chessboard.getChessComponents());
             }
         } else {
             if (first == chessComponent) { // 再次点击取消选取
+//                放下棋子音效
                 File click = new File("./musics/click2.wav");
                 playMusic(click);
-
+//                取消选中棋子
                 chessComponent.setSelected(false);
                 ChessComponent recordFirst = first;
                 first = null;
                 recordFirst.repaint();
-
+//                移除AI落子点
                 chessComponent.removeAiCanMoveTo(chessboard.getChessComponents());
             } else if (handleSecond(chessComponent)) {
-
+//                标记棋子和棋子所属方
                 ChessComponent first_ = first;
                 ChessComponent chessComponent_ = chessComponent;
                 ChessColor color1 = first.getChessColor();
@@ -53,7 +54,7 @@ public class ClickController {
                 } else {
                     color2 = ChessColor.BLACK;
                 }
-
+//                移除AI落子点
                 first.removeAiCanMoveTo(chessboard.getChessComponents());
 
 //                兵底线升变
@@ -172,11 +173,11 @@ public class ClickController {
                     }
                 }
 
-
+//                行棋音效
                 File move = new File("./musics/move.wav");
                 playMusic(move);
 
-                //repaint in swap chess method.
+//                repaint in swap chess method.
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
 
@@ -229,6 +230,10 @@ public class ClickController {
                 if (chessboard.tellIfMoreThanThreeTimes()) {
                     JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
                 }
+
+                if (chessboard.getGameMode() == 2 && color2 == ChessColor.BLACK){
+
+                }
             }
         }
     }
@@ -266,10 +271,5 @@ public class ClickController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        //死循环不让主程序结束（swing可不用）
-    /*
-      while(true){
-      }
-    */
     }
 }

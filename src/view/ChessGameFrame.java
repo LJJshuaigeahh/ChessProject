@@ -6,6 +6,8 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
@@ -23,6 +25,8 @@ public class ChessGameFrame extends JFrame {
 
     private JPanel panel0 = new JPanel();//开始界面
     private JPanel panel1 = new JPanel();//游戏界面
+
+    private Timer timer;
 
 
     public ChessGameFrame(int width, int height) {
@@ -81,6 +85,7 @@ public class ChessGameFrame extends JFrame {
         addBlackCapturedChessLabel2(panel1);
         addWhiteCapturedChessLabel2(panel1);
         addBackPanel0Button(panel1);
+        addTimerCountDownLabel(panel1);
 //        addPlaybackButton(panel1);
 //        addLastStopButton(panel1);
 //        addNextStopButton(panel1);
@@ -122,6 +127,21 @@ public class ChessGameFrame extends JFrame {
 
             }
         });
+
+
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timer.start();
+                int time = 120;
+                JLabel timerCountDownLabel = (JLabel) panel1.getComponent(12);
+                timerCountDownLabel.setText(time + "s");
+                time--;
+                if (time < 0) {
+                    timer.stop();
+                }
+            }
+        });
     }
 
     public void updateLayOutJPanel0(JPanel jPanel, int width, int height) {
@@ -150,10 +170,11 @@ public class ChessGameFrame extends JFrame {
         JLabel blackCapturedChessLabel2 = (JLabel) jPanel.getComponent(9);
         JLabel whiteCapturedChessLabel2 = (JLabel) jPanel.getComponent(10);
         JButton backPanel0Button = (JButton) jPanel.getComponent(11);
+        JLabel timerCountDownLabel = (JLabel) jPanel.getComponent(12);
 //        JButton playbackButton = (JButton) jPanel.getComponent(12);
 //        JButton lastStopButton = (JButton) jPanel.getComponent(13);
 //        JButton nextStopButton = (JButton) jPanel.getComponent(14);
-        JLabel backgroundImage = (aLabel) jPanel.getComponent(12);
+        JLabel backgroundImage = (aLabel) jPanel.getComponent(13);
 
         chessboard.setSize(height * 4 / 5, height * 4 / 5);
         chessboard.setLocation(width / 30, height / 8);
@@ -186,6 +207,8 @@ public class ChessGameFrame extends JFrame {
         whiteCapturedChessLabel2.setBounds(width * 52 / 80, height * 11 / 38, width / 3, height / 19);
 
         backPanel0Button.setBounds(width * 17 / 18, height / 15, width / 18, height / 15);
+
+        timerCountDownLabel.setBounds(width * 2 / 3, height / 38, width / 7, height * 3 / 38);
 
 //        playbackButton.setSize(width / 5, height * 3 / 38);
 //        playbackButton.setLocation(width * 7 / 10, height * 6 / 19);
@@ -228,7 +251,14 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 25));
         button.setBounds(WIDTH * 3 / 8, HEIGTH * 5 / 8, WIDTH / 4, HEIGTH / 10);
         button.addActionListener((e) -> {
-            JOptionPane.showMessageDialog(null, "人机模式待开发", "提示", JOptionPane.PLAIN_MESSAGE);
+//            JOptionPane.showMessageDialog(null, "人机模式待开发", "提示", JOptionPane.PLAIN_MESSAGE);
+            remove(panel0);
+            getContentPane().add(panel1);
+            Chessboard chessboard = (Chessboard) panel1.getComponent(0);
+            chessboard.setGameMode(2);
+            setVisible(true);
+            validate();
+            repaint();
         });
         panel.add(button);
     }
@@ -400,6 +430,7 @@ public class ChessGameFrame extends JFrame {
                 addBlackCapturedChessLabel2(panel1);
                 addWhiteCapturedChessLabel2(panel1);
                 addBackPanel0Button(panel1);
+                addTimerCountDownLabel(panel1);
 //                addPlaybackButton(panel1);
 //                addLastStopButton(panel1);
 //                addNextStopButton(panel1);
@@ -485,6 +516,18 @@ public class ChessGameFrame extends JFrame {
             repaint();
         });
         panel.add(stopMusicButton);
+    }
+
+    private void addTimerCountDownLabel(JPanel panel) {
+        JLabel timerCountDownLabel = new JLabel();
+        timerCountDownLabel.setBackground(new Color(105, 105, 105));
+        timerCountDownLabel.setForeground(Color.white);
+        timerCountDownLabel.setOpaque(true);
+        timerCountDownLabel.setFont(new Font("Rockwell", Font.BOLD, 25));
+        timerCountDownLabel.setBounds(WIDTH * 2 / 3, HEIGTH / 38, WIDTH / 7, HEIGTH * 3 / 38);
+        timerCountDownLabel.setText("120s");
+        timerCountDownLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(timerCountDownLabel);
     }
 
 //    private void addPlaybackButton(JPanel panel) {
