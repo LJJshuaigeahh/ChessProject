@@ -53,7 +53,7 @@ public class GameController {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (!aList.contains(chessData.get(i).charAt(j))) {
-                        JOptionPane.showMessageDialog(null, "Wrong piece type!!", "错误编码： 102", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Wrong chess type!!", "错误编码： 102", JOptionPane.ERROR_MESSAGE);
                         test = false;
                         return false;
                     }

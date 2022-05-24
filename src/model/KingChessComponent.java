@@ -108,7 +108,7 @@ public class KingChessComponent extends ChessComponent {
                             boolean test2 = true;
                             for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
                                 if (recordChessBoard.get(i).get(0).charAt(4) == 'K' || recordChessBoard.get(i).get(0).charAt(0) == 'R') {
-                                    test2 = false;
+                                    test = false;
                                     break;
                                 }
                             }
@@ -153,7 +153,7 @@ public class KingChessComponent extends ChessComponent {
                             boolean test2 = true;
                             for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
                                 if (recordChessBoard.get(i).get(0).charAt(4) == 'K' || recordChessBoard.get(i).get(0).charAt(7) == 'R') {
-                                    test2 = false;
+                                    test = false;
                                     break;
                                 }
                             }
@@ -218,7 +218,7 @@ public class KingChessComponent extends ChessComponent {
                             boolean test2 = true;
                             for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
                                 if (recordChessBoard.get(i).get(7).charAt(4) == 'k' || recordChessBoard.get(i).get(7).charAt(0) == 'r') {
-                                    test2 = false;
+                                    test = false;
                                     break;
                                 }
                             }
@@ -263,7 +263,7 @@ public class KingChessComponent extends ChessComponent {
                             boolean test2 = true;
                             for (int i = recordChessBoard.size() - 1; i >= 0; i--) {
                                 if (recordChessBoard.get(i).get(7).charAt(4) == 'k' || recordChessBoard.get(i).get(7).charAt(7) == 'r') {
-                                    test2 = false;
+                                    test = false;
                                     break;
                                 }
                             }

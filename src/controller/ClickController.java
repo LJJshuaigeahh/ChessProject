@@ -205,6 +205,7 @@ public class ClickController {
                         JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
                     }
                 }
+
 //                无子可动
                 if (chessboard.tellIfHasNotChessToMove(color2)) {
                     JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
@@ -219,9 +220,8 @@ public class ClickController {
 //                    AI随机行棋
                     chessboard.AIRandomChess();
                 }
+
                 chessboard.getRecordChessBoard().add(chessboard.getChessStringList());
-
-
 //                回合状态显示
                 JLabel jLabel = (JLabel) chessboard.getParent().getComponent(1);
                 jLabel.setText("Round  " + (int) chessboard.getCount() + "————" + "It's " + chessboard.getCurrentColor().getName() + "'s turn.");
