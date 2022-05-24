@@ -216,9 +216,25 @@ public class ClickController {
                     JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
                 }
 
+//                人机模式行棋方式
                 if (chessboard.getGameMode() == 2 && color1 == ChessColor.WHITE){
 //                    AI随机行棋
                     chessboard.AIRandomChess();
+
+//                    提醒被将军
+                    chessboard.tellIfKingIsAttacked(color2);
+
+//                王被将死
+                    if (chessboard.tellIfKingIsAttacked2(chessboard.getChessComponents(), color2)) {
+                        if (chessboard.tellWinOrDefeat(color2)) {
+                            JOptionPane.showMessageDialog(null, "Player " + color2.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
+                        }
+                    }
+
+//                    判断AI输
+                    if (chessboard.tellIfKingIsAttacked2(chessboard.getChessComponents(),color1)){
+                        JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
+                    }
                 }
 
                 chessboard.getRecordChessBoard().add(chessboard.getChessStringList());

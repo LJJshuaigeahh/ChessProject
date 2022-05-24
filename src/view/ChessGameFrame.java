@@ -185,6 +185,8 @@ public class ChessGameFrame extends JFrame {
         button.addActionListener((e) -> {
             remove(panel0);
             getContentPane().add(panel1);
+            Chessboard chessboard = (Chessboard) panel1.getComponent(0);
+            chessboard.setGameMode(0);
             setVisible(true);
             validate();
             repaint();
@@ -372,6 +374,8 @@ public class ChessGameFrame extends JFrame {
             int x = JOptionPane.showOptionDialog(null, "是否重新开始游戏？", "判断",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             if (x == 0) {
+                Chessboard chessboard1 = (Chessboard) panel1.getComponent(0);
+
                 remove(panel1);
                 panel1.removeAll();
                 addChessboard(panel1);
@@ -391,6 +395,11 @@ public class ChessGameFrame extends JFrame {
                 JLabel jLabel1 = new aLabel(image1);
                 jLabel1.setSize(WIDTH, HEIGTH);
                 panel1.add(jLabel1);
+
+                Chessboard chessboard2 = (Chessboard) panel1.getComponent(0);
+                if (chessboard1.getGameMode() == 2) {
+                    chessboard2.setGameMode(2);
+                }
 
                 getContentPane().add(panel1);
                 validate();
