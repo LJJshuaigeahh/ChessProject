@@ -272,7 +272,7 @@ public class ChessGameFrame extends JFrame {
     }
 
     /**
-     * 添加棋盘
+     * 在游戏中添加棋盘
      */
     private void addChessboard(JPanel panel) {
         Chessboard chessboard = new Chessboard(CHESSBOARD_SIZE, CHESSBOARD_SIZE);
