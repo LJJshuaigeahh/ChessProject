@@ -208,7 +208,7 @@ public class ClickController {
 
 //                无子可动
                 if (chessboard.tellIfHasNotChessToMove(color2)) {
-                    JOptionPane.showMessageDialog(null, "Player " + color1.getName() + " wins!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
                 }
 
 //                三次重复

@@ -235,12 +235,12 @@ public class Chessboard extends JComponent {
                 chessComponents[i][j].repaint();
             }
         }
-        recordChessBoard.add(getChessStringList());
         if (chessData.get(8).equals("w")) {
             currentColor = ChessColor.WHITE;
         } else {
             currentColor = ChessColor.BLACK;
         }
+        recordChessBoard.add(getChessStringList());
         count = 1;
         JLabel jLabel = (JLabel) this.getParent().getComponent(1);
         jLabel.setText("Round  1————" + "It's " + this.getCurrentColor().getName() + "'s turn.");

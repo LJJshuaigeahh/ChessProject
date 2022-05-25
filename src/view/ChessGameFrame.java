@@ -331,7 +331,7 @@ public class ChessGameFrame extends JFrame {
             JFileChooser fileChooser = new JFileChooser();
 
             // 设置打开文件选择框后默认输入的文件名
-            fileChooser.setSelectedFile(new File("Chessboard"));
+            fileChooser.setSelectedFile(new File("D:\\ChessDemo\\ChessDemo\\resource\\Chessboard"));
 
             // 打开文件选择框（线程将被阻塞, 直到选择框被关闭）
             int result = fileChooser.showSaveDialog(panel);
@@ -358,8 +358,28 @@ public class ChessGameFrame extends JFrame {
 
         storeIncludingStopsButton.addActionListener(e -> {
             System.out.println("Click store");
-            String path = JOptionPane.showInputDialog(this, "Input store path here");
-            gameController.storeGameFromFileIncludingStops(path);
+            /*
+             * 选择文件保存路径
+             */
+            // 创建一个默认的文件选取器
+            JFileChooser fileChooser = new JFileChooser();
+
+            // 设置打开文件选择框后默认输入的文件名
+            fileChooser.setSelectedFile(new File("D:\\ChessDemo\\ChessDemo\\resource\\Chessboard"));
+
+            // 打开文件选择框（线程将被阻塞, 直到选择框被关闭）
+            int result = fileChooser.showSaveDialog(panel);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                // 如果点击了"保存", 则获取选择的保存路径
+                File file = fileChooser.getSelectedFile();
+                final JTextArea msgTextArea = new JTextArea(10, 30);
+                msgTextArea.setLineWrap(true);
+                panel.add(msgTextArea);
+                msgTextArea.append("保存到文件: " + file.getAbsolutePath() + "\n\n");
+                String path = file.getPath();
+                gameController.storeGameFromFileIncludingStops(path);
+            }
         });
         panel.add(storeIncludingStopsButton);
     }
@@ -401,6 +421,7 @@ public class ChessGameFrame extends JFrame {
                     chessboard2.setGameMode(2);
                 }
 
+                updateLayOutJPanel1(panel1, WIDTH, HEIGTH);
                 getContentPane().add(panel1);
                 validate();
                 repaint();
@@ -470,11 +491,16 @@ public class ChessGameFrame extends JFrame {
         stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
         stopMusicButton.setLocation(WIDTH * 17 / 18, HEIGTH / 15);
         stopMusicButton.addActionListener((e) -> {
-            remove(panel1);
-            getContentPane().add(panel0);
-            setVisible(true);
-            validate();
-            repaint();
+            Object[] options = {"确定", "取消"};
+            int x = JOptionPane.showOptionDialog(null, "是否返回主界面？", "判断",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            if (x == 0) {
+                remove(panel1);
+                getContentPane().add(panel0);
+                setVisible(true);
+                validate();
+                repaint();
+            }
         });
         panel.add(stopMusicButton);
     }
