@@ -1,7 +1,7 @@
 package model;
 
-import view.ChessboardPoint;
 import controller.ClickController;
+import view.ChessboardPoint;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

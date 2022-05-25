@@ -1,7 +1,7 @@
 package model;
 
-import view.ChessboardPoint;
 import controller.ClickController;
+import view.ChessboardPoint;
 
 import java.awt.*;
 import java.io.IOException;
