@@ -38,7 +38,7 @@ public class ChessGameFrame extends JFrame {
         setLayout(null);  //绝对布局
 
 //        背景音乐
-        File bgm = new File("./musics/backgroundMusic3.wav");
+        File bgm = new File("./musics/fynz8-us285.wav");
 //        播放背景音乐
         playMusic(bgm);
 
@@ -118,12 +118,18 @@ public class ChessGameFrame extends JFrame {
 
     public void updateLayOutJPanel0(JPanel jPanel, int width, int height) {
         JButton beginGameButton = (JButton) jPanel.getComponent(0);
+        ImageIcon imageIcon1 = (ImageIcon) beginGameButton.getIcon();
         JButton beginAIGameButton = (JButton) jPanel.getComponent(1);
+        ImageIcon imageIcon2 = (ImageIcon) beginAIGameButton.getIcon();
         JButton loadGameButton = (JButton) jPanel.getComponent(2);
+        ImageIcon imageIcon3 = (ImageIcon) loadGameButton.getIcon();
         JLabel backgroundImage = (aLabel) jPanel.getComponent(3);
 
+        imageIcon1.setImage(imageIcon1.getImage().getScaledInstance(width / 4, height / 10, Image.SCALE_DEFAULT));
         beginGameButton.setBounds(width * 3 / 8, height / 2, width / 4, height / 10);
+        imageIcon2.setImage(imageIcon2.getImage().getScaledInstance(width / 4, height / 10, Image.SCALE_DEFAULT));
         beginAIGameButton.setBounds(width * 3 / 8, height * 5 / 8, width / 4, height / 10);
+        imageIcon3.setImage(imageIcon3.getImage().getScaledInstance(width / 4, height / 10, Image.SCALE_DEFAULT));
         loadGameButton.setBounds(width * 3 / 8, height * 3 / 4, width / 4, height / 10);
         backgroundImage.setBounds(0, 0, width, height);
     }
@@ -143,6 +149,19 @@ public class ChessGameFrame extends JFrame {
         JLabel whiteCapturedChessLabel2 = (JLabel) jPanel.getComponent(10);
         JButton backPanel0Button = (JButton) jPanel.getComponent(11);
         JLabel backgroundImage = (aLabel) jPanel.getComponent(12);
+
+        ImageIcon imageIcon1 = (ImageIcon) backButton.getIcon();
+        ImageIcon imageIcon2 = (ImageIcon) storeButton.getIcon();
+        ImageIcon imageIcon3 = (ImageIcon) storeIncludingStopsButton.getIcon();
+        ImageIcon imageIcon4 = (ImageIcon) reBeginGameButton.getIcon();
+        ImageIcon imageIcon5 = (ImageIcon) stopMusicButton.getIcon();
+        ImageIcon imageIcon6 = (ImageIcon) backPanel0Button.getIcon();
+        imageIcon1.setImage(imageIcon1.getImage().getScaledInstance(width / 5, height * 3 / 38, Image.SCALE_DEFAULT));
+        imageIcon2.setImage(imageIcon2.getImage().getScaledInstance(width / 5, height * 3 / 38, Image.SCALE_DEFAULT));
+        imageIcon3.setImage(imageIcon3.getImage().getScaledInstance(width / 5, height * 3 / 38, Image.SCALE_DEFAULT));
+        imageIcon4.setImage(imageIcon4.getImage().getScaledInstance(width / 5, height * 3 / 38, Image.SCALE_DEFAULT));
+        imageIcon5.setImage(imageIcon5.getImage().getScaledInstance(width / 18, height / 15, Image.SCALE_DEFAULT));
+        imageIcon6.setImage(imageIcon6.getImage().getScaledInstance(width / 18, height / 15, Image.SCALE_DEFAULT));
 
         chessboard.setSize(height * 4 / 5, height * 4 / 5);
         chessboard.setLocation(width / 30, height / 8);
@@ -166,13 +185,13 @@ public class ChessGameFrame extends JFrame {
         stopMusicButton.setSize(width / 18, height / 15);
         stopMusicButton.setLocation(width * 17 / 18, 0);
 
-        blackCapturedChessLabel.setBounds(width * 55 / 80, height * 4 / 19, width / 4, height * 3 / 38);
+        blackCapturedChessLabel.setBounds(width * 55 / 80, height * 15 / 76, width / 4, height * 3 / 38);
 
-        whiteCapturedChessLabel.setBounds(width * 55 / 80, height * 13 / 38, width / 4, height * 3 / 38);
+        whiteCapturedChessLabel.setBounds(width * 55 / 80, height * 25 / 76, width / 4, height * 3 / 38);
 
-        blackCapturedChessLabel2.setBounds(width * 52 / 80, height * 3 / 19, width / 3, height / 19);
+        blackCapturedChessLabel2.setBounds(width * 52 / 80, height * 11 / 76, width / 3, height / 19);
 
-        whiteCapturedChessLabel2.setBounds(width * 52 / 80, height * 11 / 38, width / 3, height / 19);
+        whiteCapturedChessLabel2.setBounds(width * 52 / 80, height * 21 / 76, width / 3, height / 19);
 
         backPanel0Button.setBounds(width * 17 / 18, height / 15, width / 18, height / 15);
 
@@ -180,12 +199,19 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addBeginGameButton(JPanel panel) {
-
-        JButton button = new JButton("Human vs Human");
-        button.setFont(new Font("Rockwell", Font.BOLD, 25));
-        button.setBounds(WIDTH * 3 / 8, HEIGTH / 2, WIDTH / 4, HEIGTH / 10);
+        ImageIcon imageIcon = new ImageIcon("./images/自定义模板 (5).png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(WIDTH / 4, HEIGTH / 10, Image.SCALE_DEFAULT));
+        JButton button = new JButton(imageIcon);
+        button.setLocation(WIDTH * 3 / 8, HEIGTH / 2);
         button.setBorderPainted(false);
-        button.setBackground(new Color(205, 183, 159));
+        button.setContentAreaFilled(false);
+        button.setOpaque(false);
+        button.setSize(WIDTH / 4, HEIGTH / 10);
+//        JButton button = new JButton("Human vs Human");
+//        button.setFont(new Font("Rockwell", Font.BOLD, 25));
+//        button.setBounds(WIDTH * 3 / 8, HEIGTH / 2, WIDTH / 4, HEIGTH / 10);
+//        button.setBorderPainted(false);
+//        button.setBackground(new Color(205, 183, 159));
         button.addActionListener((e) -> {
             remove(panel0);
             getContentPane().add(panel1);
@@ -209,11 +235,19 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addBeginAIGameButton(JPanel panel) {
-        JButton button = new JButton("Human vs AI");
-        button.setFont(new Font("Rockwell", Font.BOLD, 25));
-        button.setBounds(WIDTH * 3 / 8, HEIGTH * 5 / 8, WIDTH / 4, HEIGTH / 10);
+        ImageIcon imageIcon = new ImageIcon("./images/自定义模板 (4).png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(WIDTH / 4, HEIGTH / 10, Image.SCALE_DEFAULT));
+        JButton button = new JButton(imageIcon);
+        button.setLocation(WIDTH * 3 / 8, HEIGTH * 5 / 8);
         button.setBorderPainted(false);
-        button.setBackground(new Color(205, 183, 159));
+        button.setContentAreaFilled(false);
+        button.setOpaque(false);
+        button.setSize(WIDTH / 4, HEIGTH / 10);
+//        JButton button = new JButton("Human vs AI");
+//        button.setFont(new Font("Rockwell", Font.BOLD, 25));
+//        button.setBounds(WIDTH * 3 / 8, HEIGTH * 5 / 8, WIDTH / 4, HEIGTH / 10);
+//        button.setBorderPainted(false);
+//        button.setBackground(new Color(205, 183, 159));
         button.addActionListener((e) -> {
 //            JOptionPane.showMessageDialog(null, "人机模式待开发", "提示", JOptionPane.PLAIN_MESSAGE);
             remove(panel0);
@@ -228,11 +262,19 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addLoadButton(JPanel panel) {
-        JButton button = new JButton("Load a game");
-        button.setFont(new Font("Rockwell", Font.BOLD, 25));
-        button.setBounds(WIDTH * 3 / 8, HEIGTH * 3 / 4, WIDTH / 4, HEIGTH / 10);
+        ImageIcon imageIcon = new ImageIcon("./images/自定义模板 (6).png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(WIDTH / 4, HEIGTH / 10, Image.SCALE_DEFAULT));
+        JButton button = new JButton(imageIcon);
+        button.setLocation(WIDTH * 3 / 8, HEIGTH * 3 / 4);
         button.setBorderPainted(false);
-        button.setBackground(new Color(205, 183, 159));
+        button.setContentAreaFilled(false);
+        button.setOpaque(false);
+        button.setSize(WIDTH / 4, HEIGTH / 10);
+//        JButton button = new JButton("Load a game");
+//        button.setFont(new Font("Rockwell", Font.BOLD, 25));
+//        button.setBounds(WIDTH * 3 / 8, HEIGTH * 3 / 4, WIDTH / 4, HEIGTH / 10);
+//        button.setBorderPainted(false);
+//        button.setBackground(new Color(205, 183, 159));
         button.addActionListener(e -> {
             System.out.println("Click load");
 //            String path = JOptionPane.showInputDialog(this, "Input load path here");
@@ -306,12 +348,20 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addBackButton(JPanel panel) {
-        JButton backButton = new JButton("Regret");
-        backButton.setFont(new Font("Rockwell", Font.BOLD, 20));
-        backButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
+        ImageIcon imageIcon = new ImageIcon("./images/自定义模板 (8).png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(WIDTH / 5, HEIGTH * 3 / 38, Image.SCALE_DEFAULT));
+        JButton backButton = new JButton(imageIcon);
         backButton.setLocation(WIDTH * 7 / 10, HEIGTH * 10 / 19);
+        backButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
         backButton.setBorderPainted(false);
-        backButton.setBackground(new Color(205, 183, 159));
+        backButton.setContentAreaFilled(false);
+        backButton.setOpaque(false);
+//        JButton backButton = new JButton("Regret");
+//        backButton.setFont(new Font("Rockwell", Font.BOLD, 20));
+//        backButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
+//        backButton.setLocation(WIDTH * 7 / 10, HEIGTH * 10 / 19);
+//        backButton.setBorderPainted(false);
+//        backButton.setBackground(new Color(205, 183, 159));
         backButton.addActionListener((e) -> {
             System.out.println("Click back");
             Object[] options = {"确定", "取消"};
@@ -327,12 +377,20 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addStoreButton(JPanel panel) {
-        JButton storeButton = new JButton("Store");
-        storeButton.setFont(new Font("Rockwell", Font.BOLD, 20));
-        storeButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
+        ImageIcon imageIcon = new ImageIcon("./images/自定义模板 (9).png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(WIDTH / 5, HEIGTH * 3 / 38, Image.SCALE_DEFAULT));
+        JButton storeButton = new JButton(imageIcon);
         storeButton.setLocation(WIDTH * 7 / 10, HEIGTH * 12 / 19);
+        storeButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
         storeButton.setBorderPainted(false);
-        storeButton.setBackground(new Color(205, 183, 159));
+        storeButton.setContentAreaFilled(false);
+        storeButton.setOpaque(false);
+//        JButton storeButton = new JButton("Store");
+//        storeButton.setFont(new Font("Rockwell", Font.BOLD, 20));
+//        storeButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
+//        storeButton.setLocation(WIDTH * 7 / 10, HEIGTH * 12 / 19);
+//        storeButton.setBorderPainted(false);
+//        storeButton.setBackground(new Color(205, 183, 159));
         storeButton.addActionListener(e -> {
             System.out.println("Click store");
             /*
@@ -362,17 +420,25 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addStoreIncludingStopsButton(JPanel panel) {
-        JButton storeIncludingStopsButton = new JButton("Store the game");
-        storeIncludingStopsButton.setFont(new Font("Rockwell", Font.BOLD, 20));
-        storeIncludingStopsButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
+        ImageIcon imageIcon = new ImageIcon("./images/自定义模板 (10).png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(WIDTH / 5, HEIGTH * 3 / 38, Image.SCALE_DEFAULT));
+        JButton storeIncludingStopsButton = new JButton(imageIcon);
         storeIncludingStopsButton.setLocation(WIDTH * 7 / 10, HEIGTH * 14 / 19);
+        storeIncludingStopsButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
         storeIncludingStopsButton.setBorderPainted(false);
-        storeIncludingStopsButton.setBackground(new Color(205, 183, 159));
+        storeIncludingStopsButton.setContentAreaFilled(false);
+        storeIncludingStopsButton.setOpaque(false);
+//        JButton storeIncludingStopsButton = new JButton("Give up");
+//        storeIncludingStopsButton.setFont(new Font("Rockwell", Font.BOLD, 20));
+//        storeIncludingStopsButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
+//        storeIncludingStopsButton.setLocation(WIDTH * 7 / 10, HEIGTH * 14 / 19);
+//        storeIncludingStopsButton.setBorderPainted(false);
+//        storeIncludingStopsButton.setBackground(new Color(205, 183, 159));
         storeIncludingStopsButton.addActionListener(e -> {
             Chessboard chessboard = (Chessboard) panel1.getComponent(0);
-            if (chessboard.getCurrentColor()== ChessColor.WHITE){
+            if (chessboard.getCurrentColor() == ChessColor.WHITE) {
                 JOptionPane.showMessageDialog(null, "Player White gives up, then player Black wins!!", "认输", JOptionPane.PLAIN_MESSAGE);
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(null, "Player Black gives up, then player White wins!!", "认输", JOptionPane.PLAIN_MESSAGE);
             }
 //            System.out.println("Click store");
@@ -403,12 +469,20 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addReBeginGameButton(JPanel panel) {
-        JButton reBeginGameButton = new JButton("Restart");
-        reBeginGameButton.setFont(new Font("Rockwell", Font.BOLD, 20));
-        reBeginGameButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
+        ImageIcon imageIcon = new ImageIcon("./images/自定义模板 (11).png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(WIDTH / 5, HEIGTH * 3 / 38, Image.SCALE_DEFAULT));
+        JButton reBeginGameButton = new JButton(imageIcon);
         reBeginGameButton.setLocation(WIDTH * 7 / 10, HEIGTH * 16 / 19);
+        reBeginGameButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
         reBeginGameButton.setBorderPainted(false);
-        reBeginGameButton.setBackground(new Color(205, 183, 159));
+        reBeginGameButton.setContentAreaFilled(false);
+        reBeginGameButton.setOpaque(false);
+//        JButton reBeginGameButton = new JButton("Restart");
+//        reBeginGameButton.setFont(new Font("Rockwell", Font.BOLD, 20));
+//        reBeginGameButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
+//        reBeginGameButton.setLocation(WIDTH * 7 / 10, HEIGTH * 16 / 19);
+//        reBeginGameButton.setBorderPainted(false);
+//        reBeginGameButton.setBackground(new Color(205, 183, 159));
         reBeginGameButton.addActionListener((e) -> {
             Object[] options = {"确定", "取消"};
             int x = JOptionPane.showOptionDialog(null, "是否重新开始游戏？", "判断",
@@ -451,12 +525,20 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addStopMusicButton(JPanel panel) {
-        JButton stopMusicButton = new JButton("♬");
-        stopMusicButton.setFont(new Font("Rockwell", Font.BOLD, 20));
-        stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
+        ImageIcon imageIcon = new ImageIcon("./images/自定义模板 (12).png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(WIDTH / 18, HEIGTH / 15, Image.SCALE_DEFAULT));
+        JButton stopMusicButton = new JButton(imageIcon);
         stopMusicButton.setLocation(WIDTH * 17 / 18, 0);
+        stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
         stopMusicButton.setBorderPainted(false);
-        stopMusicButton.setBackground(new Color(205, 183, 159));
+        stopMusicButton.setContentAreaFilled(false);
+        stopMusicButton.setOpaque(false);
+//        JButton stopMusicButton = new JButton("♬");
+//        stopMusicButton.setFont(new Font("Rockwell", Font.BOLD, 20));
+//        stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
+//        stopMusicButton.setLocation(WIDTH * 17 / 18, 0);
+//        stopMusicButton.setBorderPainted(false);
+//        stopMusicButton.setBackground(new Color(205, 183, 159));
         stopMusicButton.addActionListener((e) -> {
             if (clip.isRunning()) {
                 clip.stop();
@@ -472,7 +554,7 @@ public class ChessGameFrame extends JFrame {
         blackCapturedChessLabel.setBackground(new Color(205, 183, 159));
         blackCapturedChessLabel.setForeground(Color.black);
         blackCapturedChessLabel.setOpaque(true);
-        blackCapturedChessLabel.setBounds(WIDTH * 55 / 80, HEIGTH * 4 / 19, WIDTH / 4, HEIGTH * 3 / 38);
+        blackCapturedChessLabel.setBounds(WIDTH * 55 / 80, HEIGTH * 15 / 76, WIDTH / 4, HEIGTH * 3 / 38);
         blackCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 22));
         blackCapturedChessLabel.setText("");
         panel.add(blackCapturedChessLabel);
@@ -481,7 +563,7 @@ public class ChessGameFrame extends JFrame {
     private void addBlackCapturedChessLabel2(JPanel panel) {
         JLabel blackCapturedChessLabel = new JLabel();
         blackCapturedChessLabel.setForeground(Color.black);
-        blackCapturedChessLabel.setBounds(WIDTH * 52 / 80, HEIGTH * 3 / 19, WIDTH / 3, HEIGTH / 19);
+        blackCapturedChessLabel.setBounds(WIDTH * 52 / 80, HEIGTH * 11 / 76, WIDTH / 3, HEIGTH / 19);
         blackCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 22));
         blackCapturedChessLabel.setText("Player Black's captured chess:");
         panel.add(blackCapturedChessLabel);
@@ -492,7 +574,7 @@ public class ChessGameFrame extends JFrame {
         whiteCapturedChessLabel.setBackground(new Color(147, 121, 97));
         whiteCapturedChessLabel.setForeground(Color.white);
         whiteCapturedChessLabel.setOpaque(true);
-        whiteCapturedChessLabel.setBounds(WIDTH * 55 / 80, HEIGTH * 13 / 38, WIDTH / 4, HEIGTH * 3 / 38);
+        whiteCapturedChessLabel.setBounds(WIDTH * 55 / 80, HEIGTH * 25 / 76, WIDTH / 4, HEIGTH * 3 / 38);
         whiteCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 22));
         whiteCapturedChessLabel.setText("");
         panel.add(whiteCapturedChessLabel);
@@ -501,19 +583,27 @@ public class ChessGameFrame extends JFrame {
     private void addWhiteCapturedChessLabel2(JPanel panel) {
         JLabel whiteCapturedChessLabel = new JLabel();
         whiteCapturedChessLabel.setForeground(Color.white);
-        whiteCapturedChessLabel.setBounds(WIDTH * 52 / 80, HEIGTH * 11 / 38, WIDTH / 3, HEIGTH / 19);
+        whiteCapturedChessLabel.setBounds(WIDTH * 52 / 80, HEIGTH * 21 / 76, WIDTH / 3, HEIGTH / 19);
         whiteCapturedChessLabel.setFont(new Font("Rockwell", Font.BOLD, 22));
         whiteCapturedChessLabel.setText("Player White's captured chess:");
         panel.add(whiteCapturedChessLabel);
     }
 
     private void addBackPanel0Button(JPanel panel) {
-        JButton stopMusicButton = new JButton("↩");
-        stopMusicButton.setFont(new Font("Rockwell", Font.BOLD, 20));
-        stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
+        ImageIcon imageIcon = new ImageIcon("./images/自定义模板 (13).png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(WIDTH / 18, HEIGTH / 15, Image.SCALE_DEFAULT));
+        JButton stopMusicButton = new JButton(imageIcon);
         stopMusicButton.setLocation(WIDTH * 17 / 18, HEIGTH / 15);
+        stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
         stopMusicButton.setBorderPainted(false);
-        stopMusicButton.setBackground(new Color(205, 183, 159));
+        stopMusicButton.setContentAreaFilled(false);
+        stopMusicButton.setOpaque(false);
+//        JButton stopMusicButton = new JButton("↩");
+//        stopMusicButton.setFont(new Font("Rockwell", Font.BOLD, 20));
+//        stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
+//        stopMusicButton.setLocation(WIDTH * 17 / 18, HEIGTH / 15);
+//        stopMusicButton.setBorderPainted(false);
+//        stopMusicButton.setBackground(new Color(205, 183, 159));
         stopMusicButton.addActionListener((e) -> {
             Object[] options = {"确定", "取消"};
             int x = JOptionPane.showOptionDialog(null, "是否返回主界面？", "判断",
