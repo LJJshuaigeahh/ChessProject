@@ -28,7 +28,7 @@ public abstract class ChessComponent extends JComponent {
      */
 
 //    private static final Dimension CHESSGRID_SIZE = new Dimension(1080 / 4 * 3 / 8, 1080 / 4 * 3 / 8);
-    private static final Color[] BACKGROUND_COLORS = {new Color(211, 211, 211), new Color(105, 105, 105)};//棋盘背景颜色（黑/白）
+    private static final Color[] BACKGROUND_COLORS = {new Color(205 ,183 ,159), new Color(147 ,121 ,97)};//棋盘背景颜色（黑/白）
     /**
      * handle click event
      */

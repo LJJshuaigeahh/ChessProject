@@ -211,11 +211,6 @@ public class ClickController {
                     JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
                 }
 
-//                三次重复
-                if (chessboard.tellIfMoreThanThreeTimes()) {
-                    JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
-                }
-
 //                人机模式行棋方式
                 if (chessboard.getGameMode() == 2 && color1 == ChessColor.WHITE){
 //                    AI随机行棋
@@ -238,6 +233,18 @@ public class ClickController {
                 }
 
                 chessboard.getRecordChessBoard().add(chessboard.getChessStringList());
+
+
+//                三次重复
+                if (chessboard.tellIfMoreThanThreeTimes()) {
+                    JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
+                }
+
+//                长将和棋
+                if (chessboard.tellIfChangJiang()) {
+                    JOptionPane.showMessageDialog(null, "Draw!!", "游戏结束", JOptionPane.PLAIN_MESSAGE);
+                }
+
 //                回合状态显示
                 JLabel jLabel = (JLabel) chessboard.getParent().getComponent(1);
                 jLabel.setText("Round  " + (int) chessboard.getCount() + "————" + "It's " + chessboard.getCurrentColor().getName() + "'s turn.");
