@@ -21,7 +21,7 @@ public class ChessGameFrame extends JFrame {
     public final int CHESSBOARD_SIZE;//棋盘大小
     private GameController gameController;
     private Clip clip;
-//呵呵
+
     private JPanel panel0 = new JPanel();//开始界面
     private JPanel panel1 = new JPanel();//游戏界面
 
