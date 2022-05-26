@@ -659,6 +659,37 @@ public class Chessboard extends JComponent {
         }
     }
 
+    public boolean tellIfChangJiang() {
+        if (recordChessBoard.size() >= 8) {
+            boolean test = true;
+            for (int i = 0; i < 8; i++) {
+                String str5 = recordChessBoard.get(recordChessBoard.size() - 4).get(i);
+                String str1 = recordChessBoard.get(recordChessBoard.size() - 8).get(i);
+                String str8 = recordChessBoard.get(recordChessBoard.size() - 1).get(i);
+                String str4 = recordChessBoard.get(recordChessBoard.size() - 5).get(i);
+                String str7 = recordChessBoard.get(recordChessBoard.size() - 2).get(i);
+                String str3 = recordChessBoard.get(recordChessBoard.size() - 6).get(i);
+                String str6 = recordChessBoard.get(recordChessBoard.size() - 3).get(i);
+                String str2 = recordChessBoard.get(recordChessBoard.size() - 7).get(i);
+                if (!str1.equals(str5)) {
+                    test = false;
+                    break;
+                }
+                if (!str2.equals(str6)) {
+                    test = false;
+                    break;
+                }
+                if (!str3.equals(str7)) {
+                    test = false;
+                    break;
+                }
+            }
+            return test;
+        } else {
+            return false;
+        }
+    }
+
     public boolean AIRandomChess() {
         boolean test = false;
         out:

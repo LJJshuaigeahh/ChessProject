@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import model.ChessColor;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -58,7 +59,7 @@ public class ChessGameFrame extends JFrame {
         addLoadButton(panel0);
 
 //        开始游戏界面背景图片
-        Image image = new ImageIcon("./images/背景/background2.jpg").getImage();
+        Image image = new ImageIcon("./images/背景/国际象棋8-1581498150.jpg").getImage();
         JLabel jLabel = new aLabel(image);
         jLabel.setSize(WIDTH, HEIGTH);
         jLabel.setLocation(0, 0);
@@ -179,9 +180,12 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addBeginGameButton(JPanel panel) {
+
         JButton button = new JButton("Human vs Human");
         button.setFont(new Font("Rockwell", Font.BOLD, 25));
         button.setBounds(WIDTH * 3 / 8, HEIGTH / 2, WIDTH / 4, HEIGTH / 10);
+        button.setBorderPainted(false);
+        button.setBackground(new Color(205, 183, 159));
         button.addActionListener((e) -> {
             remove(panel0);
             getContentPane().add(panel1);
@@ -208,6 +212,8 @@ public class ChessGameFrame extends JFrame {
         JButton button = new JButton("Human vs AI");
         button.setFont(new Font("Rockwell", Font.BOLD, 25));
         button.setBounds(WIDTH * 3 / 8, HEIGTH * 5 / 8, WIDTH / 4, HEIGTH / 10);
+        button.setBorderPainted(false);
+        button.setBackground(new Color(205, 183, 159));
         button.addActionListener((e) -> {
 //            JOptionPane.showMessageDialog(null, "人机模式待开发", "提示", JOptionPane.PLAIN_MESSAGE);
             remove(panel0);
@@ -225,7 +231,8 @@ public class ChessGameFrame extends JFrame {
         JButton button = new JButton("Load a game");
         button.setFont(new Font("Rockwell", Font.BOLD, 25));
         button.setBounds(WIDTH * 3 / 8, HEIGTH * 3 / 4, WIDTH / 4, HEIGTH / 10);
-
+        button.setBorderPainted(false);
+        button.setBackground(new Color(205, 183, 159));
         button.addActionListener(e -> {
             System.out.println("Click load");
 //            String path = JOptionPane.showInputDialog(this, "Input load path here");
@@ -280,13 +287,14 @@ public class ChessGameFrame extends JFrame {
         gameController = new GameController(chessboard);
         panel.add(chessboard);
     }
+//211,105
 
     /**
      * 在游戏面板中添加回合状态标签
      */
     private void addRoundLabel(JPanel panel) {
         JLabel roundLabel = new JLabel();
-        roundLabel.setBackground(new Color(211, 211, 211));
+        roundLabel.setBackground(new Color(205, 183, 159));
         roundLabel.setForeground(Color.black);
         roundLabel.setOpaque(true);
         roundLabel.setSize(WIDTH / 2, HEIGTH * 3 / 38);
@@ -302,6 +310,8 @@ public class ChessGameFrame extends JFrame {
         backButton.setFont(new Font("Rockwell", Font.BOLD, 20));
         backButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
         backButton.setLocation(WIDTH * 7 / 10, HEIGTH * 10 / 19);
+        backButton.setBorderPainted(false);
+        backButton.setBackground(new Color(205, 183, 159));
         backButton.addActionListener((e) -> {
             System.out.println("Click back");
             Object[] options = {"确定", "取消"};
@@ -321,7 +331,8 @@ public class ChessGameFrame extends JFrame {
         storeButton.setFont(new Font("Rockwell", Font.BOLD, 20));
         storeButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
         storeButton.setLocation(WIDTH * 7 / 10, HEIGTH * 12 / 19);
-
+        storeButton.setBorderPainted(false);
+        storeButton.setBackground(new Color(205, 183, 159));
         storeButton.addActionListener(e -> {
             System.out.println("Click store");
             /*
@@ -355,31 +366,38 @@ public class ChessGameFrame extends JFrame {
         storeIncludingStopsButton.setFont(new Font("Rockwell", Font.BOLD, 20));
         storeIncludingStopsButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
         storeIncludingStopsButton.setLocation(WIDTH * 7 / 10, HEIGTH * 14 / 19);
-
+        storeIncludingStopsButton.setBorderPainted(false);
+        storeIncludingStopsButton.setBackground(new Color(205, 183, 159));
         storeIncludingStopsButton.addActionListener(e -> {
-            System.out.println("Click store");
-            /*
-             * 选择文件保存路径
-             */
-            // 创建一个默认的文件选取器
-            JFileChooser fileChooser = new JFileChooser();
-
-            // 设置打开文件选择框后默认输入的文件名
-            fileChooser.setSelectedFile(new File("D:\\ChessDemo\\ChessDemo\\resource\\Chessboard"));
-
-            // 打开文件选择框（线程将被阻塞, 直到选择框被关闭）
-            int result = fileChooser.showSaveDialog(panel);
-
-            if (result == JFileChooser.APPROVE_OPTION) {
-                // 如果点击了"保存", 则获取选择的保存路径
-                File file = fileChooser.getSelectedFile();
-                final JTextArea msgTextArea = new JTextArea(10, 30);
-                msgTextArea.setLineWrap(true);
-                panel.add(msgTextArea);
-                msgTextArea.append("保存到文件: " + file.getAbsolutePath() + "\n\n");
-                String path = file.getPath();
-                gameController.storeGameFromFileIncludingStops(path);
+            Chessboard chessboard = (Chessboard) panel1.getComponent(0);
+            if (chessboard.getCurrentColor()== ChessColor.WHITE){
+                JOptionPane.showMessageDialog(null, "Player White gives up, then player Black wins!!", "认输", JOptionPane.PLAIN_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "Player Black gives up, then player White wins!!", "认输", JOptionPane.PLAIN_MESSAGE);
             }
+//            System.out.println("Click store");
+//            /*
+//             * 选择文件保存路径
+//             */
+//            // 创建一个默认的文件选取器
+//            JFileChooser fileChooser = new JFileChooser();
+//
+//            // 设置打开文件选择框后默认输入的文件名
+//            fileChooser.setSelectedFile(new File("D:\\ChessDemo\\ChessDemo\\resource\\Chessboard"));
+//
+//            // 打开文件选择框（线程将被阻塞, 直到选择框被关闭）
+//            int result = fileChooser.showSaveDialog(panel);
+//
+//            if (result == JFileChooser.APPROVE_OPTION) {
+//                // 如果点击了"保存", 则获取选择的保存路径
+//                File file = fileChooser.getSelectedFile();
+//                final JTextArea msgTextArea = new JTextArea(10, 30);
+//                msgTextArea.setLineWrap(true);
+//                panel.add(msgTextArea);
+//                msgTextArea.append("保存到文件: " + file.getAbsolutePath() + "\n\n");
+//                String path = file.getPath();
+//                gameController.storeGameFromFileIncludingStops(path);
+//            }
         });
         panel.add(storeIncludingStopsButton);
     }
@@ -389,6 +407,8 @@ public class ChessGameFrame extends JFrame {
         reBeginGameButton.setFont(new Font("Rockwell", Font.BOLD, 20));
         reBeginGameButton.setSize(WIDTH / 5, HEIGTH * 3 / 38);
         reBeginGameButton.setLocation(WIDTH * 7 / 10, HEIGTH * 16 / 19);
+        reBeginGameButton.setBorderPainted(false);
+        reBeginGameButton.setBackground(new Color(205, 183, 159));
         reBeginGameButton.addActionListener((e) -> {
             Object[] options = {"确定", "取消"};
             int x = JOptionPane.showOptionDialog(null, "是否重新开始游戏？", "判断",
@@ -435,6 +455,8 @@ public class ChessGameFrame extends JFrame {
         stopMusicButton.setFont(new Font("Rockwell", Font.BOLD, 20));
         stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
         stopMusicButton.setLocation(WIDTH * 17 / 18, 0);
+        stopMusicButton.setBorderPainted(false);
+        stopMusicButton.setBackground(new Color(205, 183, 159));
         stopMusicButton.addActionListener((e) -> {
             if (clip.isRunning()) {
                 clip.stop();
@@ -447,7 +469,7 @@ public class ChessGameFrame extends JFrame {
 
     private void addBlackCapturedChessLabel(JPanel panel) {
         JLabel blackCapturedChessLabel = new JLabel();
-        blackCapturedChessLabel.setBackground(new Color(211, 211, 211));
+        blackCapturedChessLabel.setBackground(new Color(205, 183, 159));
         blackCapturedChessLabel.setForeground(Color.black);
         blackCapturedChessLabel.setOpaque(true);
         blackCapturedChessLabel.setBounds(WIDTH * 55 / 80, HEIGTH * 4 / 19, WIDTH / 4, HEIGTH * 3 / 38);
@@ -467,7 +489,7 @@ public class ChessGameFrame extends JFrame {
 
     private void addWhiteCapturedChessLabel(JPanel panel) {
         JLabel whiteCapturedChessLabel = new JLabel();
-        whiteCapturedChessLabel.setBackground(new Color(105, 105, 105));
+        whiteCapturedChessLabel.setBackground(new Color(147, 121, 97));
         whiteCapturedChessLabel.setForeground(Color.white);
         whiteCapturedChessLabel.setOpaque(true);
         whiteCapturedChessLabel.setBounds(WIDTH * 55 / 80, HEIGTH * 13 / 38, WIDTH / 4, HEIGTH * 3 / 38);
@@ -490,6 +512,8 @@ public class ChessGameFrame extends JFrame {
         stopMusicButton.setFont(new Font("Rockwell", Font.BOLD, 20));
         stopMusicButton.setSize(WIDTH / 18, HEIGTH / 15);
         stopMusicButton.setLocation(WIDTH * 17 / 18, HEIGTH / 15);
+        stopMusicButton.setBorderPainted(false);
+        stopMusicButton.setBackground(new Color(205, 183, 159));
         stopMusicButton.addActionListener((e) -> {
             Object[] options = {"确定", "取消"};
             int x = JOptionPane.showOptionDialog(null, "是否返回主界面？", "判断",
